@@ -1,0 +1,13 @@
+Aufgabenbeschreibung:
+1. StartScreen + Highscore --> Jonas
+2. Statisches Spielfeld mit Funktion "Wand getroffen" + Reibung auf dem Spielfeld + Positionswinkel --> Sebastian
+3. Ball + Schlag-Impuls (Vektor) mit Maus --> Tobias
+4. Reflexion --> Kilian
+5. Spiellogik / Status Spiel (wie viele Schläge, evtl. welche Strecke zurückgelegt, Punkte) --> Hai
+
+SLOTS:
+1. Slot zu statisches Spielfeld-Fenster, Level (Spielfeld Auswahl)
+2. Slot zu Reflexion (detection erkannt)
+3. tbd
+4. tbd
+5. tbd
