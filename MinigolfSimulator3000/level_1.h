@@ -14,11 +14,10 @@ public:
     //! \brief Destructor
     virtual ~Level_1(){};
 
-    //! \brief Constructs the level
-    void constructLevel();
-
 private:
 
+    //! \brief Constructs the level
+    void constructLevel();
 
 };
 

@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include "borderline.h"
 #include "courtelement.h"
+#include <QStyleOptionGraphicsItem>
 
 class Dialog;
 

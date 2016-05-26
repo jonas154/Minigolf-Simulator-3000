@@ -33,42 +33,42 @@ public:
         switch(material)
         {
             case concrete_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
             break;
 
             case grass_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
             break;
 
             case wood_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
             break;
 
             case sand_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
                 minSpeed = 0.1;
             break;
 
             case water_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
             break;
 
             case nonNewtonian_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
                 minSpeed = 0.5;
             break;
 
             case speedUp_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
             break;
 
             case hole_material:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
                 maxSpeed = 10.0;
             break;
 
             default:
-                frictionCoefficient = 0.0;
+                frictionCoefficient = 0.1;
             break;
         }
 

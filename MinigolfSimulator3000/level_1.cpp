@@ -4,6 +4,7 @@
 Level_1::Level_1()
 {
     this->setStartCoordinates(250.0, 300.0);
+    this->constructLevel();
     this->createBall();
 }
 

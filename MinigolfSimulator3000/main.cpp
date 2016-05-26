@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
 
     //wird später von der Logik ausgeführt
     Level_1* w = new Level_1;
-    w->constructLevel();
     w->show();
 
     return a.exec();

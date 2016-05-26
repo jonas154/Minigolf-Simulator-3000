@@ -4,8 +4,9 @@
 
 Ball::Ball()
 {
+    setFlag(ItemUsesExtendedStyleOption);
 
-    speed = 3; //später 0
+    speed = 5; //später zunächst 0
 
     angle = (60); //später durch Schlag bestimmt
     setRotation(angle);
@@ -21,6 +22,9 @@ QRectF Ball::boundingRect() const
 
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+
+    painter->setClipRect(option->exposedRect);
+
     QRectF rec = boundingRect();
     QBrush brush(Qt::white);
 
