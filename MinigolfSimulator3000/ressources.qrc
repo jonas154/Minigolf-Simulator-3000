@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>Images/Level_Test.png</file>
+    </qresource>
+    <qresource prefix="/Sounds">
+        <file>Sounds/click_dummy_sound.wav</file>
+    </qresource>
+</RCC>
