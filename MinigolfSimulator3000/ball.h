@@ -10,6 +10,7 @@
 #include "courtelement.h"
 #include <QStyleOptionGraphicsItem>
 
+
 class Dialog;
 
 class Ball : public QGraphicsItem
@@ -28,6 +29,11 @@ public:
 
     //bewege Ball
     void advance(int phase);
+
+signals:
+
+    // Signal zur SoundEngie (geht noch nicht)
+    void angleChanged();
 
 private:
 

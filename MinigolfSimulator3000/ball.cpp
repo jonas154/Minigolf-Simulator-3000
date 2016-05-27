@@ -6,7 +6,7 @@ Ball::Ball()
 {
     setFlag(ItemUsesExtendedStyleOption);
 
-    speed = 5; //später zunächst 0
+    speed = 10; //später zunächst 0
 
     angle = (60); //später durch Schlag bestimmt
     setRotation(angle);
@@ -73,6 +73,8 @@ void Ball::doCollision()
                     setRotation(2*(angle+90.0-rotation()) + rotation());
 
                     speed = speed * borderline->getReflectionCoefficient();
+                 //   emit angleChanged();
+
                 }
 
             break;

@@ -22,7 +22,7 @@ Court::Court(QWidget *parent)
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    timer->start(40); //25 fps
+    timer->start(50); //Bisschen mehr fps müssens schon sein!
 }
 
 //------------------------------------------

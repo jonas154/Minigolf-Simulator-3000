@@ -2,6 +2,10 @@
 #define LEVEL_1_H
 
 #include "court.h"
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QPixmap>
+#include <QGraphicsItem>
 
 
 class Level_1 : public Court
