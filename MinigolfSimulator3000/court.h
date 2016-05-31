@@ -7,6 +7,8 @@
 #include "borderline.h"
 #include "groundmaterial.h"
 #include "ball.h"
+#include "arrow.h"
+#include "arrowstartitem.h"
 
 namespace Ui {
 class Court;
@@ -49,6 +51,9 @@ protected:
 
     //! \brief Create ball and add to scene at start coordinates
     void createBall();
+
+    //! \brief Create Arrow including the ArrowStartItem
+    void createArrow();
 
 //---------------------------------
 

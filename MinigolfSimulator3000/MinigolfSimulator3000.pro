@@ -17,7 +17,9 @@ SOURCES += main.cpp\
         court.cpp \
     ball.cpp \
     level_1.cpp \
-    soundengine.cpp
+    soundengine.cpp \
+    arrow.cpp \
+    arrowstartitem.cpp
 
 HEADERS  += court.h \
     ball.h \
@@ -25,7 +27,9 @@ HEADERS  += court.h \
     courtelement.h \
     groundmaterial.h \
     level_1.h \
-    soundengine.h
+    soundengine.h \
+    arrow.h \
+    arrowstartitem.h
 
 FORMS    += court.ui
 
