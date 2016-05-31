@@ -14,14 +14,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        court.cpp \
     ball.cpp \
     level_1.cpp \
     soundengine.cpp \
     arrow.cpp \
-    arrowstartitem.cpp
+    arrowstartitem.cpp \
+    court.cpp \
+    startwindow.cpp
 
-HEADERS  += court.h \
+HEADERS  += \
     ball.h \
     borderline.h \
     courtelement.h \
@@ -29,9 +30,13 @@ HEADERS  += court.h \
     level_1.h \
     soundengine.h \
     arrow.h \
-    arrowstartitem.h
+    arrowstartitem.h \
+    court.h \
+    startwindow.h
 
-FORMS    += court.ui
+FORMS    += \
+    court.ui \
+    startwindow.ui
 
 CONFIG += c++14
 

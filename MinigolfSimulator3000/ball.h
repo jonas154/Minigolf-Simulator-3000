@@ -11,8 +11,6 @@
 #include <QStyleOptionGraphicsItem>
 
 
-class Dialog;
-
 class Ball : public QGraphicsItem
 {
 

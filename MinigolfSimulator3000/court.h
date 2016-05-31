@@ -1,20 +1,23 @@
 #ifndef COURT_H
 #define COURT_H
 
-#include <QDialog>
+#include <QWidget>
 #include <QtCore>
 #include <QtGui>
+#include "ui_court.h"
 #include "borderline.h"
 #include "groundmaterial.h"
 #include "ball.h"
 #include "arrow.h"
 #include "arrowstartitem.h"
 
+
 namespace Ui {
 class Court;
 }
 
-class Court : public QDialog
+
+class Court : public QWidget
 {
     Q_OBJECT
 

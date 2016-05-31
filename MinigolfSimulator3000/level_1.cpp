@@ -1,15 +1,14 @@
 #include "level_1.h"
 
 
-Level_1::Level_1()
+Level_1::Level_1(QWidget *parent)
+    :
+    Court(parent)
 {
     this->setStartCoordinates(250.0, 300.0);
     this->constructLevel();
     this->createBall();
-//    this->createArrow();
-
-
-
+    this->createArrow();
 
 }
 
