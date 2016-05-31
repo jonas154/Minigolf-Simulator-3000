@@ -1,5 +1,6 @@
 #include "court.h"
 #include "ui_court.h"
+#include "startwindow.h"
 
 Court::Court(QWidget *parent)
     :
@@ -12,9 +13,9 @@ Court::Court(QWidget *parent)
     const int width = 1024;
     const int height = 768;
 
-    ui->graphicsView->setFixedSize(width, height);
-    ui->graphicsView->setSceneRect(0, 0, width, height);
-    ui->graphicsView->setFrameStyle(0);
+//    ui->graphicsView->setFixedSize(width, height);
+//    ui->graphicsView->setSceneRect(0, 0, width, height);
+//    ui->graphicsView->setFrameStyle(0);
 
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);

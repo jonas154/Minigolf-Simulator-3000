@@ -17,7 +17,9 @@ SOURCES += main.cpp\
         court.cpp \
     ball.cpp \
     level_1.cpp \
-    soundengine.cpp
+    soundengine.cpp \
+    startwindow.cpp \
+    court2.cpp
 
 HEADERS  += court.h \
     ball.h \
@@ -25,9 +27,13 @@ HEADERS  += court.h \
     courtelement.h \
     groundmaterial.h \
     level_1.h \
-    soundengine.h
+    soundengine.h \
+    startwindow.h \
+    court2.h
 
-FORMS    += court.ui
+FORMS    += court.ui \
+    startwindow.ui \
+    court2.ui
 
 CONFIG += c++14
 

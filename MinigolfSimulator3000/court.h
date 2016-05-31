@@ -7,6 +7,7 @@
 #include "borderline.h"
 #include "groundmaterial.h"
 #include "ball.h"
+#include "QWidget"
 
 namespace Ui {
 class Court;
@@ -53,6 +54,8 @@ protected:
 //---------------------------------
 
 private:
+
+    //Ui::Court *ui;
 
     QTimer* timer;
 
