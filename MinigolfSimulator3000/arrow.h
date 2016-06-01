@@ -8,6 +8,8 @@
 #include <iostream>
 #include <arrowstartitem.h>
 #include <ball.h>
+#include <math.h>
+#include <cmath>
 
 const qreal Pi = 3.14;
 

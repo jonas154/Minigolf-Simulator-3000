@@ -2,6 +2,16 @@
     <qresource prefix="/Images">
         <file>Images/Level_Test.png</file>
         <file>Images/wasser.png</file>
+        <file>Images/ball.png</file>
+        <file>Images/ball2.png</file>
+        <file>Images/ball3.png</file>
+        <file>Images/ball4.png</file>
+        <file>Images/ball5.png</file>
+        <file>Images/club.png</file>
+        <file>Images/club2.png</file>
+        <file>Images/club3.png</file>
+        <file>Images/club4.png</file>
+        <file>Images/club5.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/click_dummy_sound.wav</file>
