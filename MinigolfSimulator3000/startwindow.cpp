@@ -1,5 +1,5 @@
 #include "startwindow.h"
-#include "ui_startwindow.h"
+
 
 StartWindow::StartWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,16 +13,19 @@ StartWindow::StartWindow(QWidget *parent) :
 
     statusBar()->setFixedHeight(0);
 
-    myLevel_1 = new Level_1(ui->stackedWidget);
-
-    ui->stackedWidget->addWidget(myLevel_1);
     ui->stackedWidget->setCurrentIndex(0);
+
+    game = new Game(this);
+
+
 }
 
 StartWindow::~StartWindow()
 {
     delete ui;
 }
+
+
 
 //void StartWindow::on_pushButton_clicked()
 //{
@@ -35,6 +38,5 @@ StartWindow::~StartWindow()
 
 void StartWindow::on_Start_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(myLevel_1);
-
+    game->startLevel(1);
 }

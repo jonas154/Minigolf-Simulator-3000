@@ -1,9 +1,11 @@
 #ifndef STARTWINDOW_H
 #define STARTWINDOW_H
 
+#include "ui_startwindow.h"
 #include <QMainWindow>
-#include "level_1.h"
+#include "game.h"
 
+class Game;
 
 namespace Ui {
 class StartWindow;
@@ -16,6 +18,12 @@ class StartWindow : public QMainWindow
 public:
     explicit StartWindow(QWidget *parent = 0);
     ~StartWindow();
+    Game* game;
+
+    Ui::StartWindow* getUi()
+    {
+        return this->ui;
+    };
 
 private slots:
    // void on_pushButton_clicked();
@@ -23,8 +31,7 @@ private slots:
     void on_Start_clicked();
 
 private:
-    Ui::StartWindow *ui;
-    Level_1 *myLevel_1;
+    Ui::StartWindow* ui;
 
 };
 
