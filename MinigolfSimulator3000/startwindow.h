@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include "level_1.h"
-
+#include "QString"
+#include "QFile"
 
 namespace Ui {
 class StartWindow;
@@ -17,10 +18,12 @@ public:
     explicit StartWindow(QWidget *parent = 0);
     ~StartWindow();
 
-private slots:
-   // void on_pushButton_clicked();
+    void setLevel(int level);
 
+private slots:
     void on_Start_clicked();
+
+    void on_exitButton_clicked();
 
 private:
     Ui::StartWindow *ui;
