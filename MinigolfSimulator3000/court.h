@@ -38,9 +38,6 @@ public:
     //! \brief Returns pointer to the active ball
     Ball* getBall();
 
-public slots:
-
-   virtual void updateLevel() = 0;
 //---------------------------------
 
 protected:
@@ -48,8 +45,6 @@ protected:
     Ui::Court* ui;
 
     QGraphicsScene* scene;
-
-    QTimer* timer;
 
     //! \brief Set the start coordinates of the level
     void setStartCoordinates(const QPointF startPoint);
@@ -67,8 +62,7 @@ protected:
 
 private:
 
-
-
+    QTimer* timer;
 
     QPointF startCoordinates;
 
