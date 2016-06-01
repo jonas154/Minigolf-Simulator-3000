@@ -5,12 +5,10 @@ Level_1::Level_1(QWidget *parent)
     :
     Court(parent)
 {
-    connect(timer, SIGNAL(timeout()),this, SLOT(updateLevel()));
     this->setStartCoordinates(250.0, 300.0);
     this->constructLevel();
     this->createBall();
     this->createArrow();
-
 
 }
 
@@ -18,12 +16,9 @@ Level_1::Level_1(QWidget *parent)
 
 void Level_1::constructLevel()
 {
-
-
     // Dateipfad als String
     QString bgroundimage = ":/Images/Images/Level_Test.png";
-     waterimage = ":/Images/Images/wasser.png";
-     waterimage2 = ":/Images/Images/wasser2.png";
+    QString waterimage = ":/Images/Images/wasser.png";
 
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
@@ -65,30 +60,10 @@ void Level_1::constructLevel()
     scene->addItem(line9);
 
 
-    QPolygon water_polygon;
-    water_polygon << QPoint(140,250) << QPoint(140,152) << QPoint(293,152) << QPoint(294,252);
-    water = new GroundMaterial(GroundMaterial::water_material,water_polygon);
-    water->setBrush(QImage(waterimage));
-    scene->addItem(water);
-    water->setVisible(true);
+
 
 
 }
 
 //------------------------------------
-void Level_1::updateLevel()
-{
-float a = rand(); // you can use qrand here
-a /= RAND_MAX;
-if (a< 0.5)
-{
-water->setBrush(QImage(waterimage2));
-}
-else
-{
-water->setBrush(QImage(waterimage));
-}
-qDebug() << "test";
-qDebug() << a;
 
-}
