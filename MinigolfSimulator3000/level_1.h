@@ -6,10 +6,12 @@
 #include <QGraphicsScene>
 #include <QPixmap>
 #include <QGraphicsItem>
+#include <QString>
 
 
 class Level_1 : public Court
 {
+
 public:
 
     //! \brief Constructor
@@ -18,10 +20,18 @@ public:
     //! \brief Destructor
     virtual ~Level_1(){};
 
-private:
+public slots:
 
+    void updateLevel() override;
+
+
+
+private:
+    GroundMaterial *water;
     //! \brief Constructs the level
     void constructLevel();
+    QString waterimage;
+    QString waterimage2;
 
 };
 
