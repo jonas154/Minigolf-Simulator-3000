@@ -41,7 +41,7 @@ Court::~Court()
 
 QGraphicsScene* Court::getScene()
 {
-    return scene;
+    return this->scene;
 };
 
 //------------------------------------------

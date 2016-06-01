@@ -20,7 +20,10 @@ SOURCES += main.cpp\
     arrow.cpp \
     arrowstartitem.cpp \
     court.cpp \
-    startwindow.cpp
+    startwindow.cpp \
+    game.cpp \
+    score.cpp \
+    strike.cpp
 
 HEADERS  += \
     ball.h \
@@ -32,7 +35,10 @@ HEADERS  += \
     arrow.h \
     arrowstartitem.h \
     court.h \
-    startwindow.h
+    startwindow.h \
+    game.h \
+    score.h \
+    strike.h
 
 FORMS    += \
     court.ui \
