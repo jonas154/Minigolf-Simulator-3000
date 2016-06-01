@@ -9,42 +9,42 @@ Game::Game(StartWindow* _startW)
 {
 }
 
-void Game::construct()
+void Game::construct(QGraphicsScene* _scene)
 {
 
     // Player name will replace PLAYER 1
     QGraphicsTextItem* p1 = new QGraphicsTextItem("PLAYER 1");
     p1->setPos(0,0);
     p1->setDefaultTextColor(Qt::white);
-    l1->getScene()->addItem(p1);
+    _scene->addItem(p1);
 
     score1 = new Score();
     score1->setPos(0,25);
-    l1->getScene()->addItem(score1);
+    _scene->addItem(score1);
 
     strike1 = new Strike();
     strike1->setPos(0,50);
-    l1->getScene()->addItem(strike1);
+    _scene->addItem(strike1);
 
     QGraphicsTextItem* p2 = new QGraphicsTextItem("PLAYER 2");
     p2->setPos(200,0);
     p2->setDefaultTextColor(Qt::white);
-    l1->getScene()->addItem(p2);
+    _scene->addItem(p2);
 
     score2 = new Score();
     score2->setPos(200,25);
-    l1->getScene()->addItem(score2);
+    _scene->addItem(score2);
 
     strike2 = new Strike();
     strike2->setPos(200,50);
-    l1->getScene()->addItem(strike2);
+    _scene->addItem(strike2);
 
     //whose turn text
     TurnText = new QGraphicsTextItem();
     setTurn(QString("PLAYER 1"));
     TurnText->setPos(400,0);
     TurnText->setDefaultTextColor(Qt::white);
-    l1->getScene()->addItem(TurnText);
+    _scene->addItem(TurnText);
 }
 
 void Game::setTurn(QString player)
@@ -72,10 +72,19 @@ void Game::nextPlayersTurn()
 
 void Game::GameOver() // still working on it
 {
-    // disable all scene items
-    for (size_t i = 0, n = scene->items().size(); i < n; i++)
+
+    switch(currentLevel)
     {
-            scene->items()[i]->setEnabled(false);
+        case 1:
+            delete l1;
+        break;
+
+        case 2:
+            //delete l2;
+        break;
+
+        default: break;
+
     }
 
     if (score1->getScore() < score2->getScore())
@@ -93,17 +102,39 @@ void Game::GameOver() // still working on it
 
 
     //back to main menu and move on next level
+
+    //wenn direkt das nächste Level aufgeht:
+    //++currentLevel;
+
 }
 
 void Game::startLevel(int levelnumber)
 {
-    l1 = new Level_1(startW->getUi()->stackedWidget);
-    this->construct();
-    l1->show();
+    currentLevel = levelnumber;
 
+    switch(levelnumber)
+    {
+        case 1:
+
+            l1 = new Level_1(startW->getUi()->stackedWidget);
+            this->construct(l1->getScene());
+            l1->show();
+
+        break;
+
+        case 2:
+
+            //l2 = new Level_2(startW->getUi()->stackedWidget);
+            //this->construct(l2->getScene());
+            //l2->show();
+
+        break;
+
+        default: break;
+    }
 }
 
 //void Game::BallinWater()
 //{
-//    Level_1->getBall()->setPos(Level_1->get)
+//    l1->getBall()->setPos(Level_1->getStartCoordinates());
 //}
