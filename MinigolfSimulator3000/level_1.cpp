@@ -18,6 +18,7 @@ void Level_1::constructLevel()
 {
     // Dateipfad als String
     QString bgroundimage = ":/Images/Images/Level_Test.png";
+    QString waterimage = ":/Images/Images/wasser.png";
 
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
@@ -57,6 +58,8 @@ void Level_1::constructLevel()
 
     BorderLine* line9 = new BorderLine(731.0,253.0,139.0,255.0,BorderLine::metal_material);
     scene->addItem(line9);
+
+
 
 
 
