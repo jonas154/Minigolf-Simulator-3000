@@ -1,4 +1,6 @@
 #include "arrow.h"
+#include "math.h"
+#include "cmath"
 
 Arrow::Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent)
     : QGraphicsLineItem(parent)

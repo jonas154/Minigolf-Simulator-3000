@@ -13,7 +13,7 @@ class Level_1 : public Court
 public:
 
     //! \brief Constructor
-    Level_1();
+    Level_1(QWidget* parent = 0);
 
     //! \brief Destructor
     virtual ~Level_1(){};

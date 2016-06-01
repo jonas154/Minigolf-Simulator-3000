@@ -1,9 +1,9 @@
 #include "court.h"
-#include "ui_court.h"
+
 
 Court::Court(QWidget *parent)
     :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::Court),
     startCoordinates(0.0, 0.0)
 {
@@ -22,7 +22,9 @@ Court::Court(QWidget *parent)
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    timer->start(50); //Bisschen mehr fps müssens schon sein!
+    timer->start(40); //Bisschen mehr fps müssens schon sein!
+    //Haha dann musst du aber die Zahl kleiner machen! Unbedingt bald klären, da hängt sehr viel dran!
+    //25 fps reicht eigentlich fürs menschliche Auge
 }
 
 //------------------------------------------
@@ -86,5 +88,3 @@ void Court::createArrow()
 }
 
 
-
-//------------------------------------------

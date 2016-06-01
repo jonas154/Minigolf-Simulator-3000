@@ -6,7 +6,7 @@ Ball::Ball()
 {
     setFlag(ItemUsesExtendedStyleOption);
 
-    speed = 10; //später zunächst 0
+    speed = 0; //später zunächst 0
 
     angle = (60); //später durch Schlag bestimmt
     setRotation(angle);
