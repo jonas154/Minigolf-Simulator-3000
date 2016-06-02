@@ -24,6 +24,8 @@ void Level_1::constructLevel()
     QString bgroundimage = ":/Images/Images/Level_Test.png";
      waterimage = ":/Images/Images/wasser.png";
      waterimage2 = ":/Images/Images/wasser2.png";
+     vogelimage = ":/Images/Images/v.png";
+     vogelimage2 = ":/Images/Images/v2.png";
 
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
@@ -73,22 +75,67 @@ void Level_1::constructLevel()
     water->setVisible(true);
 
 
+
+    vogel2 = new QGraphicsPixmapItem;
+    vogel2->setPixmap(vogelimage);
+    vogel2->setVisible(true);
+    vogel2->setPos(50,100);
+    scene->addItem(vogel2);
+
+    vogelcounter = 0;
+
+
 }
 
 //------------------------------------
 void Level_1::updateLevel()
 {
-float a = rand(); // you can use qrand here
-a /= RAND_MAX;
-if (a< 0.5)
+float rand = qrand();
+
+rand /= RAND_MAX;
+
+if (changeimage)
 {
 water->setBrush(QImage(waterimage2));
+changeimage = false;
 }
 else
 {
 water->setBrush(QImage(waterimage));
+changeimage = true;
 }
 qDebug() << "test";
-qDebug() << a;
+int x,y;
+if (rand < 0.001)
+{
+vogelaction = true;
+}
+x = vogel2->x();
+y = vogel2->y();
+if(x < 1024  && vogelaction == true)
+{
+vogel2->setVisible(true);
+vogel2->setPos(x+10,y);
+}
+else
+{vogel2->setPos(0,100);
+ vogel2->setVisible(false);
+ vogelaction = false;
+}
 
+if(vogelcounter < 8)
+{
+vogelcounter++;
+vogel2->setPixmap(vogelimage);
+}
+
+if(vogelcounter >= 8)
+{
+vogelcounter++;
+vogel2->setPixmap(vogelimage2);
+}
+if(vogelcounter >10)
+{
+vogelcounter = 0;
+}
 }

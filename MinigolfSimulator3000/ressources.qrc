@@ -12,6 +12,8 @@
         <file>Images/club3.png</file>
         <file>Images/club4.png</file>
         <file>Images/club5.png</file>
+        <file>Images/v.png</file>
+        <file>Images/v2.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/click_dummy_sound.wav</file>

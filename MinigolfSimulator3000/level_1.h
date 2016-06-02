@@ -7,6 +7,7 @@
 #include <QPixmap>
 #include <QGraphicsItem>
 #include <QString>
+#include <QGraphicsPixmapItem>
 
 
 class Level_1 : public Court
@@ -28,10 +29,19 @@ public slots:
 
 private:
     GroundMaterial *water;
+    QGraphicsRectItem *vogel;
+    QGraphicsPixmapItem *vogel2;
     //! \brief Constructs the level
     void constructLevel();
     QString waterimage;
     QString waterimage2;
+    QString vogelimage;
+    QString vogelimage2;
+    bool changeimage;
+    bool vogelaction;
+    int vogelcounter;
+
+
 
 };
 
