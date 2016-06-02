@@ -22,117 +22,54 @@ void Level_1::constructLevel()
 
     // Dateipfad als String
     QString bgroundimage = ":/Images/Images/Level_Test.png";
-     waterimage = ":/Images/Images/wasser1.png";
-     vogelimage = ":/Images/Images/v.png";
-     vogelimage2 = ":/Images/Images/v2.png";
-     vogelcounter = 0;
-     wassercounter = 0;
-     vogelaction = false;
+    waterimage = ":/Images/Images/wasser1.png";
+    vogelimage = ":/Images/Images/v.png";
+    vogelimage2 = ":/Images/Images/v2.png";
+    vogelcounter = 0;
+    wassercounter = 0;
+    vogelaction = false;
+    std::vector<BorderLine*> lineVec;
 
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
-
+    // QPen setzen
     QPen redpen;
-    redpen.setWidth(2);
+    redpen.setWidth(3);
     redpen.setColor(Qt::red);
 
-    // Begrenzungen hinzufügen
-    BorderLine* line1 = new BorderLine(139.0,250.0,139.0,600.0,BorderLine::metal_material);
-    scene->addItem(line1);
-
-    BorderLine* line2 = new BorderLine(139.0,600.0,150.0,623.0,BorderLine::metal_material);
-    scene->addItem(line2);
-
-//  BorderLine* line3 = new BorderLine(213.0,662.0,295.0,596.0,BorderLine::metal_material);
-//  scene->addItem(line3);
-
-    BorderLine* line4 = new BorderLine(295.0,596.0,295.0,375.0,BorderLine::metal_material);
-    scene->addItem(line4);
-
-    BorderLine* line5 = new BorderLine(295.0,375.0,333.0,338.0,BorderLine::metal_material);
-    scene->addItem(line5);
-
-    BorderLine* line6 = new BorderLine(333.0,338.0,731.0,338.0,BorderLine::metal_material);
-    scene->addItem(line6);
-
-    BorderLine* line7 = new BorderLine(731.0,338.0,731.0,253.0,BorderLine::metal_material);
-    scene->addItem(line7);
-
- // BorderLine* line8 = new BorderLine(731.0,253.0,294.0,253.0,BorderLine::metal_material);
- // scene->addItem(line8);
-
-    BorderLine* line9 = new BorderLine(731.0,253.0,139.0,250.0,BorderLine::metal_material);
-    scene->addItem(line9);
-
-    BorderLine* line10 = new BorderLine(150.0,623.0,160,636,BorderLine::metal_material);
-    scene->addItem(line10);
-
-    BorderLine* line11 = new BorderLine(160,636,170,646,BorderLine::metal_material);
-    scene->addItem(line11);
-
-    BorderLine* line12 = new BorderLine(170,646,179,653,BorderLine::metal_material);
-    scene->addItem(line12);
-
-    BorderLine* line13 = new BorderLine(179,653,189,657,BorderLine::metal_material);
-    scene->addItem(line13);
-
-    BorderLine* line14 = new BorderLine(189,657,201,661,BorderLine::metal_material);
-    scene->addItem(line14);
-
-    BorderLine* line15 = new BorderLine(201,661,220,662,BorderLine::metal_material);
-    scene->addItem(line15);
-
-    BorderLine* line16 = new BorderLine(220,662,238,659,BorderLine::metal_material);
-    scene->addItem(line16);
-
-    BorderLine* line17 = new BorderLine(238,659,253,653,BorderLine::metal_material);
-    scene->addItem(line17);
-
-    BorderLine* line18 = new BorderLine(253,653,265,646,BorderLine::metal_material);
-
-    scene->addItem(line18);
-
-    BorderLine* line19 = new BorderLine(265,646,274,638,BorderLine::metal_material);
-    scene->addItem(line19);
-
-    BorderLine* line20 = new BorderLine(274,638,282,628,BorderLine::metal_material);
-    scene->addItem(line20);
-
-    BorderLine* line21 = new BorderLine(282,628,291,609,BorderLine::metal_material);
-    scene->addItem(line21);
-
-    BorderLine* line22 = new BorderLine(291,609,293,598,BorderLine::metal_material);
-    scene->addItem(line22);
-
-    BorderLine* line23 = new BorderLine(293,598,295,375,BorderLine::metal_material);
-    scene->addItem(line23);
 
 
-    line1->setVisible(false);
-    line2->setVisible(false);
-    line4->setVisible(false);
-    line5->setVisible(false);
-    line6->setVisible(false);
-    line7->setVisible(false);
- // line8->setVisible(false);
-    line9->setVisible(false);
-    line10->setVisible(false);
-    line11->setVisible(false);
-    line12->setVisible(false);
-    line13->setVisible(false);
-    line14->setVisible(false);
-    line15->setVisible(false);
-    line16->setVisible(false);
-    line17->setVisible(false);
-    line18->setVisible(false);
-    line19->setVisible(false);
-    line20->setVisible(false);
-    line21->setVisible(false);
-    line22->setVisible(false);
-    line23->setVisible(false);
+    //Begrenzungslinien zur Liste hinzufügen
+    lineVec.push_back( new BorderLine(139.0,250.0,139.0,600.0,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(139.0,600.0,150.0,623.0,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(295.0,596.0,295.0,375.0,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(295.0,375.0,333.0,338.0,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(333.0,338.0,731.0,338.0,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(731.0,338.0,731.0,253.0,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(731.0,253.0,139.0,250.0,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(150.0,623.0,160,636,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(160,636,170,646,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(170,646,179,653,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(179,653,189,657,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(189,657,201,661,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(201,661,220,662,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(220,662,238,659,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(238,659,253,653,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(253,653,265,646,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(265,646,274,638,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(274,638,282,628,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(282,628,291,609,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(291,609,293,598,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(293,598,295,375,BorderLine::metal_material));
 
-
-
+    //Linien unsichtbar machen + Linien zur Scene hinzufügen
+    for (int i=0;i< lineVec.size();i++)
+        {
+        lineVec[i]->setVisible(false);
+        lineVec[i]->setPen(redpen);
+        scene->addItem(lineVec[i]);
+        }
+    // Wasserbilder
     QPolygon water_polygon;
     water_polygon << QPoint(140,250) << QPoint(140,152) << QPoint(293,152) << QPoint(294,252);
     water = new GroundMaterial(GroundMaterial::water_material,water_polygon);
@@ -141,18 +78,12 @@ void Level_1::constructLevel()
     water->setVisible(true);
     water->setPen(Qt::NoPen);
 
-
-
-
-
+    // Vogelbilder
     vogel2 = new QGraphicsPixmapItem;
     vogel2->setPixmap(vogelimage);
     vogel2->setVisible(true);
     vogel2->setPos(50,100);
     scene->addItem(vogel2);
-
-
-
 
 }
 
