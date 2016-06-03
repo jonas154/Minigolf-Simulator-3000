@@ -5,6 +5,7 @@
 
 #include <QPainter>
 #include <QGraphicsItem>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include "borderline.h"
 #include "courtelement.h"
@@ -45,6 +46,10 @@ private:
 
     //inline bedeutet: setze den Funktionscode an die Stelle, an der die Funktion aufgerufen wird (zur Optimierung). Kann man, muss man aber nicht machen
     inline void doCollision();
+
+    QString vogeltot;
+    int tot;
+    QGraphicsPixmapItem* removeVogel;
 };
 
 #endif // BALL_H

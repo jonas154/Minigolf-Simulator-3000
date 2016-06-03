@@ -11,6 +11,9 @@ Ball::Ball()
     speed = 0;
     angle = 0;
 
+    vogeltot = ":/Images/Images/vtot.png";
+    tot = 0;
+
 }
 
 QRectF Ball::boundingRect() const
@@ -57,12 +60,23 @@ void Ball::setSpeed(qreal s)
 
 void Ball::doCollision()
 {
+    if(tot>0)
+    {
+        --tot;
+        if(tot<=0)
+        {
+            scene()->removeItem(removeVogel);
+        }
+    }
+
     //check ob es eine Kollision gibt
-    if(!(scene()->collidingItems(this).isEmpty()))
+    QList<QGraphicsItem*> collideList = scene()->collidingItems(this);
+
+    if(!(collideList.isEmpty()))
     {
 
         //finde Typ des kollidierenden Objectes heraus (BorderLine oder GroundMaterial)
-        int sw = scene()->collidingItems(this).first()->type();
+        int sw = collideList.first()->type();
 
         BorderLine* borderline;
         int angle;
@@ -71,11 +85,11 @@ void Ball::doCollision()
         {
             case CourtElement::borderline_type: //Kollision mit Spielfeldrand, abprallen
 
-            qDebug() << "collision with borderline";
+            //qDebug() << "collision with borderline";
 
                 //Jetzt weis man, dass es eine Borderline ist, also caste QGraphicsItem* in BorderLine*
                 //Nehme ersten Eintrag aus der Kollisionsliste. Achtung, es können später auch weitere Einträge vorhanden sein.
-                borderline = static_cast<BorderLine*>(scene()->collidingItems(this).first());
+                borderline = static_cast<BorderLine*>(collideList.first());
                 angle = borderline->getAngle();
 
                 if(canCollide<=0)
@@ -94,6 +108,13 @@ void Ball::doCollision()
 
                 }
 
+            break;
+
+            case 7: //Vogel abgeschossen!
+                //scene()->removeItem(collideList.first());
+                removeVogel = static_cast<QGraphicsPixmapItem*>(collideList.first());
+                removeVogel->setPixmap(vogeltot);
+                tot = 5;
             break;
 
             default: break;

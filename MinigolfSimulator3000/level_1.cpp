@@ -145,74 +145,76 @@ void Level_1::constructLevel()
 void Level_1::updateLevel()
 {
 
-float rand = qrand();
-int x,y;
+    float rand = qrand();
+    int x,y;
 
-rand /= RAND_MAX;
-x = vogel2->x();
-y = vogel2->y();
+    rand /= RAND_MAX;
+    x = vogel2->x();
+    y = vogel2->y();
 
-if (wassercounter < 6)
+    if (wassercounter < 6)
     {
-    water->setBrush(QImage(":/Images/Images/wasser1.png"));
-
-    }
-if (wassercounter > 6 && wassercounter <= 12)
-    {
-    water->setBrush(QImage(":/Images/Images/wasser2.png"));
-
-    }
-if (wassercounter > 12 && wassercounter <= 16)
-    {
-    water->setBrush(QImage(":/Images/Images/wasser3.png"));
-
-    }
-if (wassercounter > 16 && wassercounter <= 20)
-    {
-    water->setBrush(QImage(":/Images/Images/wasser4.png"));
+        water->setBrush(QImage(":/Images/Images/wasser1.png"));
 
     }
 
-if (rand < 0.001)
+    if (wassercounter > 6 && wassercounter <= 12)
     {
-    vogelaction = true;
+        water->setBrush(QImage(":/Images/Images/wasser2.png"));
+
+    }
+
+    if (wassercounter > 12 && wassercounter <= 16)
+    {
+        water->setBrush(QImage(":/Images/Images/wasser3.png"));
+
+    }
+
+    if (wassercounter > 16 && wassercounter <= 20)
+    {
+        water->setBrush(QImage(":/Images/Images/wasser4.png"));
+
+    }
+
+    if (rand < 1.0)
+    {
+        vogelaction = true;
     }
 
 
-if(x < 1024  && vogelaction == true)
+    if(x < 1024  && vogelaction == true)
     {
-    vogel2->setVisible(true);
-    vogel2->setPos(x+10,y);
+        vogel2->setVisible(true);
+        vogel2->setPos(x+10,y);
+    }
+    else
+    {
+        vogel2->setPos(0,1000*rand);
+        vogel2->setVisible(false);
+        vogelaction = false;
     }
 
-else
+    if(vogelcounter < 8)
     {
-    vogel2->setPos(0,1000*rand);
-    vogel2->setVisible(false);
-    vogelaction = false;
+        vogel2->setPixmap(vogelimage);
     }
 
-if(vogelcounter < 8)
+    if(vogelcounter >= 8)
     {
-    vogel2->setPixmap(vogelimage);
+        vogel2->setPixmap(vogelimage2);
     }
 
-if(vogelcounter >= 8)
+    vogelcounter++;
+    wassercounter++;
+
+    if(vogelcounter >10)
     {
-    vogel2->setPixmap(vogelimage2);
+        vogelcounter = 0;
     }
 
-vogelcounter++;
-wassercounter++;
-
-if(vogelcounter >10)
+    if(wassercounter  >20)
     {
-    vogelcounter = 0;
-    }
-
-if(wassercounter  >20)
-    {
-    wassercounter = 0;
+        wassercounter = 0;
     }
 
 }

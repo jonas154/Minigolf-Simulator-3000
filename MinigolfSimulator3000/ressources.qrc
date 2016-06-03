@@ -17,6 +17,7 @@
         <file>Images/wasser2.png</file>
         <file>Images/wasser3.png</file>
         <file>Images/wasser4.png</file>
+        <file>Images/vtot.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/click_dummy_sound.wav</file>
