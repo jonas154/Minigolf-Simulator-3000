@@ -83,6 +83,62 @@ void Level_1::constructLevel()
     vogel2->setVisible(true);
     vogel2->setPos(50,100);
     scene->addItem(vogel2);
+
+
+//-----------------------------
+
+    QPen redpen;
+    redpen.setWidth(2);
+    redpen.setColor(Qt::red);
+
+    double startX = 400.0;
+    double startY = 450.0;
+    double stopX = 500.0;
+    double stopY = 450.0;
+    double radius = 80;
+    double lineLength = 10.0;
+    int orientation = BorderLineCurveDrawer::left;
+    bool segmentIsComplementary = false;
+
+
+    BorderLineCurveDrawer::draw(startX, startY, stopX, stopY, radius, lineLength,
+                                orientation, segmentIsComplementary,
+                                BorderLine::metal_material, scene, redpen);
+//------------------------
+
+
+    startX = 530.0;
+    stopX = 630.0;
+    orientation = BorderLineCurveDrawer::right;
+
+    BorderLineCurveDrawer::draw(startX, startY, stopX, stopY, radius, lineLength,
+                                orientation, segmentIsComplementary,
+                                BorderLine::metal_material, scene, redpen);
+//------------------------
+
+
+    startX = 670.0;
+    stopX = 770.0;
+    segmentIsComplementary = true;
+
+    BorderLineCurveDrawer::draw(startX, startY, stopX, stopY, radius, lineLength,
+                                orientation, segmentIsComplementary,
+                                BorderLine::metal_material, scene, redpen);
+//------------------------
+
+    startX = 850.0;
+    stopX = 950.0;
+    lineLength = 50.0;
+    QPen whitePen;
+    whitePen.setWidth(2);
+    whitePen.setColor(Qt::white);
+
+    std::vector<BorderLine*> lineVector = BorderLineCurveDrawer::draw(startX, startY, stopX, stopY, radius, lineLength,
+                                                                   orientation, segmentIsComplementary,
+                                                                   BorderLine::metal_material, scene, whitePen);
+
+    lineVector[0]->setPen(redpen);
+
 }
 
 //------------------------------------

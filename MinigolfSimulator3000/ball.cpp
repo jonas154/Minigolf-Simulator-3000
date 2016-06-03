@@ -8,6 +8,9 @@ Ball::Ball()
 
     canCollide = 0; //Zähler damit Kollision nicht abspackt, kann besser gelöst werden
 
+    speed = 0;
+    angle = 0;
+
 }
 
 QRectF Ball::boundingRect() const

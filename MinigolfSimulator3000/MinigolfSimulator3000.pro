@@ -38,14 +38,15 @@ HEADERS  += \
     startwindow.h \
     game.h \
     score.h \
-    strike.h
+    strike.h \
+    borderlinecurvedrawer.h
 
 FORMS    += \
     court.ui \
     startwindow.ui
 
 CONFIG += c++14
-CONFIG   -= x86_64
+CONFIG -= x86_64
 
 #INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt"
 

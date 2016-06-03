@@ -10,6 +10,8 @@
 #include "ball.h"
 #include "arrow.h"
 #include "arrowstartitem.h"
+#include "borderlinecurvedrawer.h"
+#include <vector>
 
 #include <QDebug>
 

@@ -18,13 +18,12 @@ Court::Court(QWidget *parent)
 
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
-    //ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    timer->start(40); //Bisschen mehr fps müssens schon sein!
-    //Haha dann musst du aber die Zahl kleiner machen! Unbedingt bald klären, da hängt sehr viel dran!
-    //25 fps reicht eigentlich fürs menschliche Auge
+    timer->start(33);
+
 }
 
 //------------------------------------------
