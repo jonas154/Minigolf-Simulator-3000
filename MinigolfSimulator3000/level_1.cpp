@@ -19,8 +19,6 @@ Level_1::Level_1(QWidget *parent)
 
 void Level_1::constructLevel()
 {
-
-
     // Dateipfad als String
     QString bgroundimage = ":/Images/Images/Level_Test.png";
     waterimage = ":/Images/Images/wasser1.png";
@@ -33,12 +31,11 @@ void Level_1::constructLevel()
 
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
+
    // QPen setzen
-    QPen redpen;
-    redpen.setWidth(1);
-    redpen.setColor(Qt::NoPen);
-
-
+    QPen linepen;
+    linepen.setWidth(3);
+    linepen.setColor(QColor(0,0,0,0));
 
     //Begrenzungslinien zur Liste hinzufügen
     lineVec.push_back( new BorderLine(139.0,250.0,139.0,600.0,BorderLine::metal_material));
@@ -67,9 +64,10 @@ void Level_1::constructLevel()
     for (int i=0;i< lineVec.size();i++)
         {
         lineVec[i]->setVisible(true);
-        lineVec[i]->setPen(redpen);
+        lineVec[i]->setPen(linepen);
         scene->addItem(lineVec[i]);
         }
+
     // Wasserbilder
     QPolygon water_polygon;
     water_polygon << QPoint(140,250) << QPoint(140,152) << QPoint(293,152) << QPoint(294,252);
@@ -85,7 +83,6 @@ void Level_1::constructLevel()
     vogel2->setVisible(true);
     vogel2->setPos(50,100);
     scene->addItem(vogel2);
-
 }
 
 //------------------------------------
