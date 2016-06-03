@@ -28,6 +28,9 @@ public:
     //bewege Ball
     void advance(int phase);
 
+    void setAngle(qreal a);
+    void setSpeed(qreal s);
+
 signals:
 
     // Signal zur SoundEngie (geht noch nicht)

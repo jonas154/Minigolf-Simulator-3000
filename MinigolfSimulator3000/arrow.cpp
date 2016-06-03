@@ -31,16 +31,22 @@ QPainterPath Arrow::shape() const
 
 qreal Arrow::getAngle()
 {
-    qreal angle;
-    // angle berechnen
+    QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
+    setLine(line);
+
+    qreal angle = line.angle();
+
+    angle = 360 - angle;
+    angle = angle - 90;
+
+//    qDebug() << "angle handed to ball: " << angle;
     return angle;
 }
 
 qreal Arrow::getSpeed()
 {
-    // needs to be checked
     qreal speed;
-    qreal scalingFactor = 1;
+    qreal scalingFactor = 0.05;
     speed = std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
     return scalingFactor * speed;
 }

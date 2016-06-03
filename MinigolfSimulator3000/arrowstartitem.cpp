@@ -25,3 +25,8 @@ void ArrowStartItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->fillRect(rec,brush);
 
 }
+
+void ArrowStartItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    emit arrowStartItemReleased();
+}

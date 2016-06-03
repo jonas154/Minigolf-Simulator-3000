@@ -6,11 +6,6 @@ Ball::Ball()
 {
     setFlag(ItemUsesExtendedStyleOption);
 
-    speed = 0; //später zunächst 0
-
-    angle = (60); //später durch Schlag bestimmt
-    setRotation(angle);
-
     canCollide = 0; //Zähler damit Kollision nicht abspackt, kann besser gelöst werden
 
 }
@@ -39,11 +34,22 @@ inline void Ball::advance(int phase)
 {
     if(!phase) return;
 
-    setPos(mapToParent(0,-(speed)));
+    setPos(mapToParent(0,speed));
 
     //Abspackzähler
     --canCollide;
     if(canCollide < 0) canCollide=0;
+}
+
+void Ball::setAngle(qreal a)
+{
+    angle = a;
+    setRotation(angle);
+}
+
+void Ball::setSpeed(qreal s)
+{
+    speed = s;
 }
 
 void Ball::doCollision()
@@ -75,6 +81,12 @@ void Ball::doCollision()
                     speed = speed * borderline->getReflectionCoefficient();
                  //   emit angleChanged();
 
+                    //Abspackzähler
+                    if(canCollide<=0)
+                    {
+                        canCollide = 16/speed;
+                    }
+
                 }
 
             break;
@@ -82,10 +94,6 @@ void Ball::doCollision()
             default: break;
         }
 
-        //Abspackzähler
-        if(canCollide<=0)
-        {
-            canCollide = 16/speed;
-        }
+
     }
 }

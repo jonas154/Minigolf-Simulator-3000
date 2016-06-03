@@ -9,7 +9,12 @@ Level_1::Level_1(QWidget *parent)
     this->setStartCoordinates(250.0, 300.0);
     this->constructLevel();
     this->createBall();
+
     this->createArrow();
+    connect(arrowStart, SIGNAL(arrowStartItemReleased()), this, SLOT(shot()));
+
+
+
 
 
 }
@@ -104,7 +109,7 @@ else
 water->setBrush(QImage(waterimage));
 changeimage = true;
 }
-qDebug() << "test";
+//qDebug() << "test";
 int x,y;
 if (rand < 0.001)
 {

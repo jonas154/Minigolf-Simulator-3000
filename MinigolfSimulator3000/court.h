@@ -11,6 +11,7 @@
 #include "arrow.h"
 #include "arrowstartitem.h"
 
+#include <QDebug>
 
 namespace Ui {
 class Court;
@@ -42,6 +43,8 @@ public slots:
 
     virtual void updateLevel() = 0;
 
+    void shot();
+
 //---------------------------------
 
 protected:
@@ -64,6 +67,10 @@ protected:
     //! \brief Create Arrow including the ArrowStartItem
     void createArrow();
 
+    //! \brief Create Arrow including the ArrowStartItem
+    void deleteArrow();
+
+
 //---------------------------------
 
 private:
@@ -72,6 +79,11 @@ private:
     QPointF startCoordinates;
 
     Ball* ball;
+
+
+protected:
+    ArrowStartItem* arrowStart;
+    Arrow* arrow;
 
 };
 

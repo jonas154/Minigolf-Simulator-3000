@@ -8,10 +8,13 @@
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
 
+#include <QDebug>
+
 // The ArrowStartItem is used to adjust the arrow
 
-class ArrowStartItem : public QGraphicsItem
+class ArrowStartItem : public QObject, public QGraphicsItem
 {
+    Q_OBJECT
 public:
     ArrowStartItem();
 
@@ -20,6 +23,11 @@ public:
 
     //malt das Item bei jedem Zeitschritt
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+signals:
+    void arrowStartItemReleased();
 
 private:
     QPointF arrowStartPoint;

@@ -78,13 +78,27 @@ void Court::createBall()
 
 void Court::createArrow()
 {
-    ArrowStartItem *arrowStart = new ArrowStartItem();
+    arrowStart = new ArrowStartItem();
     scene->addItem(arrowStart);
     arrowStart->setPos(ball->pos()-QPointF(50.0,50.0));
 
-    Arrow *arrow = new Arrow(arrowStart,ball);
+    arrow = new Arrow(arrowStart,ball);
     scene->addItem(arrow);
     arrow->updatePosition();
+}
+
+void Court::deleteArrow()
+{
+    scene->removeItem(arrowStart);
+    scene->removeItem(arrow);
+}
+
+void Court::shot()
+{
+    ball->setAngle(arrow->getAngle());
+    ball->setSpeed(arrow->getSpeed());
+//    qDebug() << "speed handed to ball: " << arrow->getSpeed();
+    this->deleteArrow();
 }
 
 
