@@ -45,6 +45,7 @@ FORMS    += \
     startwindow.ui
 
 CONFIG += c++14
+CONFIG   -= x86_64
 
 #INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt"
 

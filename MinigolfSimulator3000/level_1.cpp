@@ -33,10 +33,10 @@ void Level_1::constructLevel()
 
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
-    // QPen setzen
+   // QPen setzen
     QPen redpen;
-    redpen.setWidth(3);
-    redpen.setColor(Qt::red);
+    redpen.setWidth(1);
+    redpen.setColor(Qt::NoPen);
 
 
 
@@ -66,7 +66,7 @@ void Level_1::constructLevel()
     //Linien unsichtbar machen + Linien zur Scene hinzufügen
     for (int i=0;i< lineVec.size();i++)
         {
-        lineVec[i]->setVisible(false);
+        lineVec[i]->setVisible(true);
         lineVec[i]->setPen(redpen);
         scene->addItem(lineVec[i]);
         }
