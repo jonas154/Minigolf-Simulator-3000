@@ -68,6 +68,8 @@ void Ball::doCollision()
         {
             case CourtElement::borderline_type: //Kollision mit Spielfeldrand, abprallen
 
+            qDebug() << "collision with borderline";
+
                 //Jetzt weis man, dass es eine Borderline ist, also caste QGraphicsItem* in BorderLine*
                 //Nehme ersten Eintrag aus der Kollisionsliste. Achtung, es können später auch weitere Einträge vorhanden sein.
                 borderline = static_cast<BorderLine*>(scene()->collidingItems(this).first());

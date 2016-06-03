@@ -10,6 +10,7 @@
 #include "courtelement.h"
 #include <QStyleOptionGraphicsItem>
 
+#include <QDebug>
 
 class Ball : public QGraphicsItem
 {

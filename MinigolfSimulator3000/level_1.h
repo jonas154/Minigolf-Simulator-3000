@@ -40,6 +40,8 @@ private:
     bool changeimage;
     bool vogelaction;
     int vogelcounter;
+    int wassercounter;
+
 
 
 
