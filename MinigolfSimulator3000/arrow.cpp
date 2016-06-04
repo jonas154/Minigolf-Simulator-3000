@@ -7,7 +7,6 @@ Arrow::Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent)
 {
     myStartItem = startItem;
     myEndItem = endItem;
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
     myColor = Qt::red;
     setPen(QPen(myColor, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 }
@@ -47,13 +46,14 @@ qreal Arrow::getSpeed()
 {
     qreal speed;
     qreal scalingFactor = 0.05;
-    speed = std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
+    speed = 0.75*std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
     return scalingFactor * speed;
 }
 
 void Arrow::updatePosition()
 {
     QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
+    if(line.length()>100.0) line.setLength(100.0);
     setLine(line);
 }
 

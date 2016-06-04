@@ -56,6 +56,7 @@ protected:
     QGraphicsScene* scene;
 
     QTimer* timer;
+    QTimer* graphicsTimer;
 
     //! \brief Set the start coordinates of the level
     void setStartCoordinates(const QPointF startPoint);

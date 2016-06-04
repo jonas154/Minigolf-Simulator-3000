@@ -7,6 +7,7 @@
 #include <QGraphicsScene>
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
+#include "ball.h"
 
 #include <QDebug>
 
@@ -16,7 +17,7 @@ class ArrowStartItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    ArrowStartItem();
+    ArrowStartItem(Ball* _ball);
 
     //von QGraphicsItem geerbt
     QRectF boundingRect() const;
@@ -26,11 +27,15 @@ public:
 
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+
 signals:
     void arrowStartItemReleased();
 
 private:
     QPointF arrowStartPoint;
+
+    Ball* ball;
 
 };
 

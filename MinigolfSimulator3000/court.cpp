@@ -22,7 +22,10 @@ Court::Court(QWidget *parent)
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    timer->start(33);
+    timer->start(10);
+
+    graphicsTimer = new QTimer(this);
+    graphicsTimer->start(33);
 
 }
 
@@ -77,7 +80,7 @@ void Court::createBall()
 
 void Court::createArrow()
 {
-    arrowStart = new ArrowStartItem();
+    arrowStart = new ArrowStartItem(ball);
     scene->addItem(arrowStart);
     arrowStart->setPos(ball->pos()-QPointF(50.0,50.0));
 
