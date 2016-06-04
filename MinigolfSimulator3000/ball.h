@@ -47,9 +47,9 @@ private:
     //inline bedeutet: setze den Funktionscode an die Stelle, an der die Funktion aufgerufen wird (zur Optimierung). Kann man, muss man aber nicht machen
     inline void doCollision();
 
-    QString vogeltot;
-    int tot;
-    QGraphicsPixmapItem* removeVogel;
+    QString birdDeadPicture;
+    int birdDeadCounter;
+    QGraphicsPixmapItem* removeBird;
 };
 
 #endif // BALL_H

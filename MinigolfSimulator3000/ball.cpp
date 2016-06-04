@@ -7,32 +7,34 @@ Ball::Ball()
     setFlag(ItemUsesExtendedStyleOption);
 
     canCollide = 0; //Zähler damit Kollision nicht abspackt, kann besser gelöst werden
-
     speed = 0;
     angle = 0;
 
-    vogeltot = ":/Images/Images/vtot.png";
-    tot = 0;
+    birdDeadPicture = ":/Images/Images/vtot.png";
+    birdDeadCounter = 0;
 
 }
 
 QRectF Ball::boundingRect() const
 {
-    return QRectF(-4,-4,8,8); //Größe 8*8, Mittelpunkt für Rotation in der Mitte
+    return QRectF(-3,-3,6,6);
 }
 
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    //QRectF rec = boundingRect();
 
-    painter->setClipRect(option->exposedRect);
-
-    QRectF rec = boundingRect();
     QBrush brush(Qt::white);
+    QPen pen;
+    pen.setColor(Qt::white);
 
-    doCollision();
+    QPainterPath path(QPointF(0.0, -5.0));
+    path.arcTo(QRectF(-5.0,-5.0,10.0,10.0), 90.0, 360.0);
 
-    painter->fillRect(rec,brush);
-    painter->drawRect(rec);
+    painter->setClipPath(path);
+    painter->setPen(pen);
+    painter->fillPath(path,brush);
+    painter->drawPath(path);
 }
 
 //bewege Ball
@@ -42,9 +44,10 @@ inline void Ball::advance(int phase)
 
     setPos(mapToParent(0,speed));
 
-    //Abspackzähler
-    --canCollide;
-    if(canCollide < 0) canCollide=0;
+    doCollision();
+
+    if(canCollide > 0)
+    {--canCollide;}
 }
 
 void Ball::setAngle(qreal a)
@@ -60,23 +63,25 @@ void Ball::setSpeed(qreal s)
 
 void Ball::doCollision()
 {
-    if(tot>0)
+    if(birdDeadCounter>0)
     {
-        --tot;
-        if(tot<=0)
+        --birdDeadCounter;
+        if(birdDeadCounter<=0)
         {
-            scene()->removeItem(removeVogel);
+            scene()->removeItem(removeBird);
         }
     }
 
     //check ob es eine Kollision gibt
     QList<QGraphicsItem*> collideList = scene()->collidingItems(this);
 
-    if(!(collideList.isEmpty()))
+
+    //if(!(collideList.isEmpty()))
+    for(int i=0; i<collideList.size(); ++i)
     {
 
         //finde Typ des kollidierenden Objectes heraus (BorderLine oder GroundMaterial)
-        int sw = collideList.first()->type();
+        int sw = collideList.at(i)->type();
 
         BorderLine* borderline;
         int angle;
@@ -85,11 +90,8 @@ void Ball::doCollision()
         {
             case CourtElement::borderline_type: //Kollision mit Spielfeldrand, abprallen
 
-            //qDebug() << "collision with borderline";
-
                 //Jetzt weis man, dass es eine Borderline ist, also caste QGraphicsItem* in BorderLine*
-                //Nehme ersten Eintrag aus der Kollisionsliste. Achtung, es können später auch weitere Einträge vorhanden sein.
-                borderline = static_cast<BorderLine*>(collideList.first());
+                borderline = static_cast<BorderLine*>(collideList.at(i));
                 angle = borderline->getAngle();
 
                 if(canCollide<=0)
@@ -98,23 +100,19 @@ void Ball::doCollision()
                     setRotation(2*(angle+90.0-rotation()) + rotation());
 
                     speed = speed * borderline->getReflectionCoefficient();
-                 //   emit angleChanged();
 
-                    //Abspackzähler
-                    if(canCollide<=0)
-                    {
-                        canCollide = 16/speed;
-                    }
+                    //emit angleChanged();
 
+                    canCollide = 4;
                 }
 
             break;
 
-            case 7: //Vogel abgeschossen!
-                //scene()->removeItem(collideList.first());
-                removeVogel = static_cast<QGraphicsPixmapItem*>(collideList.first());
-                removeVogel->setPixmap(vogeltot);
-                tot = 5;
+            case 7: //Vogel abgeschossen! (7 = Pixmap)
+
+                removeBird = static_cast<QGraphicsPixmapItem*>(collideList.at(i));
+                removeBird->setPixmap(birdDeadPicture);
+                birdDeadCounter = 30;
             break;
 
             default: break;
