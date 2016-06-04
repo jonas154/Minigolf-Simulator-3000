@@ -7,8 +7,8 @@ Ball::Ball()
     setFlag(ItemUsesExtendedStyleOption);
 
     canCollide = 0; //Zähler damit Kollision nicht abspackt, kann besser gelöst werden
-    speed = 0;
-    angle = 0;
+    speed = 0.0;
+    angle = 0.0;
 
     birdDeadPicture = ":/Images/Images/vtot.png";
     birdDeadCounter = 0;
@@ -83,16 +83,13 @@ void Ball::doCollision()
         //finde Typ des kollidierenden Objectes heraus (BorderLine oder GroundMaterial)
         int sw = collideList.at(i)->type();
 
-        BorderLine* borderline;
-        int angle;
-
         switch(sw)
         {
             case CourtElement::borderline_type: //Kollision mit Spielfeldrand, abprallen
-
+            {
                 //Jetzt weis man, dass es eine Borderline ist, also caste QGraphicsItem* in BorderLine*
-                borderline = static_cast<BorderLine*>(collideList.at(i));
-                angle = borderline->getAngle();
+                BorderLine* borderline = static_cast<BorderLine*>(collideList.at(i));
+                int angle = borderline->getAngle();
 
                 if(canCollide<=0)
                 {
@@ -105,19 +102,82 @@ void Ball::doCollision()
 
                     canCollide = 4;
                 }
+            }
+            break;
 
+            case CourtElement::groundmaterial_type:
+            {
+                GroundMaterial* groundmaterial = static_cast<GroundMaterial*>(collideList.at(i));
+
+                double maxspeed = groundmaterial->getMaxSpeed();
+                double minspeed = groundmaterial->getMinSpeed();
+                double friction = groundmaterial->getFrictionCoefficient();
+
+                switch(groundmaterial->getMaterial())
+                {
+                    case GroundMaterial::grass_material:
+                    case GroundMaterial::concrete_material:
+                    case GroundMaterial::wood_material:
+                    case GroundMaterial::sand_material:
+                    case GroundMaterial::speedUp_material:
+                    {
+                        speed -= friction;
+
+                        if(speed<minspeed)
+                        {
+                            speed = 0.0;
+                            //emit ballStopped();
+                        }
+                    }
+                    break;
+
+                    case GroundMaterial::water_material:
+
+                        speed -= friction*speed;
+                        //emit ballInWater();
+                    break;
+
+                    case GroundMaterial::nonNewtonian_material:
+
+                        if(speed > minspeed)
+                        {
+                            speed -= speed*friction;
+                        }
+                        else if(speed<minspeed)
+                        {
+                            //emit ballInNewtonian();
+                        }
+                    break;
+
+                    case GroundMaterial::hole_material:
+
+                        if(speed>maxspeed)
+                        {
+                            speed -= speed*friction;
+                        }
+                        else
+                        {
+                            speed = 0.0;
+                            //emit ballInHole();
+                        }
+
+                    break;
+
+                    default: break;
+                }
+            }
             break;
 
             case 7: //Vogel abgeschossen! (7 = Pixmap)
-
+            {
                 removeBird = static_cast<QGraphicsPixmapItem*>(collideList.at(i));
                 removeBird->setPixmap(birdDeadPicture);
                 birdDeadCounter = 30;
+            }
             break;
 
             default: break;
         }
-
-
     }
+
 }

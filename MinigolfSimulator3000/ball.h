@@ -1,5 +1,3 @@
-//BEISPIELCODE, WIRD SPÄTER ERSETZT
-
 #ifndef BALL_H
 #define BALL_H
 
@@ -8,6 +6,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include "borderline.h"
+#include "groundmaterial.h"
 #include "courtelement.h"
 #include <QStyleOptionGraphicsItem>
 

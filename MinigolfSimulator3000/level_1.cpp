@@ -41,12 +41,23 @@ void Level_1::constructLevel()
     water->setVisible(true);
     water->setPen(Qt::NoPen);
 
+
+
     // QPen setzen
     QPen linepen;
     linepen.setWidth(2);
     linepen.setColor(QColor(0,0,0,0));
     linepen.setJoinStyle(Qt::RoundJoin);
     linepen.setCapStyle(Qt::RoundCap);
+
+
+    //grass material
+    QPolygonF grassPolygon;
+    grassPolygon << QPointF(294.0, 670.0) << QPointF(294.0, 255.0) << QPointF(140.0, 255.0) << QPointF(140.0, 670.0);
+    GroundMaterial* grass = new GroundMaterial(GroundMaterial::grass_material, grassPolygon);
+    grass->setPen(linepen);
+    scene->addItem(grass);
+
 
     //Begrenzungslinien zur Liste hinzufügen
     lineVec.push_back( new BorderLine(294.0,594.0,294.0,375.0,BorderLine::metal_material));
