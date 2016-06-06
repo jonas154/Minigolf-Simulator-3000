@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     startwindow.cpp \
     game.cpp \
     score.cpp \
-    strike.cpp
+    strike.cpp \
+    bonus.cpp
 
 HEADERS  += \
     ball.h \
@@ -39,7 +40,8 @@ HEADERS  += \
     game.h \
     score.h \
     strike.h \
-    borderlinecurvedrawer.h
+    borderlinecurvedrawer.h \
+    bonus.h
 
 FORMS    += \
     court.ui \

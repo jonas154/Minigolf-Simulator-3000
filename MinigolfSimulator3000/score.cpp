@@ -2,24 +2,49 @@
 
 Score::Score(QGraphicsItem *parent) : QObject(),QGraphicsPixmapItem(parent)
 {
-    score = 0;
+    score1 = 0;
+    score2 = 0;
     setPixmap(QPixmap(":/Images/Images/ball.png"));
 }
 
-void Score::increase()
+void Score::increase(int _score)
 {
-    score++;
-    if (score == 2)
-        setPixmap(QPixmap(":/Images/Images/ball2.png"));
-    else if (score == 3)
-        setPixmap(QPixmap(":/Images/Images/ball3.png"));
-    else if (score == 4)
-        setPixmap(QPixmap(":/Images/Images/ball4.png"));
-    else if (score == 5)
-        setPixmap(QPixmap(":/Images/Images/ball5.png"));
+    if (_score == 1)
+    {
+        score1++;
+        if (score1 == 2)
+            setPixmap(QPixmap(":/Images/Images/ball2.png"));
+        else if (score1 == 3)
+            setPixmap(QPixmap(":/Images/Images/ball3.png"));
+        else if (score1 == 4)
+            setPixmap(QPixmap(":/Images/Images/ball4.png"));
+        else if (score1 == 5)
+            setPixmap(QPixmap(":/Images/Images/ball5.png"));
+    }
+
+    else if (_score == 2)
+    {
+        score2++;
+        if (score2 == 2)
+            setPixmap(QPixmap(":/Images/Images/ball2.png"));
+        else if (score2 == 3)
+            setPixmap(QPixmap(":/Images/Images/ball3.png"));
+        else if (score2 == 4)
+            setPixmap(QPixmap(":/Images/Images/ball4.png"));
+        else if (score2 == 5)
+            setPixmap(QPixmap(":/Images/Images/ball5.png"));
+    }
+
 }
 
-int Score::getScore()
+int Score::getScore(int _score)
 {
-    return score;
+    if (_score == 1)
+    {
+        return score1;
+    }
+    else if (_score == 2)
+    {
+        return score2;
+    }
 }

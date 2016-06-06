@@ -10,11 +10,11 @@ class Strike : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Strike(QGraphicsItem *parent=0);
-    int getStrike();
+    int getStrike(int _strike);
 public slots:
-    void decrease();
+    void decrease(int _strike);
 private:
-    int strike;
+    int strike1, strike2;
 };
 
 #endif // STRIKE_H
