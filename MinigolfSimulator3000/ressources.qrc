@@ -1,11 +1,6 @@
 <RCC>
     <qresource prefix="/Images">
         <file>Images/Level_Test.png</file>
-        <file>Images/ball.png</file>
-        <file>Images/ball2.png</file>
-        <file>Images/ball3.png</file>
-        <file>Images/ball4.png</file>
-        <file>Images/ball5.png</file>
         <file>Images/club.png</file>
         <file>Images/club2.png</file>
         <file>Images/club3.png</file>
@@ -18,7 +13,16 @@
         <file>Images/wasser3.png</file>
         <file>Images/wasser4.png</file>
         <file>Images/vtot.png</file>
-        <file>Images/bonus1.png</file>
+        <file>Images/ball0-5.png</file>
+        <file>Images/ball1-5.png</file>
+        <file>Images/ball2-5.png</file>
+        <file>Images/ball3-5.png</file>
+        <file>Images/ball4-5.png</file>
+        <file>Images/ball5-5.png</file>
+        <file>Images/bonus0-3.png</file>
+        <file>Images/bonus1-3.png</file>
+        <file>Images/bonus2-3.png</file>
+        <file>Images/bonus3-3.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/click_dummy_sound.wav</file>
