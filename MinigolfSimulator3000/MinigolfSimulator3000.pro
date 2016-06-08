@@ -25,11 +25,9 @@ SOURCES += main.cpp\
     game.cpp \
     score.cpp \
     strike.cpp \
-<<<<<<< HEAD
-    addplayerdialog.cpp
-=======
-    bonus.cpp
->>>>>>> aa31261c90d54d1b9268906ff736ed5732a94b4e
+    addplayerdialog.cpp \
+    bonus.cpp \
+
 
 HEADERS  += \
     ball.h \
@@ -46,12 +44,10 @@ HEADERS  += \
     game.h \
     score.h \
     strike.h \
-<<<<<<< HEAD
-    addplayerdialog.h
-=======
+    addplayerdialog.h \
     borderlinecurvedrawer.h \
-    bonus.h
->>>>>>> aa31261c90d54d1b9268906ff736ed5732a94b4e
+    bonus.h \
+
 
 FORMS    += \
     court.ui \

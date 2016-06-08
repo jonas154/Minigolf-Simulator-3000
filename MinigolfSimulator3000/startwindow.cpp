@@ -77,7 +77,7 @@ void StartWindow::on_addPlayer_clicked()
 // Aufbau der Datei: :1:Name:Level:":2:Name:Level:":
 void StartWindow::readLines()
 {
-
+/*
     QString line;
     QString verzeichnis=QCoreApplication::applicationDirPath();
     verzeichnis.append("/minigolfSimulator3000.txt");
@@ -124,11 +124,11 @@ void StartWindow::readLines()
         }
     }
 file.close();
-
+*/
 }
 
 void StartWindow::writeFile()
-{
+{/*
     QString verzeichnis=QCoreApplication::applicationDirPath();
     verzeichnis.append("/minigolfSimulator3000.txt");
     QFile file(verzeichnis);
@@ -146,4 +146,5 @@ void StartWindow::writeFile()
        }
     }
     file.close();
+*/
 }
