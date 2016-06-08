@@ -25,7 +25,11 @@ SOURCES += main.cpp\
     game.cpp \
     score.cpp \
     strike.cpp \
+<<<<<<< HEAD
+    addplayerdialog.cpp
+=======
     bonus.cpp
+>>>>>>> aa31261c90d54d1b9268906ff736ed5732a94b4e
 
 HEADERS  += \
     ball.h \
@@ -42,12 +46,17 @@ HEADERS  += \
     game.h \
     score.h \
     strike.h \
+<<<<<<< HEAD
+    addplayerdialog.h
+=======
     borderlinecurvedrawer.h \
     bonus.h
+>>>>>>> aa31261c90d54d1b9268906ff736ed5732a94b4e
 
 FORMS    += \
     court.ui \
-    startwindow.ui
+    startwindow.ui \
+    addplayerdialog.ui
 
 CONFIG += c++14
 CONFIG -= x86_64

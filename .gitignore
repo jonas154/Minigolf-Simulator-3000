@@ -1,3 +1,2 @@
-*.user
-build-MinigolfSimulator3000-Desktop_Qt_5_6_0_MSVC2015_64bit-Debug/
-build-MinigolfSimulator3000-Desktop_Qt_5_6_0_MinGW_32bit-Release/
+build-MinigolfSimulator3000-Desktop_Qt_5_6_0_MinGW_32bit-Debug/
+MinigolfSimulator3000/MinigolfSimulator3000.pro.user

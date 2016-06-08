@@ -6,9 +6,9 @@
 #include "game.h"
 #include "QString"
 #include "QFile"
-
+#include "addplayerdialog.h"
 class Game;
-
+class addPlayerDialog;
 
 namespace Ui {
 class StartWindow;
@@ -28,15 +28,27 @@ public:
         return this->ui;
     };
 
-    void setLevel(int level);
+   // void setMatrix(QString playerMatrix[10][3]);
+    //QString getMatrix();
 
+    int getLevel();
+  //  int getPlayerCounter();
+    bool fileExists(QString filename);
+    QString matrix[10][3];
+    int playercounter;
+
+    void writeFile();
+    void readLines();
 private slots:
     void on_Start_clicked();
-
     void on_exitButton_clicked();
+    void on_addPlayer_clicked();
+
 
 private:
     Ui::StartWindow* ui;
+   // std::vector<Player*> playerVec;
+
 
 };
 
