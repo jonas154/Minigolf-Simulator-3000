@@ -10,7 +10,10 @@
 #include "ball.h"
 #include "arrow.h"
 #include "arrowstartitem.h"
+#include "borderlinecurvedrawer.h"
+#include <vector>
 
+#include <QDebug>
 
 namespace Ui {
 class Court;
@@ -42,6 +45,8 @@ public slots:
 
     virtual void updateLevel() = 0;
 
+    void shot();
+
 //---------------------------------
 
 protected:
@@ -51,6 +56,7 @@ protected:
     QGraphicsScene* scene;
 
     QTimer* timer;
+    QTimer* graphicsTimer;
 
     //! \brief Set the start coordinates of the level
     void setStartCoordinates(const QPointF startPoint);
@@ -64,6 +70,10 @@ protected:
     //! \brief Create Arrow including the ArrowStartItem
     void createArrow();
 
+    //! \brief Create Arrow including the ArrowStartItem
+    void deleteArrow();
+
+
 //---------------------------------
 
 private:
@@ -72,6 +82,11 @@ private:
     QPointF startCoordinates;
 
     Ball* ball;
+
+
+protected:
+    ArrowStartItem* arrowStart;
+    Arrow* arrow;
 
 };
 

@@ -28,47 +28,48 @@ public:
      */
     GroundMaterial(const int _material, const QPolygonF _polygon = QPolygonF(), QGraphicsItem* parent = 0)
         :
-        CourtElement(CourtElement::groundmaterial_type), material(_material), minSpeed(0.0), maxSpeed(1e+6)
+        CourtElement(CourtElement::groundmaterial_type), material(_material), minSpeed(0.0001), maxSpeed(10.0)
     {
         switch(material)
         {
             case concrete_material:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = 0.01;
             break;
 
             case grass_material:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = 0.01;
+                minSpeed = 0.0001;
             break;
 
             case wood_material:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = 0.01;
             break;
 
             case sand_material:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = 0.05;
                 minSpeed = 0.1;
             break;
 
             case water_material:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = 0.2;
             break;
 
             case nonNewtonian_material:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = 0.03;
                 minSpeed = 0.5;
             break;
 
             case speedUp_material:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = -0.01;
             break;
 
             case hole_material:
-                frictionCoefficient = 0.1;
-                maxSpeed = 10.0;
+                frictionCoefficient = 0.01;
+                maxSpeed = 4.0;
             break;
 
             default:
-                frictionCoefficient = 0.1;
+                frictionCoefficient = 0.01;
             break;
         }
 

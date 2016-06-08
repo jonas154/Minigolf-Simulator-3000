@@ -7,7 +7,6 @@ Arrow::Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent)
 {
     myStartItem = startItem;
     myEndItem = endItem;
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
     myColor = Qt::red;
     setPen(QPen(myColor, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 }
@@ -31,23 +30,30 @@ QPainterPath Arrow::shape() const
 
 qreal Arrow::getAngle()
 {
-    qreal angle;
-    // angle berechnen
+    QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
+    setLine(line);
+
+    qreal angle = line.angle();
+
+    angle = 360 - angle;
+    angle = angle - 90;
+
+//    qDebug() << "angle handed to ball: " << angle;
     return angle;
 }
 
 qreal Arrow::getSpeed()
 {
-    // needs to be checked
     qreal speed;
-    qreal scalingFactor = 1;
-    speed = std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
+    qreal scalingFactor = 0.05;
+    speed = 0.75*std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
     return scalingFactor * speed;
 }
 
 void Arrow::updatePosition()
 {
     QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
+    if(line.length()>100.0) line.setLength(100.0);
     setLine(line);
 }
 

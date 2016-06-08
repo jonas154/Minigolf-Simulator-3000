@@ -10,11 +10,11 @@ class Score : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Score(QGraphicsItem *parent=0);
-    int getScore();
+    int getScore(int _score);
 public slots:
-    void increase();
+    void increase(int _score);
 private:
-    int score;
+    int score1, score2;
 };
 
 #endif // SCORE_H

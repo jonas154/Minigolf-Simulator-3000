@@ -18,13 +18,15 @@ Court::Court(QWidget *parent)
 
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
-    //ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    timer->start(40); //Bisschen mehr fps müssens schon sein!
-    //Haha dann musst du aber die Zahl kleiner machen! Unbedingt bald klären, da hängt sehr viel dran!
-    //25 fps reicht eigentlich fürs menschliche Auge
+    timer->start(10);
+
+    graphicsTimer = new QTimer(this);
+    graphicsTimer->start(33);
+
 }
 
 //------------------------------------------
@@ -78,13 +80,27 @@ void Court::createBall()
 
 void Court::createArrow()
 {
-    ArrowStartItem *arrowStart = new ArrowStartItem();
+    arrowStart = new ArrowStartItem(ball);
     scene->addItem(arrowStart);
     arrowStart->setPos(ball->pos()-QPointF(50.0,50.0));
 
-    Arrow *arrow = new Arrow(arrowStart,ball);
+    arrow = new Arrow(arrowStart,ball);
     scene->addItem(arrow);
     arrow->updatePosition();
+}
+
+void Court::deleteArrow()
+{
+    scene->removeItem(arrowStart);
+    scene->removeItem(arrow);
+}
+
+void Court::shot()
+{
+    ball->setAngle(arrow->getAngle());
+    ball->setSpeed(arrow->getSpeed());
+//    qDebug() << "speed handed to ball: " << arrow->getSpeed();
+    this->deleteArrow();
 }
 
 

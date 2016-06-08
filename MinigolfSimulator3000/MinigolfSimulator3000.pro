@@ -16,6 +16,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
     ball.cpp \
     level_1.cpp \
+    level_2.cpp \
     soundengine.cpp \
     arrow.cpp \
     arrowstartitem.cpp \
@@ -24,7 +25,11 @@ SOURCES += main.cpp\
     game.cpp \
     score.cpp \
     strike.cpp \
+<<<<<<< HEAD
     addplayerdialog.cpp
+=======
+    bonus.cpp
+>>>>>>> aa31261c90d54d1b9268906ff736ed5732a94b4e
 
 HEADERS  += \
     ball.h \
@@ -32,6 +37,7 @@ HEADERS  += \
     courtelement.h \
     groundmaterial.h \
     level_1.h \
+    level_2.h \
     soundengine.h \
     arrow.h \
     arrowstartitem.h \
@@ -40,7 +46,12 @@ HEADERS  += \
     game.h \
     score.h \
     strike.h \
+<<<<<<< HEAD
     addplayerdialog.h
+=======
+    borderlinecurvedrawer.h \
+    bonus.h
+>>>>>>> aa31261c90d54d1b9268906ff736ed5732a94b4e
 
 FORMS    += \
     court.ui \
@@ -48,6 +59,7 @@ FORMS    += \
     addplayerdialog.ui
 
 CONFIG += c++14
+CONFIG -= x86_64
 
 #INCLUDEPATH += "C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt"
 
