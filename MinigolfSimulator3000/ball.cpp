@@ -39,7 +39,7 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 }
 
 //bewege Ball
-inline void Ball::advance(int phase)
+void Ball::advance(int phase)
 {
     if(!phase) return;
 
