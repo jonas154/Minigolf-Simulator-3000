@@ -28,27 +28,32 @@ public:
         return this->ui;
     };
 
-   // void setMatrix(QString playerMatrix[10][3]);
-    //QString getMatrix();
-
     int getLevel();
-  //  int getPlayerCounter();
     bool fileExists(QString filename);
-    QString matrix[10][3];
-    int playercounter;
+    QString matrix[10][4];
+    int playercounter = 0;
+    bool firstStart = false;
 
     void writeFile();
     void readLines();
+    void createLevelBox();
+    void createPlayerBox();
+    QString getActPlayerName();
+    void setAvaLevel(int avalevel);
+    int getAvaLevel();
+    int getActPlayerIndex();
+
 private slots:
     void on_Start_clicked();
     void on_exitButton_clicked();
     void on_addPlayer_clicked();
-
+    void on_playerBox_currentIndexChanged(int index);
 
 private:
     Ui::StartWindow* ui;
-   // std::vector<Player*> playerVec;
-
+    int availableLevel = 2;
+    void checkFile();
+    void closeEvent(QCloseEvent *);
 
 };
 

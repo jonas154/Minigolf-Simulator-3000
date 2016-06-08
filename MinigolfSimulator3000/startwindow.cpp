@@ -8,42 +8,45 @@ StartWindow::StartWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    int availableLevel = 2;
+
     const int width = 1024;
     const int height = 768;
     this->setFixedSize(width,height);
-    this->readLines();
+    ui->stackedWidget->setCurrentIndex(0);
+
+    this->checkFile();
 
     statusBar()->setFixedHeight(0);
-
-    ui->stackedWidget->setCurrentIndex(0);
 
 
     game = new Game(this);
 
-    for (int i = 1;i <= availableLevel;i++)
-    {
-        ui->levelBox->addItem("Level" + QString::number(i));
-    }
-
-    for (int i = 0;i < playercounter;i++)
-    {
-        ui->playerBox->addItem(matrix[i][1]);
-    }
-
+    this->createPlayerBox();
 
 }
-
-
 StartWindow::~StartWindow()
 {
     delete ui;
 }
 
-
-void StartWindow::on_Start_clicked()
+QString StartWindow::getActPlayerName()
 {
-    game->startLevel(ui->levelBox->currentIndex() + 1);
+    return matrix[ui->playerBox->currentIndex()][1];
+
+}
+
+int StartWindow::getActPlayerIndex()
+{
+    QString _actplayerindex = matrix[ui->playerBox->currentIndex()][0];
+    return _actplayerindex.toInt();
+
+}
+
+int StartWindow::getAvaLevel()
+{
+    QString _avalevel = matrix[ui->playerBox->currentIndex()][2];
+    return _avalevel.toInt();
+
 }
 
 int StartWindow::getLevel()
@@ -52,19 +55,28 @@ int StartWindow::getLevel()
     return level;
 }
 
+void StartWindow::setAvaLevel(int avalevel)
+{
+    matrix[this->getActPlayerIndex() -1][2] = avalevel;
+    ui->levelBox->clear();
+    this->createLevelBox();
+}
+
+
+void StartWindow::on_Start_clicked()
+{
+    game->startLevel(ui->levelBox->currentIndex() + 1);
+}
+
 void StartWindow::on_exitButton_clicked()
 {
     qApp->quit();
     StartWindow::writeFile();
 }
 
-bool StartWindow::fileExists(QString filename){
-    if (QFile::exists(filename)){
-        return true;
-    }else{
-        return false;
-    }
-
+void StartWindow::closeEvent(QCloseEvent *)
+{
+    this->on_exitButton_clicked();
 }
 
 void StartWindow::on_addPlayer_clicked()
@@ -72,17 +84,81 @@ void StartWindow::on_addPlayer_clicked()
     addPlayerDialog playerDialog(this);
     playerDialog.setModal(true);
     playerDialog.exec();
+
+    if (firstStart == false)
+    {
+        ui->playerBox->clear();
+        this->createPlayerBox();
+    }
 }
 
-// Aufbau der Datei: :1:Name:Level:":2:Name:Level:":
-void StartWindow::readLines()
+void StartWindow::on_playerBox_currentIndexChanged(int index)
 {
-/*
+    ui->levelBox->clear();
+    this->createLevelBox();
+}
+
+
+void StartWindow::createLevelBox()
+{
+    int playerlevel = this->getAvaLevel();
+    for (int i = 1;i <= playerlevel;i++)
+    {
+        ui->levelBox->addItem("Level" + QString::number(i));
+    }
+
+}
+
+void StartWindow::createPlayerBox()
+{
+    for (int i = 0;i < playercounter;i++)
+    {
+        ui->playerBox->addItem(matrix[i][1]);
+    }
+}
+
+
+// Aufbau der Datei: :Index:Name:Freigeschaltene_Levell:Highsccore:":2:Name:Level:":
+
+void StartWindow::checkFile()
+{
     QString line;
     QString verzeichnis=QCoreApplication::applicationDirPath();
-    verzeichnis.append("/minigolfSimulator3000.txt");
+    verzeichnis.append("/config.txt");
+    QFile file(verzeichnis);
+    if(file.open(QIODevice::ReadOnly) | QIODevice::Text)
+    {
+
+        QTextStream in(&file);
+        QString reader = in.readAll();
+        QString intCon;
+        file.close();
+     if (reader.isEmpty())
+     {
+         firstStart = true;
+         this->on_addPlayer_clicked();
+         firstStart = false;
+     }
+     else
+      {
+          this->readLines();
+      }
+    }
+
+
+}
+
+void StartWindow::readLines()
+{
+
+    QString line;
+    QString verzeichnis=QCoreApplication::applicationDirPath();
+    verzeichnis.append("/config.txt");
+
+
 
     QFile file(verzeichnis);
+
     if(file.open(QIODevice::ReadOnly) | QIODevice::Text)
     {
 
@@ -98,10 +174,11 @@ void StartWindow::readLines()
         lastpos =1;
         j=0;
         playercounter = 0;
+
         while(j==0)
         {
 
-            for(i=0;i<3;i++){
+            for(i=0;i<4;i++){
                 pos = reader.indexOf(":",lastpos);
                  matrix[z][i] = reader.mid(lastpos,pos-lastpos);
                 lastpos=pos+1;
@@ -124,13 +201,12 @@ void StartWindow::readLines()
         }
     }
 file.close();
-*/
 }
 
 void StartWindow::writeFile()
-{/*
+{
     QString verzeichnis=QCoreApplication::applicationDirPath();
-    verzeichnis.append("/minigolfSimulator3000.txt");
+    verzeichnis.append("/config.txt");
     QFile file(verzeichnis);
 
     if(file.open(QFile::WriteOnly | QFile::Truncate))
@@ -141,10 +217,17 @@ void StartWindow::writeFile()
        for(z=0;z < playercounter;z++)
        {
 
-            out << ":" << matrix[z][0] << ":"<< matrix[z][1] << ":" << matrix[z][2] << ":" << "\"";
-//            out << endl;
+            out << ":" << matrix[z][0] << ":"<< matrix[z][1] << ":" << matrix[z][2] << ":" << matrix[z][3] << ":" << "\"";
        }
     }
     file.close();
-*/
+}
+
+bool StartWindow::fileExists(QString filename){
+    if (QFile::exists(filename)){
+        return true;
+    }else{
+        return false;
+    }
+
 }
