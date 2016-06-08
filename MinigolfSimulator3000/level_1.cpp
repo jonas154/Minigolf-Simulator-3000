@@ -50,9 +50,10 @@ void Level_1::constructLevel()
     linepen.setCapStyle(Qt::RoundCap);
 
 
-    //grass material
+    //grass material  [zum debuggen QPen(Qt::red) anstatt linepen verwenden]
     QPolygonF grassPolygon;
-    grassPolygon << QPointF(294.0, 670.0) << QPointF(294.0, 255.0) << QPointF(140.0, 255.0) << QPointF(140.0, 670.0);
+    grassPolygon << QPoint(126,664) << QPoint(310,665) <<QPoint(302,382) <<QPoint(343,345) <<QPoint(740,343) <<QPoint(739,245)
+    <<QPoint(292,253) <<QPoint(132,253);
     GroundMaterial* grass = new GroundMaterial(GroundMaterial::grass_material, grassPolygon);
     grass->setPen(linepen);
     scene->addItem(grass);
