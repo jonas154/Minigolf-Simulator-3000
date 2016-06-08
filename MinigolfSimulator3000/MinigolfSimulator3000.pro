@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     startwindow.cpp \
     game.cpp \
     score.cpp \
-    strike.cpp
+    strike.cpp \
+    addplayerdialog.cpp
 
 HEADERS  += \
     ball.h \
@@ -38,11 +39,13 @@ HEADERS  += \
     startwindow.h \
     game.h \
     score.h \
-    strike.h
+    strike.h \
+    addplayerdialog.h
 
 FORMS    += \
     court.ui \
-    startwindow.ui
+    startwindow.ui \
+    addplayerdialog.ui
 
 CONFIG += c++14
 
