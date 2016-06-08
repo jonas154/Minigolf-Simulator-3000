@@ -70,14 +70,14 @@ void Game::nextPlayersTurn()
     if (getTurn() == QString("PLAYER 1"))
     {
         if(stopTurn == true)
-            break;
+            return;
         else
             setTurn(QString("PLAYER 2"));
     }
     else
     {
         if(stopTurn == true)
-            break;
+            return;
         else
             setTurn(QString("PLAYER 1"));
     }
@@ -139,9 +139,9 @@ void Game::startLevel(int levelnumber)
 
         case 2:
 
-            //l2 = new Level_2(startW->getUi()->stackedWidget);
-            //this->construct(l2->getScene());
-            //l2->show();
+            l2 = new Level_2(startW->getUi()->stackedWidget);
+            this->construct(l2->getScene());
+            l2->show();
 
         break;
 

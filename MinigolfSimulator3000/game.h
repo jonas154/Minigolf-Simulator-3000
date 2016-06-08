@@ -7,6 +7,7 @@
 #include "score.h"
 #include "strike.h"
 #include "level_1.h"
+#include "level_2.h"
 #include "startwindow.h"
 
 
@@ -29,7 +30,7 @@ public:
     Score *score1, *score2;
     Strike *strike1, *strike2;
     Level_1 *l1;
-    //Level_2* l2;
+    Level_2* l2;
     int endScore1 = 0, endScore2 = 0;
 
 public slots:
@@ -46,7 +47,7 @@ private:
     QGraphicsTextItem *TurnText;
     StartWindow* startW;
     int currentLevel;
-    bool stopTurn == false; // now game knows when to stop changing Turn
+    bool stopTurn = false; // now game knows when to stop changing Turn
 
 
     void construct(QGraphicsScene* _scene);
