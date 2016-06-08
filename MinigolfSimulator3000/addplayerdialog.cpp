@@ -16,10 +16,13 @@ addPlayerDialog::~addPlayerDialog()
 
 void addPlayerDialog::on_addButton_clicked()
 {
-
     name = ui->inputName->text();
 
-
+    if(name.isEmpty()==true)
+    {
+        QMessageBox::information(this,"Information","Ihre Eingabe war fehlerhaft. Es wurde kein Player angelegt.");
+    }
+    else{
     startwindow->playercounter = startwindow->playercounter + 1;
     number = startwindow->playercounter;
 
@@ -29,6 +32,7 @@ void addPlayerDialog::on_addButton_clicked()
     startwindow->matrix[number - 1][3] = QString::number(0);
 
     startwindow->playercounter = number;
+    }
 
     addPlayerDialog::close();
 
