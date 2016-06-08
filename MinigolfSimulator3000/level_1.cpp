@@ -20,7 +20,7 @@ Level_1::Level_1(QWidget *parent)
 void Level_1::constructLevel()
 {
     // Dateipfad als String
-    QString bgroundimage = ":/Images/Images/Level_Test.png";
+    QString bgroundimage = ":/Images/Images/Level_1.png";
     waterimage = ":/Images/Images/wasser1.png";
     vogelimage = ":/Images/Images/v.png";
     vogelimage2 = ":/Images/Images/v2.png";

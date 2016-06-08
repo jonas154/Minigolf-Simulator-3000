@@ -16,6 +16,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
     ball.cpp \
     level_1.cpp \
+    level_2.cpp \
     soundengine.cpp \
     arrow.cpp \
     arrowstartitem.cpp \
@@ -32,6 +33,7 @@ HEADERS  += \
     courtelement.h \
     groundmaterial.h \
     level_1.h \
+    level_2.h \
     soundengine.h \
     arrow.h \
     arrowstartitem.h \

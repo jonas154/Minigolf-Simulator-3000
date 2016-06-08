@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/Images">
-        <file>Images/Level_Test.png</file>
         <file>Images/club.png</file>
         <file>Images/club2.png</file>
         <file>Images/club3.png</file>
@@ -13,6 +12,8 @@
         <file>Images/wasser3.png</file>
         <file>Images/wasser4.png</file>
         <file>Images/vtot.png</file>
+        <file>Images/Level_1.png</file>
+        <file>Images/Level_2.png</file>
         <file>Images/ball0-5.png</file>
         <file>Images/ball1-5.png</file>
         <file>Images/ball2-5.png</file>
@@ -27,4 +28,5 @@
     <qresource prefix="/Sounds">
         <file>Sounds/click_dummy_sound.wav</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
