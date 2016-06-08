@@ -27,6 +27,8 @@ Court::Court(QWidget *parent)
     graphicsTimer = new QTimer(this);
     graphicsTimer->start(33);
 
+
+
 }
 
 //------------------------------------------
@@ -78,23 +80,25 @@ void Court::createBall()
     ball->setPos(startCoordinates);
 }
 
-void Court::createArrow()
+void Court::createArrow(bool firstCreate)
 {
-    arrowStart = new ArrowStartItem(ball);
+    arrowStart = new ArrowStartItem(ball, firstCreate);
     scene->addItem(arrowStart);
     //arrowStart->setPos(ball->pos()-QPointF(0.0,-50.0));
 
     arrow = new Arrow(arrowStart,ball);
     scene->addItem(arrow);
-    arrow->updatePosition();
+    //arrow->updatePosition();
+    connect(arrowStart,SIGNAL(arrowStartItemReleased()),this,SLOT(shot()));
 }
 
 void Court::deleteArrow()
 {
+    disconnect(arrowStart,SIGNAL(arrowStartItemReleased()),this,SLOT(shot()));
     scene->removeItem(arrowStart);
     scene->removeItem(arrow);
-    delete arrowStart;
-    delete arrow;
+    //delete arrowStart;
+    //delete arrow;
 }
 
 void Court::shot()

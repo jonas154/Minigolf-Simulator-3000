@@ -6,12 +6,12 @@ Level_2::Level_2(QWidget *parent)
     Court(parent)
 {
 
-    this->setStartCoordinates(218.0, 600.0);
+    this->setStartCoordinates(195.0, 590.0);
     this->constructLevel();
     this->createBall();
 
-    this->createArrow();
-    connect(arrowStart,SIGNAL(arrowStartItemReleased()),this,SLOT(shot()));
+    this->createArrow(true);
+
 
 }
 

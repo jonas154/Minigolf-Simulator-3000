@@ -17,7 +17,7 @@ class ArrowStartItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    ArrowStartItem(Ball* _ball);
+    ArrowStartItem(Ball* _ball, bool _firstCreate = false);
 
     //von QGraphicsItem geerbt
     QRectF boundingRect() const override;
@@ -36,6 +36,8 @@ private:
     QPointF arrowStartPoint;
 
     Ball* ball;
+
+    bool firstCreate;
 
 };
 

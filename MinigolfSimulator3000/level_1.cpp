@@ -8,10 +8,9 @@ Level_1::Level_1(QWidget *parent)
 
     this->setStartCoordinates(218.0, 600.0);
     this->constructLevel();
-    this->createBall();
 
-    this->createArrow();
-    connect(arrowStart,SIGNAL(arrowStartItemReleased()),this,SLOT(shot()));
+    this->createBall();
+    this->createArrow(true);
 
 }
 

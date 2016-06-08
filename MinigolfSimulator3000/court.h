@@ -42,7 +42,7 @@ public:
     Ball* getBall();
 
     //! \brief Create Arrow including the ArrowStartItem
-    void createArrow();
+    void createArrow(bool firstCreate = false);
 
 public slots:
 
