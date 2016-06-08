@@ -41,6 +41,9 @@ public:
     //! \brief Returns pointer to the active ball
     Ball* getBall();
 
+    //! \brief Create Arrow including the ArrowStartItem
+    void createArrow();
+
 public slots:
 
     virtual void updateLevel() = 0;
@@ -66,9 +69,6 @@ protected:
 
     //! \brief Create ball and add to scene at start coordinates
     void createBall();
-
-    //! \brief Create Arrow including the ArrowStartItem
-    void createArrow();
 
     //! \brief Create Arrow including the ArrowStartItem
     void deleteArrow();

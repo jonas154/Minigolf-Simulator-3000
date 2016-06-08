@@ -9,6 +9,7 @@
 #include "level_1.h"
 #include "level_2.h"
 #include "startwindow.h"
+#include "ball.h"
 
 
 class StartWindow;
@@ -36,7 +37,7 @@ public:
 public slots:
 
     void BallinHole();
-    //void BallStopped(QPoint coordinates);
+    void BallStopped();
     void BallinWater();
     void GameOver();
     void startLevel(int levelnumber);

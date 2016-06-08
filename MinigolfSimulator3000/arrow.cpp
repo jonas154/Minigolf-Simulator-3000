@@ -53,7 +53,7 @@ qreal Arrow::getSpeed()
 void Arrow::updatePosition()
 {
     QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
-    if(line.length()>100.0) line.setLength(100.0);
+    //if(line.length()>100.0) line.setLength(100.0);
     setLine(line);
 }
 

@@ -3,9 +3,11 @@
 #include "ball.h"
 
 Ball::Ball()
+
 {
     setFlag(ItemUsesExtendedStyleOption);
 
+    stopped = true;
     canCollide = 0; //Zähler damit Kollision nicht abspackt, kann besser gelöst werden
     speed = 0.0;
     angle = 0.0;
@@ -22,7 +24,6 @@ QRectF Ball::boundingRect() const
 
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    //QRectF rec = boundingRect();
 
     QBrush brush(Qt::white);
     QPen pen;
@@ -58,11 +59,14 @@ void Ball::setAngle(qreal a)
 
 void Ball::setSpeed(qreal s)
 {
+    if(s>0.0) stopped = false;
     speed = s;
 }
 
 void Ball::doCollision()
 {
+    if(!stopped){
+
     if(birdDeadCounter>0)
     {
         --birdDeadCounter;
@@ -126,7 +130,8 @@ void Ball::doCollision()
                         if(speed<minspeed)
                         {
                             speed = 0.0;
-                            //emit ballStopped();
+                            emit ballStopped();
+                            stopped = true;
                         }
                     }
                     break;
@@ -179,5 +184,5 @@ void Ball::doCollision()
             default: break;
         }
     }
-
+  }
 }
