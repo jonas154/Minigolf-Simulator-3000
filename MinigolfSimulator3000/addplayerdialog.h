@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "startwindow.h"
 #include <QString>
+#include <QMessageBox>
 class StartWindow;
 
 
@@ -24,7 +25,7 @@ private slots:
 
 private:
     Ui::addPlayerDialog *ui;
-    QString name;
+    QString name = "";
     StartWindow* startwindow;
     int number;
 };
