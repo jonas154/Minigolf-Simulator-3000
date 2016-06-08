@@ -9,33 +9,34 @@
 #include "groundmaterial.h"
 #include "courtelement.h"
 #include <QStyleOptionGraphicsItem>
+#include <QObject>
 
 #include <QDebug>
 
-class Ball : public QGraphicsItem
+class Ball : public QObject, public QGraphicsItem
 {
 
+Q_OBJECT
 
 public:
 
     Ball();
 
     //von QGraphicsItem geerbt
-    QRectF boundingRect() const;
+    QRectF boundingRect() const override;
 
     //malt den Ball bei jedem Zeitschritt
-    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
     //bewege Ball
-    void advance(int phase);
+    void advance(int phase) override;
 
     void setAngle(qreal a);
     void setSpeed(qreal s);
 
 signals:
 
-    // Signal zur SoundEngie (geht noch nicht)
-    void angleChanged();
+    void ballStopped();
 
 private:
 
@@ -49,6 +50,8 @@ private:
     QString birdDeadPicture;
     int birdDeadCounter;
     QGraphicsPixmapItem* removeBird;
+
+    bool stopped;
 };
 
 #endif // BALL_H
