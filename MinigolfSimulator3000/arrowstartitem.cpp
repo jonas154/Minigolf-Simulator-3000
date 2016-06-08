@@ -9,13 +9,11 @@ ArrowStartItem::ArrowStartItem(Ball* _ball)
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
-    setPos(ball->pos()-QPointF(0.0,-50.0));
-
 }
 
 QRectF ArrowStartItem::boundingRect() const
 {
-    return QRectF(-10,-10,20,20);
+    return QRectF(-15,-15,30,30); //Größe 16*16, Mittelpunkt für Rotation in der Mitte
 }
 
 void ArrowStartItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -23,6 +21,7 @@ void ArrowStartItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->setClipRect(option->exposedRect);
 
     QRectF rec = QRectF(-7,-7,14,14);
+   // QRectF rec = boundingRect();
     QBrush brush(Qt::red);
 
     painter->fillRect(rec,brush);
@@ -47,8 +46,8 @@ QVariant ArrowStartItem::itemChange(QGraphicsItem::GraphicsItemChange change, co
             line.setLength(150.0);
             newPos.setX(line.x2());
             newPos.setY(line.y2());
+            return newPos;
         }
-        return newPos;
     }
     return QGraphicsItem::itemChange(change, value);
 }

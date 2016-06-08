@@ -134,7 +134,6 @@ void Game::startLevel(int levelnumber)
             l1 = new Level_1(startW->getUi()->stackedWidget);
             this->construct(l1->getScene());
             l1->show();
-            connect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
 
         break;
 
@@ -143,7 +142,6 @@ void Game::startLevel(int levelnumber)
             l2 = new Level_2(startW->getUi()->stackedWidget);
             this->construct(l2->getScene());
             l2->show();
-            connect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
 
         break;
 
@@ -153,20 +151,7 @@ void Game::startLevel(int levelnumber)
 
 void Game::BallinWater()
 {
-    switch(currentLevel)
-    {
-        case 1:
-            l1->getBall()->setPos(l1->getStartCoordinates());
-            l1->createArrow();
-        break;
-
-        case 2:
-            l2->getBall()->setPos(l1->getStartCoordinates());
-            l2->createArrow();
-        break;
-
-        default: break;
-    }
+    l1->getBall()->setPos(218.0, 600.0);
 }
 
 void Game::calculateScore()
@@ -179,31 +164,4 @@ void Game::BallinHole()
 {
     nextPlayersTurn();
     stopTurn == true;
-}
-
-void Game::BallStopped()
-{
-    switch(currentLevel)
-    {
-        case 1:
-        {
-            QPointF coordinates = l1->getBall()->pos();
-            //do something with the coordinates, maybe save for multiplayer?
-            l1->createArrow();
-        }
-        break;
-
-        case 2:
-        {
-            QPointF coordinates = l2->getBall()->pos();
-            //do something with the coordinates, maybe save for multiplayer?
-            l2->createArrow();
-        }
-        break;
-
-        default: break;
-    }
-
-    //??
-    //this->nextPlayersTurn();
 }
