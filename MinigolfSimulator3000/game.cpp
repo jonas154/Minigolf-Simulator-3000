@@ -1,7 +1,6 @@
 #include "game.h"
 #include "level_1.h"
 #include <QGraphicsTextItem>
-#include <QDebug>
 
 Game::Game(StartWindow* _startW)
     :
@@ -22,8 +21,12 @@ void Game::construct(QGraphicsScene* _scene)
     score1->setPos(0,25);
     _scene->addItem(score1);
 
+    bonus1 = new Bonus();
+    bonus1->setPos(0,50);
+    _scene->addItem(bonus1);
+
     strike1 = new Strike();
-    strike1->setPos(0,50);
+    strike1->setPos(0,90);
     _scene->addItem(strike1);
 
     QGraphicsTextItem* p2 = new QGraphicsTextItem("PLAYER 2");
@@ -35,8 +38,12 @@ void Game::construct(QGraphicsScene* _scene)
     score2->setPos(200,25);
     _scene->addItem(score2);
 
+    bonus2 = new Bonus();
+    bonus2->setPos(200,50);
+    _scene->addItem(bonus2);
+
     strike2 = new Strike();
-    strike2->setPos(200,50);
+    strike2->setPos(200,90);
     _scene->addItem(strike2);
 
     //whose turn text
@@ -83,28 +90,30 @@ void Game::GameOver() // still working on it
             //delete l2;
         break;
 
+        case 3:
+            //delete l3;
+            calculateScore();
+            if (endScore1 > endScore2)
+            {
+                TurnText->setPlainText(QString("Player 1 wins!"));
+            }
+            else if (endScore1 == endScore2)
+            {
+                TurnText->setPlainText(QString("Tie Game!"));
+            }
+            else
+            {
+                TurnText->setPlainText(QString("Player 2 wins!"));
+            }
+        break;
+
         default: break;
-
     }
 
-    if (score1->getScore() < score2->getScore())
-    {
-        TurnText->setPlainText(QString("Player 1 wins!"));
-    }
-    else if (score1->getScore() == score2->getScore())
-    {
-        TurnText->setPlainText(QString("Tie Game!"));
-    }
-    else
-    {
-        TurnText->setPlainText(QString("Player 2 wins!"));
-    }
-
-
-    //back to main menu and move on next level
+    //back to main menu and move on next level?
 
     //wenn direkt das nächste Level aufgeht:
-    //++currentLevel;
+    ++currentLevel;
 
 }
 
@@ -134,7 +143,13 @@ void Game::startLevel(int levelnumber)
     }
 }
 
-//void Game::BallinWater()
-//{
-//    l1->getBall()->setPos(Level_1->getStartCoordinates());
-//}
+void Game::BallinWater()
+{
+    l1->getBall()->setPos(218.0, 600.0);
+}
+
+void Game::calculateScore()
+{
+    endScore1 += (1000 - ((score1->getScore(1)-1)*200)) + ((bonus1->getBonus(1))*500);
+    endScore2 += (1000 - ((score2->getScore(2)-1)*200)) + ((bonus2->getBonus(2))*500);
+}

@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QObject>
+#include "bonus.h"
 #include "score.h"
 #include "strike.h"
 #include "level_1.h"
@@ -22,17 +23,20 @@ public:
     void setTurn(QString player);
     QString getTurn();
     void nextPlayersTurn();
+    void calculateScore();
 
+    Bonus *bonus1, *bonus2;
     Score *score1, *score2;
     Strike *strike1, *strike2;
     Level_1 *l1;
     //Level_2* l2;
+    int endScore1 = 0, endScore2 = 0;
 
 public slots:
 
     //void BallinHole();
-    //void BallinWater(); getBall setStartCoor
     //void BallStopped(QPoint coordinates);
+    void BallinWater();
     void GameOver();
     void startLevel(int levelnumber);
 

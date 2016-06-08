@@ -16,6 +16,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
     ball.cpp \
     level_1.cpp \
+    level_2.cpp \
     soundengine.cpp \
     arrow.cpp \
     arrowstartitem.cpp \
@@ -23,7 +24,8 @@ SOURCES += main.cpp\
     startwindow.cpp \
     game.cpp \
     score.cpp \
-    strike.cpp
+    strike.cpp \
+    bonus.cpp
 
 HEADERS  += \
     ball.h \
@@ -31,6 +33,7 @@ HEADERS  += \
     courtelement.h \
     groundmaterial.h \
     level_1.h \
+    level_2.h \
     soundengine.h \
     arrow.h \
     arrowstartitem.h \
@@ -39,7 +42,8 @@ HEADERS  += \
     game.h \
     score.h \
     strike.h \
-    borderlinecurvedrawer.h
+    borderlinecurvedrawer.h \
+    bonus.h
 
 FORMS    += \
     court.ui \
