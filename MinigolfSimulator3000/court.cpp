@@ -82,7 +82,7 @@ void Court::createArrow()
 {
     arrowStart = new ArrowStartItem(ball);
     scene->addItem(arrowStart);
-    //arrowStart->setPos(ball->pos()-QPointF(0.0,-50.0));
+    arrowStart->setPos(ball->pos()-QPointF(50.0,50.0));
 
     arrow = new Arrow(arrowStart,ball);
     scene->addItem(arrow);
@@ -93,8 +93,6 @@ void Court::deleteArrow()
 {
     scene->removeItem(arrowStart);
     scene->removeItem(arrow);
-    delete arrowStart;
-    delete arrow;
 }
 
 void Court::shot()

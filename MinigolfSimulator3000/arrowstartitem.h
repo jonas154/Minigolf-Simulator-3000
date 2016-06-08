@@ -20,14 +20,14 @@ public:
     ArrowStartItem(Ball* _ball);
 
     //von QGraphicsItem geerbt
-    QRectF boundingRect() const override;
+    QRectF boundingRect() const;
 
     //malt das Item bei jedem Zeitschritt
-    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
 signals:
     void arrowStartItemReleased();
