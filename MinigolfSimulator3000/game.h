@@ -34,7 +34,7 @@ public:
 
 public slots:
 
-    //void BallinHole();
+    void BallinHole();
     //void BallStopped(QPoint coordinates);
     void BallinWater();
     void GameOver();
@@ -46,6 +46,8 @@ private:
     QGraphicsTextItem *TurnText;
     StartWindow* startW;
     int currentLevel;
+    bool stopTurn == false; // now game knows when to stop changing Turn
+
 
     void construct(QGraphicsScene* _scene);
 

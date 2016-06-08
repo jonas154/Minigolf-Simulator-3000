@@ -1,10 +1,10 @@
-#include "game.h"
+﻿#include "game.h"
 #include "level_1.h"
 #include <QGraphicsTextItem>
 
 Game::Game(StartWindow* _startW)
     :
-    startW(_startW)
+    startW(_startW) // startW = _startW; Initialisierungsliste
 {
 }
 
@@ -69,11 +69,17 @@ void Game::nextPlayersTurn()
 {
     if (getTurn() == QString("PLAYER 1"))
     {
-        setTurn(QString("PLAYER 2"));
+        if(stopTurn == true)
+            break;
+        else
+            setTurn(QString("PLAYER 2"));
     }
     else
     {
-        setTurn(QString("PLAYER 1"));
+        if(stopTurn == true)
+            break;
+        else
+            setTurn(QString("PLAYER 1"));
     }
 }
 
@@ -152,4 +158,10 @@ void Game::calculateScore()
 {
     endScore1 += (1000 - ((score1->getScore(1)-1)*200)) + ((bonus1->getBonus(1))*500);
     endScore2 += (1000 - ((score2->getScore(2)-1)*200)) + ((bonus2->getBonus(2))*500);
+}
+
+void Game::BallinHole()
+{
+    nextPlayersTurn();
+    stopTurn == true;
 }
