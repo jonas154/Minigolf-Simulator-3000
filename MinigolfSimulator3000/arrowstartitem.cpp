@@ -1,15 +1,16 @@
 #include "arrowstartitem.h"
 
-ArrowStartItem::ArrowStartItem(Ball* _ball)
+ArrowStartItem::ArrowStartItem(Ball* _ball, bool _firstCreate)
     :
-    ball(_ball)
+    ball(_ball), firstCreate(_firstCreate)
 {
-    arrowStartPoint = QPointF(0.0,0.0);
+    //arrowStartPoint = QPointF(0.0,0.0);
 
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
-    setPos(ball->pos()-QPointF(0.0,-50.0));
+    this->setPos(ball->pos()-QPointF(0.0,-50.0));
+
 
 }
 
@@ -39,7 +40,15 @@ QVariant ArrowStartItem::itemChange(QGraphicsItem::GraphicsItemChange change, co
 {
     if(change==ItemPositionChange&&scene())
     {
-        QPointF newPos = value.toPointF();
+        QPointF newPos;
+
+        //bug workaround
+        //on first creation, value is relative to point (0,0) of scene
+        //on the next creations, value is relative to this->pos()
+        //WTF???
+        if(firstCreate) newPos = value.toPointF();
+        else newPos = ball->pos() - QPointF(0.0,-50.0) + value.toPointF();
+
         QLineF line(ball->pos(), newPos);
 
         if(line.length() > 150.0)
@@ -48,7 +57,10 @@ QVariant ArrowStartItem::itemChange(QGraphicsItem::GraphicsItemChange change, co
             newPos.setX(line.x2());
             newPos.setY(line.y2());
         }
-        return QGraphicsItem::itemChange(change, newPos);
+        return newPos;
     }
-    return QGraphicsItem::itemChange(change, value);
+    else
+    {
+        return QGraphicsItem::itemChange(change, value);
+    }
 }

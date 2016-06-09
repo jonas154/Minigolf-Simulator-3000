@@ -81,7 +81,7 @@ public:
         double correctStep = std::ceil(alphaDeg/stepInDegrees);
         stepInDegrees = alphaDeg/correctStep;
 
-        double m_x = 0.5*(startX+stopX+(cos(alphaRad*0.5)/sin(alphaRad*0.5))*(-startY+stopY));
+        double m_x = 0.5*(startX+stopX+(cos(alphaRad*0.5)/sin(alphaRad*0.5))*(startY-stopY));
         double m_y = 0.5*(startY+stopY+(cos(alphaRad*0.5)/sin(alphaRad*0.5))*(-startX+stopX));
 
         QPointF pOld, pNew;
