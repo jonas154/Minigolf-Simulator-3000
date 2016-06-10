@@ -1,4 +1,6 @@
 #include "level_1.h"
+#include "rectitem.h"
+#include "startwindow.h"
 
 
 Level_1::Level_1(QWidget *parent)
@@ -27,6 +29,7 @@ void Level_1::constructLevel()
     wassercounter = 0;
     vogelaction = false;
     std::vector<BorderLine*> lineVec;
+    menuActive = false;
 
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
@@ -39,7 +42,6 @@ void Level_1::constructLevel()
     scene->addItem(water);
     water->setVisible(true);
     water->setPen(Qt::NoPen);
-
 
 
     // QPen setzen
@@ -58,6 +60,19 @@ void Level_1::constructLevel()
     grass->setPen(linepen);
     scene->addItem(grass);
 
+
+    continueItem->setRect(368,266,289,80);
+    continueItem->setPen(linepen);
+    continueItem->setVisible(false);
+    scene->addItem(continueItem);
+
+    leaveItem->setRect(368,362,289,80);
+    leaveItem->setPen(linepen);
+    leaveItem->setVisible(false);
+    scene->addItem(leaveItem);
+
+    //item->setVisible(true);
+  //  scene->addItem(item);
 
     //Begrenzungslinien zur Liste hinzufügen
     lineVec.push_back( new BorderLine(294.0,594.0,294.0,375.0,BorderLine::metal_material));
@@ -94,9 +109,36 @@ void Level_1::constructLevel()
 
     //erst connecten, wenn Wasser und Vögel schon initialisiert sind!
     connect(graphicsTimer, SIGNAL(timeout()),this, SLOT(updateLevel()));
+    connect(continueItem,SIGNAL(mousePressed()),this,SLOT(menuLevel()));
+    connect(leaveItem,SIGNAL(mousePressed()),this,SLOT());
+
 
 }
+void Level_1::menuLevel()
+{   if (menuActive == false)
+    {
+    scene->setForegroundBrush(QImage(QString(":/Images/Images/Level_1_ESC_Menu.png")));
+    continueItem->setVisible(true);
+    leaveItem->setVisible(true);
+    menuActive = true;
+    }
+else
+    {
+    scene->setForegroundBrush(Qt::NoBrush);
+    continueItem->setVisible(false);
+    leaveItem->setVisible(false);
+    menuActive = false;
+    }
+   // qDebug() << "menuLevel erreicht";
+}
+//------------------------------------
+void Level_1::keyPressEvent(QKeyEvent *event) {
 
+   if (event->key() == Qt::Key_Escape)
+   {
+     menuLevel();
+   }
+}
 //------------------------------------
 void Level_1::updateLevel()
 {

@@ -12,6 +12,7 @@
 #include "arrowstartitem.h"
 #include "borderlinecurvedrawer.h"
 #include <vector>
+#include "rectitem.h"
 
 #include <QDebug>
 
@@ -44,9 +45,13 @@ public:
     //! \brief Create Arrow including the ArrowStartItem
     void createArrow(bool firstCreate = false);
 
+
+
 public slots:
 
     virtual void updateLevel() = 0;
+    virtual void menuLevel() = 0;
+
 
     void shot();
 
@@ -60,6 +65,10 @@ protected:
 
     QTimer* timer;
     QTimer* graphicsTimer;
+    RectItem * continueItem;
+    RectItem * leaveItem;
+
+
 
     //! \brief Set the start coordinates of the level
     void setStartCoordinates(const QPointF startPoint);
@@ -82,6 +91,7 @@ private:
     QPointF startCoordinates;
 
     Ball* ball;
+
 
 
 protected:

@@ -24,6 +24,7 @@ public:
 public slots:
 
     void updateLevel() override;
+    void menuLevel() override;
 
 
 
@@ -41,8 +42,10 @@ private:
     bool vogelaction;
     int vogelcounter;
     int wassercounter;
+    bool menuActive;
 
-
+protected:
+    void keyPressEvent(QKeyEvent * e);
 
 
 };

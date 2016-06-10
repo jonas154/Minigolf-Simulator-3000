@@ -27,6 +27,7 @@ SOURCES += main.cpp\
     strike.cpp \
     addplayerdialog.cpp \
     bonus.cpp \
+    rectitem.cpp
 
 
 HEADERS  += \
@@ -47,6 +48,7 @@ HEADERS  += \
     addplayerdialog.h \
     borderlinecurvedrawer.h \
     bonus.h \
+    rectitem.h
 
 
 FORMS    += \

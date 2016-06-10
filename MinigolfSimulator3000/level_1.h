@@ -2,6 +2,7 @@
 #define LEVEL_1_H
 
 #include "court.h"
+#include "rectitem.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QPixmap>
@@ -24,6 +25,7 @@ public:
 public slots:
 
     void updateLevel() override;
+    void menuLevel()  override;
 
 
 
@@ -41,6 +43,11 @@ private:
     bool vogelaction;
     int vogelcounter;
     int wassercounter;
+    bool menuActive;
+
+
+protected:
+    void keyPressEvent(QKeyEvent * e);
 
 
 

@@ -27,6 +27,10 @@ Court::Court(QWidget *parent)
     graphicsTimer = new QTimer(this);
     graphicsTimer->start(33);
 
+    continueItem = new RectItem;
+    leaveItem = new RectItem;
+
+
 
 
 }

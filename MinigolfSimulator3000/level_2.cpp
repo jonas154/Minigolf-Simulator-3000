@@ -27,6 +27,7 @@ void Level_2::constructLevel()
     vogelcounter = 0;
     wassercounter = 0;
     vogelaction = false;
+    menuActive = false;
     std::vector<BorderLine*> lineVec;
 
     // Hintergrundbild
@@ -48,19 +49,29 @@ void Level_2::constructLevel()
     // QPen setzen
     QPen linepen;
     linepen.setWidth(2);
-    //linepen.setColor(QColor(80,0,0,0));
-    linepen.setColor(Qt::red);
+    linepen.setColor(QColor(0,0,0,0));
     linepen.setJoinStyle(Qt::RoundJoin);
     linepen.setCapStyle(Qt::RoundCap);
 
-    /*
+
     //grass material
     QPolygonF grassPolygon;
-    grassPolygon << QPointF(294.0, 670.0) << QPointF(294.0, 255.0) << QPointF(140.0, 255.0) << QPointF(140.0, 670.0);
+    grassPolygon << QPointF(140,638) << QPointF(134,154) << QPointF(400,154) << QPointF(410,576) << QPointF(504,577) << QPointF(505,269)
+                 << QPointF(747,269) << QPointF(752,377) << QPointF(595,375) << QPointF(601,506) << QPointF(729,495) << QPointF(718,658);
     GroundMaterial* grass = new GroundMaterial(GroundMaterial::grass_material, grassPolygon);
     grass->setPen(linepen);
     scene->addItem(grass);
-    */
+
+
+    continueItem->setRect(368,266,289,80);
+    continueItem->setPen(linepen);
+    continueItem->setVisible(false);
+    scene->addItem(continueItem);
+
+    leaveItem->setRect(368,362,289,80);
+    leaveItem->setPen(linepen);
+    leaveItem->setVisible(false);
+    scene->addItem(leaveItem);
 
     //Begrenzungslinien zur Liste hinzufügen
     lineVec.push_back( new BorderLine(143,590,143,269,BorderLine::metal_material));
@@ -101,16 +112,16 @@ void Level_2::constructLevel()
                                 BorderLine::metal_material, scene, linepen);
 
     BorderLineCurveDrawer::draw(315,646,275,607, 50, 6.0,
-                                BorderLineCurveDrawer::right, false,
+                                BorderLineCurveDrawer::left, false,
                                 BorderLine::metal_material, scene, linepen);
 
 
-    BorderLineCurveDrawer::draw(660,645,664,513, 67, 6.0,
+    BorderLineCurveDrawer::draw(660,645,669,513, 67, 6.0,
                                 BorderLineCurveDrawer::right, false,
                                 BorderLine::metal_material, scene, linepen);
 
-    BorderLineCurveDrawer::draw(100,100,150,150, 100, 6.0,
-                                BorderLineCurveDrawer::right, false,
+    BorderLineCurveDrawer::draw(648,570,647,592,12,6.0,
+                                BorderLineCurveDrawer::left, false,
                                 BorderLine::metal_material, scene, linepen);
 
     //Linien unsichtbar machen + Linien zur Scene hinzufügen
@@ -130,9 +141,35 @@ void Level_2::constructLevel()
 
     //erst connecten, wenn Wasser und Vögel schon initialisiert sind!
     connect(graphicsTimer, SIGNAL(timeout()),this, SLOT(updateLevel()));
+    connect(continueItem,SIGNAL(mousePressed()),this,SLOT(menuLevel()));
+    connect(leaveItem,SIGNAL(mousePressed()),this,SLOT());
 
 }
 
+void Level_2::menuLevel()
+{   if (menuActive == false)
+    {
+    scene->setForegroundBrush(QImage(QString(":/Images/Images/Level_2_ESC_Menu.png")));
+    continueItem->setVisible(true);
+    leaveItem->setVisible(true);
+    menuActive = true;
+    }
+else
+    {
+    scene->setForegroundBrush(Qt::NoBrush);
+    continueItem->setVisible(false);
+    leaveItem->setVisible(false);
+    menuActive = false;
+    }
+   // qDebug() << "menuLevel erreicht";
+}
+void Level_2::keyPressEvent(QKeyEvent *event) {
+
+   if (event->key() == Qt::Key_Escape)
+   {
+     menuLevel();
+   }
+}
 //------------------------------------
 void Level_2::updateLevel()
 {
