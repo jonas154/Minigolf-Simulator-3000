@@ -153,6 +153,8 @@ void Level_2::menuLevel()
     continueItem->setVisible(true);
     leaveItem->setVisible(true);
     menuActive = true;
+    timer->stop();
+    graphicsTimer->stop();
     }
 else
     {
@@ -160,6 +162,8 @@ else
     continueItem->setVisible(false);
     leaveItem->setVisible(false);
     menuActive = false;
+    timer->start();
+    graphicsTimer->start();
     }
    // qDebug() << "menuLevel erreicht";
 }

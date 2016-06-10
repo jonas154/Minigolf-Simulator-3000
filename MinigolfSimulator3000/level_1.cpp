@@ -34,6 +34,7 @@ void Level_1::constructLevel()
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
 
+
     // Wasserbilder
     QPolygon water_polygon;
     water_polygon << QPoint(140,250) << QPoint(140,152) << QPoint(293,152) << QPoint(294,252);
@@ -121,6 +122,8 @@ void Level_1::menuLevel()
     continueItem->setVisible(true);
     leaveItem->setVisible(true);
     menuActive = true;
+    timer->stop();
+    graphicsTimer->stop();
     }
 else
     {
@@ -128,6 +131,8 @@ else
     continueItem->setVisible(false);
     leaveItem->setVisible(false);
     menuActive = false;
+    timer->start();
+    graphicsTimer->start();
     }
    // qDebug() << "menuLevel erreicht";
 }
