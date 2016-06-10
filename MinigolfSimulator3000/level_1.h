@@ -26,8 +26,11 @@ public slots:
 
     void updateLevel() override;
     void menuLevel()  override;
+    void leaveLevel() override;
 
+ signals:
 
+    void destroyLevel();
 
 private:
     GroundMaterial *water;

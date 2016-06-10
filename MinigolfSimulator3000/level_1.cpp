@@ -111,7 +111,7 @@ void Level_1::constructLevel()
     //erst connecten, wenn Wasser und Vögel schon initialisiert sind!
     connect(graphicsTimer, SIGNAL(timeout()),this, SLOT(updateLevel()));
     connect(continueItem,SIGNAL(mousePressed()),this,SLOT(menuLevel()));
-    connect(leaveItem,SIGNAL(mousePressed()),this,SLOT());
+    connect(leaveItem,SIGNAL(mousePressed()),this,SLOT(leaveLevel()));
 
 
 }
@@ -136,6 +136,13 @@ else
     }
    // qDebug() << "menuLevel erreicht";
 }
+void Level_1::leaveLevel()
+{
+    emit destroyLevel();
+    qDebug() << "destroy level emittiert";
+}
+void Level_1::destroyLevel()
+{}
 //------------------------------------
 void Level_1::keyPressEvent(QKeyEvent *event) {
 

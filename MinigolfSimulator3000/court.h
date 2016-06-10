@@ -51,6 +51,7 @@ public slots:
 
     virtual void updateLevel() = 0;
     virtual void menuLevel() = 0;
+    virtual void leaveLevel () = 0;
 
 
     void shot();
