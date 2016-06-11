@@ -45,6 +45,9 @@ signals:
     //! signal that the Ball does not move
     void ballStopped();
 
+    void ballInWater();
+    void ballInHole();
+
 private:
 
     qreal angle;

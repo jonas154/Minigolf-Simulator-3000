@@ -137,8 +137,12 @@ void Ball::doCollision()
 
                     case GroundMaterial::water_material:
 
-                        speed -= friction*speed;
-                        //emit ballInWater();
+//                        speed -= friction*speed;
+                        speed = 0.0;
+                        emit ballInWater();
+                        stopped = true;
+
+
                     break;
 
                     case GroundMaterial::nonNewtonian_material:
@@ -155,6 +159,8 @@ void Ball::doCollision()
 
                     case GroundMaterial::hole_material:
 
+//                        qDebug() << "ball in hole";
+
                         if(speed>maxspeed)
                         {
                             speed -= speed*friction;
@@ -162,7 +168,7 @@ void Ball::doCollision()
                         else
                         {
                             speed = 0.0;
-                            //emit ballInHole();
+                            emit ballInHole();
                         }
 
                     break;
