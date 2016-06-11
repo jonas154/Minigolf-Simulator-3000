@@ -270,7 +270,7 @@ void StartWindow::on_Highscore_clicked()
     ui->highscoreViewer->horizontalHeader()->setVisible(true);
 
     ui->highscoreViewer->setHorizontalHeaderLabels(header);
-    ui->highscoreViewer->setEditTriggers(false);
+    ui->highscoreViewer->setEditTriggers(QAbstractItemView::NoEditTriggers);
     int i,z,n;
     for(i=0;i<playercounter;i++)
     {
