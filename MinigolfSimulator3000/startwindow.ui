@@ -128,6 +128,30 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_3">
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>951</width>
+        <height>681</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <widget class="QTableWidget" name="highscoreViewer"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>Hauptmenü</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
     <widget class="QWidget" name="page_2">
      <widget class="QWidget" name="gridLayoutWidget_2">
       <property name="geometry">

@@ -7,6 +7,7 @@
 #include "QString"
 #include "QFile"
 #include "addplayerdialog.h"
+#include <QMessageBox>
 class Game;
 class addPlayerDialog;
 
@@ -39,15 +40,21 @@ public:
     void createLevelBox();
     void createPlayerBox();
     QString getActPlayerName();
-    void setAvaLevel(int avalevel);
-    int getAvaLevel();
+    void setActLevel(int actLevel);
+    int getActLevel();
     int getActPlayerIndex();
+    void setActHighscore(int actHighscore);
+    int getActHighscore();
 
 private slots:
     void on_Start_clicked();
     void on_exitButton_clicked();
     void on_addPlayer_clicked();
     void on_playerBox_currentIndexChanged(int index);
+
+    void on_Highscore_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::StartWindow* ui;
