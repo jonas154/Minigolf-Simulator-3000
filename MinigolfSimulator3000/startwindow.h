@@ -40,9 +40,11 @@ public:
     void createLevelBox();
     void createPlayerBox();
     QString getActPlayerName();
-    void setAvaLevel(int avalevel);
-    int getAvaLevel();
+    void setActLevel(int actLevel);
+    int getActLevel();
     int getActPlayerIndex();
+    void setActHighscore(int actHighscore);
+    int getActHighscore();
 
 private slots:
     void on_Start_clicked();

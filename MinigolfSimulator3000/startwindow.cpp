@@ -29,39 +29,58 @@ StartWindow::~StartWindow()
     delete ui;
 }
 
+//Gibt den Namen des ausgewählten Players als QString zurück
 QString StartWindow::getActPlayerName()
 {
-    return matrix[ui->playerBox->currentIndex()][1];
+    QString _actPlayerName = matrix[ui->playerBox->currentIndex()][1];
+    return _actPlayerName;
 
 }
 
+// Gibt die Index-Nummer (1...10) des ausgewählten Players zurück
 int StartWindow::getActPlayerIndex()
 {
     QString _actplayerindex = matrix[ui->playerBox->currentIndex()][0];
     return _actplayerindex.toInt();
 
 }
-
-int StartWindow::getAvaLevel()
+//Gibt die für den ausgewählten Player freigespielten Level zurück
+int StartWindow::getActLevel()
 {
-    QString _avalevel = matrix[ui->playerBox->currentIndex()][2];
-    return _avalevel.toInt();
+    QString _actLevel = matrix[ui->playerBox->currentIndex()][2];
+    return _actLevel.toInt();
 
 }
 
+// tbd
 int StartWindow::getLevel()
 {
     int level = ui->levelBox->currentIndex();
     return level;
 }
 
-void StartWindow::setAvaLevel(int avalevel)
+
+//Hiermit kann man von anderen Klassen einem Player mehr Level freischalten
+void StartWindow::setActLevel(int actLevel)
 {
-    matrix[this->getActPlayerIndex() -1][2] = avalevel;
+    matrix[ui->playerBox->currentIndex()][2] = actLevel;
     ui->levelBox->clear();
     this->createLevelBox();
 }
 
+// Hiermit kann man den Highscore des aktuellen Players verändern
+void StartWindow::setActHighscore(int actHighscore)
+{
+    matrix[ui->playerBox->currentIndex()][3] = actHighscore;
+
+}
+
+// Hiermit kann man den Highscore des aktuell ausgewählten Players verändern
+int StartWindow::getActHighscore()
+{
+    QString _actHighscore = matrix[ui->playerBox->currentIndex()][3];
+    return _actHighscore.toInt();
+}
 
 void StartWindow::on_Start_clicked()
 {
@@ -110,7 +129,7 @@ void StartWindow::on_playerBox_currentIndexChanged(int index)
 
 void StartWindow::createLevelBox()
 {
-    int playerlevel = this->getAvaLevel();
+    int playerlevel = this->getActLevel();
     for (int i = 1;i <= playerlevel;i++)
     {
         ui->levelBox->addItem("Level" + QString::number(i));
