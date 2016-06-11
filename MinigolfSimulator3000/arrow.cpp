@@ -1,6 +1,4 @@
 #include "arrow.h"
-#include "math.h"
-#include "cmath"
 
 Arrow::Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent)
     : QGraphicsLineItem(parent)
@@ -13,6 +11,9 @@ Arrow::Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent)
 
 QRectF Arrow::boundingRect() const
 {
+    /*! The Reimplementation is necessary because the arrow with its head occupies more space in the QMainWindow.
+        The bounding rectangle must include the whole arrow such that the right space of the QMainWindow can be updated */
+
     qreal extra = (pen().width() + 20) / 2.0;
 
     return QRectF(line().p1(), QSizeF(line().p2().x() - line().p1().x(),
@@ -23,6 +24,8 @@ QRectF Arrow::boundingRect() const
 
 QPainterPath Arrow::shape() const
 {
+    /*! The arrow line and the arrow head are added to a QPainterPath */
+
     QPainterPath path = QGraphicsLineItem::shape();
     path.addPolygon(arrowHead);
     return path;
@@ -38,22 +41,29 @@ qreal Arrow::getAngle()
     angle = 360 - angle;
     angle = angle - 90;
 
-//    qDebug() << "angle handed to ball: " << angle;
+    /*! The angle is measured clockwise and a zero degree direction points in negative y-direction.
+        The angle ranges from 0 to 360 degrees and the corresponding negative angles also occur. */
+
     return angle;
 }
 
 qreal Arrow::getSpeed()
 {
-    qreal speed;
-    qreal scalingFactor = 0.05;
-    speed = 0.75*std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
-    return scalingFactor * speed;
+    qreal length;
+
+    /*! \param scalingFactor set the scalingFactor to an appropriate value for a fun game*/
+    qreal scalingFactor = 0.04;
+
+    /*! the length of the arrow line is computed via the hypotenuse of a right-angled triangle */
+    length = std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
+
+    /*! the speed for the ball is set to a multiplication of the arrow length with a scaling factor */
+    return scalingFactor * length;
 }
 
 void Arrow::updatePosition()
 {
     QLineF line(mapFromItem(myStartItem, 0, 0), mapFromItem(myEndItem, 0, 0));
-    //if(line.length()>100.0) line.setLength(100.0);
     setLine(line);
 }
 
@@ -62,7 +72,7 @@ void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
 {
     if (myStartItem->collidesWithItem(myEndItem))
     {
-//        std::cout << "no arrow possible because items collide" << std::endl;
+//      no arrow possible because items collide
         return;
     }
 
@@ -75,16 +85,16 @@ void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
     setLine(QLineF(myEndItem->pos(), myStartItem->pos()));
     painter->drawLine(line());
 
-    // add arrow tip
+    // add arrow head
     qreal arrowSize = 15;
     double angle = ::acos(line().dx() / line().length());
        if (line().dy() >= 0)
-           angle = (Pi * 2) - angle;
+           angle = (M_PI * 2) - angle;
 
-           QPointF arrowP1 = line().p1() + QPointF(sin(angle + Pi / 3) * arrowSize,
-                                           cos(angle + Pi / 3) * arrowSize);
-           QPointF arrowP2 = line().p1() + QPointF(sin(angle + Pi - Pi / 3) * arrowSize,
-                                           cos(angle + Pi - Pi / 3) * arrowSize);
+           QPointF arrowP1 = line().p1() + QPointF(sin(angle + M_PI / 3) * arrowSize,
+                                           cos(angle + M_PI / 3) * arrowSize);
+           QPointF arrowP2 = line().p1() + QPointF(sin(angle + M_PI - M_PI / 3) * arrowSize,
+                                           cos(angle + M_PI - M_PI / 3) * arrowSize);
 
            arrowHead.clear();
            arrowHead << line().p1() << arrowP1 << arrowP2;

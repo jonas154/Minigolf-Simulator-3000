@@ -4,45 +4,49 @@
 #include <QGraphicsLineItem>
 #include <QPen>
 #include <QPainter>
-
-#include <iostream>
 #include <arrowstartitem.h>
 #include <ball.h>
 #include <math.h>
 #include <cmath>
 
-const qreal Pi = 3.14;
-
-// This class draws an arrow between the ArrowStartItem and the Ball
-// the arrow is used to compute the inital speed and inital angle for a shot
-// The ArrowStartItem is moveable such that the speed and angle can be adjusted
+//! This class draws an arrow between an ArrowStartItem and a Ball
+/*! The arrow is used to compute the initial speed and initial angle of the ball for a shot. */
 
 class Arrow : public QGraphicsLineItem
 {
 public:
 
-    //! \brief Constructor
+    //! Constructor
     Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent = 0);
 
-    //! \brief Reimplements the boundingRect() fct of QGraphicsLineItem
-    //! because the arrow with its tip is thicker than a line
+    //! Reimplements the boundingRect() function of QGraphicsLineItem
     QRectF boundingRect() const Q_DECL_OVERRIDE;
 
-    //! \brief Returns QPainterPath including arrow line and arrow tip
+    //! Returns a QPainterPath including the arrow line and the arrow head
     QPainterPath shape() const Q_DECL_OVERRIDE;
 
+    //! Pointer to the start item of the arrow
     ArrowStartItem *startItem() const { return myStartItem; }
+
+    //! Pointer to the end item of the arrow
     Ball *endItem() const { return myEndItem; }
 
+    //! returns the angle of the arrow
     qreal getAngle();
+
+    //! returns a speed value that is dependent on the length of the arrow
     qreal getSpeed();
 
+    //! updates the position of the arrow
     void updatePosition();
 
 protected:
+
+    //! paints the arrow line and the arrow head in the QMainWindow
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) Q_DECL_OVERRIDE;
 
 private:
+
     ArrowStartItem *myStartItem;
     Ball *myEndItem;
     QColor myColor;

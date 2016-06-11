@@ -4,8 +4,6 @@ ArrowStartItem::ArrowStartItem(Ball* _ball, bool _firstCreate)
     :
     ball(_ball), firstCreate(_firstCreate)
 {
-    //arrowStartPoint = QPointF(0.0,0.0);
-
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
@@ -16,6 +14,8 @@ ArrowStartItem::ArrowStartItem(Ball* _ball, bool _firstCreate)
 
 QRectF ArrowStartItem::boundingRect() const
 {
+    /*! The Reimplementation is necessary because the ArrowStartItem occupies more space in the QMainWindow */
+
     return QRectF(-10,-10,20,20);
 }
 
