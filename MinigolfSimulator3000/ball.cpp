@@ -159,8 +159,6 @@ void Ball::doCollision()
 
                     case GroundMaterial::hole_material:
 
-//                        qDebug() << "ball in hole";
-
                         if(speed>maxspeed)
                         {
                             speed -= speed*friction;
@@ -168,7 +166,9 @@ void Ball::doCollision()
                         else
                         {
                             speed = 0.0;
+//                            qDebug() << "ball in hole";
                             emit ballInHole();
+                            stopped = true;
                         }
 
                     break;
