@@ -7,6 +7,7 @@
 #include "QString"
 #include "QFile"
 #include "addplayerdialog.h"
+#include <QMessageBox>
 class Game;
 class addPlayerDialog;
 
@@ -48,6 +49,10 @@ private slots:
     void on_exitButton_clicked();
     void on_addPlayer_clicked();
     void on_playerBox_currentIndexChanged(int index);
+
+    void on_Highscore_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::StartWindow* ui;

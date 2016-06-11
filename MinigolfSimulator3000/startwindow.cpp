@@ -4,7 +4,7 @@
 StartWindow::StartWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::StartWindow)
-{
+    {
 
     ui->setupUi(this);
 
@@ -81,14 +81,23 @@ void StartWindow::closeEvent(QCloseEvent *)
 
 void StartWindow::on_addPlayer_clicked()
 {
-    addPlayerDialog playerDialog(this);
-    playerDialog.setModal(true);
-    playerDialog.exec();
 
-    if (firstStart == false)
+    if (playercounter < 10)
     {
-        ui->playerBox->clear();
-        this->createPlayerBox();
+        addPlayerDialog playerDialog(this);
+        playerDialog.setModal(true);
+        playerDialog.exec();
+
+        if (firstStart == false)
+        {
+            ui->playerBox->clear();
+            this->createPlayerBox();
+        }
+    }
+    else
+    {
+        //tbd
+        //QMessageBox::(this,"Maximale Anzahl an Player ist erreicht.");
     }
 }
 
@@ -133,19 +142,17 @@ void StartWindow::checkFile()
         QString reader = in.readAll();
         QString intCon;
         file.close();
-     if (reader.isEmpty())
-     {
-         firstStart = true;
-         this->on_addPlayer_clicked();
-         firstStart = false;
-     }
-     else
-      {
-          this->readLines();
-      }
+        if (reader.isEmpty())
+        {
+            firstStart = true;
+            this->on_addPlayer_clicked();
+            firstStart = false;
+        }
+        else
+        {
+            this->readLines();
+        }
     }
-
-
 }
 
 void StartWindow::readLines()
@@ -154,9 +161,6 @@ void StartWindow::readLines()
     QString line;
     QString verzeichnis=QCoreApplication::applicationDirPath();
     verzeichnis.append("/config.txt");
-
-
-
     QFile file(verzeichnis);
 
     if(file.open(QIODevice::ReadOnly) | QIODevice::Text)
@@ -180,7 +184,7 @@ void StartWindow::readLines()
 
             for(i=0;i<4;i++){
                 pos = reader.indexOf(":",lastpos);
-                 matrix[z][i] = reader.mid(lastpos,pos-lastpos);
+                matrix[z][i] = reader.mid(lastpos,pos-lastpos);
                 lastpos=pos+1;
             }
 
@@ -196,11 +200,11 @@ void StartWindow::readLines()
             else{
                 z=z+1;
                 lastpos = lastpos + 2;
-               // matrix
+                // matrix
             }
         }
     }
-file.close();
+    file.close();
 }
 
 void StartWindow::writeFile()
@@ -211,18 +215,19 @@ void StartWindow::writeFile()
 
     if(file.open(QFile::WriteOnly | QFile::Truncate))
     {
-       int z;
-       QTextStream out(&file);
+        int z;
+        QTextStream out(&file);
 
-       for(z=0;z < playercounter;z++)
-       {
+        for(z=0;z < playercounter;z++)
+        {
 
             out << ":" << matrix[z][0] << ":"<< matrix[z][1] << ":" << matrix[z][2] << ":" << matrix[z][3] << ":" << "\"";
-       }
+        }
     }
     file.close();
 }
 
+// tbd Für was wird diese Funktion benötigt?
 bool StartWindow::fileExists(QString filename){
     if (QFile::exists(filename)){
         return true;
@@ -230,4 +235,66 @@ bool StartWindow::fileExists(QString filename){
         return false;
     }
 
+}
+
+void StartWindow::on_Highscore_clicked()
+{
+    QStringList header;
+    header << "Platz";
+    header << "Name";
+    header << "Punktzahl";
+
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->highscoreViewer->setRowCount(playercounter);
+    ui->highscoreViewer->setColumnCount(3);
+    ui->highscoreViewer->verticalHeader()->setVisible(false);
+    ui->highscoreViewer->horizontalHeader()->setVisible(true);
+
+    ui->highscoreViewer->setHorizontalHeaderLabels(header);
+    ui->highscoreViewer->setEditTriggers(false);
+    int i,z,n;
+    for(i=0;i<playercounter;i++)
+    {
+        QString _widgetName = matrix[i][1];
+        QString _widgetHighscore = matrix[i][3];
+        ui->highscoreViewer->setItem(i,1,new QTableWidgetItem(_widgetName));
+        ui->highscoreViewer->setItem(i,2,new QTableWidgetItem(_widgetHighscore));
+        //ui->highscoreViewer->sortItems(1,Qt::AscendingOrder);
+    }
+
+    //Bubble-Sort
+    for(n=playercounter;n>1;n--)
+    {
+
+        for(i=0;i<n-1;i++)
+        {
+            int firstHighscoreINT = ui->highscoreViewer->item(i,2)->text().toInt();
+            int compareHighscoreINT = ui->highscoreViewer->item(i+1,2)->text().toInt();
+
+            if (compareHighscoreINT > firstHighscoreINT)
+            {
+                QString compareHighscoreName = ui->highscoreViewer->item(i+1,1)->text();
+                QString compareHighscore = ui->highscoreViewer->item(i+1,2)->text();
+                QString firstHighscoreName = ui->highscoreViewer->item(i,1)->text();
+                QString firstHighscore = ui->highscoreViewer->item(i,2)->text();
+                ui->highscoreViewer->setItem(i,2,new QTableWidgetItem(compareHighscore));
+                ui->highscoreViewer->setItem(i,1,new QTableWidgetItem(compareHighscoreName));
+                ui->highscoreViewer->setItem(i+1,2,new QTableWidgetItem(firstHighscore));
+                ui->highscoreViewer->setItem(i+1,1,new QTableWidgetItem(firstHighscoreName));
+            }
+        }
+    }
+
+    for(z=0;z<playercounter;z++)
+    {
+        // tbd Hier fehlt eine Logik, die bei zwei gleichen Punktzahlen, den gleichen Platz vergibt.
+        QString place = QString::number(z+1);
+        ui->highscoreViewer->setItem(z,0,new QTableWidgetItem(place));
+    }
+}
+
+
+void StartWindow::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
 }
