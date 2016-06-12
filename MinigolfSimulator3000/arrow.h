@@ -6,8 +6,8 @@
 #include <QPainter>
 #include <arrowstartitem.h>
 #include <ball.h>
-#include <math.h>
-#include <cmath>
+#include <qmath.h>
+
 
 //! This class draws an arrow between an ArrowStartItem and a Ball
 /*! The arrow is used to compute the initial speed and initial angle of the ball for a shot. */
