@@ -46,6 +46,7 @@ QVariant ArrowStartItem::itemChange(QGraphicsItem::GraphicsItemChange change, co
         //on first creation, value is relative to point (0,0) of scene
         //on the next creations, value is relative to this->pos()
         //WTF???
+
         if(firstCreate) newPos = value.toPointF();
         else newPos = ball->pos() - QPointF(0.0,-50.0) + value.toPointF();
 

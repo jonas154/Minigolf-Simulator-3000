@@ -6,6 +6,7 @@ Game::Game(StartWindow* _startW)
     :
     startW(_startW) // startW = _startW; Initialisierungsliste
 {
+    stopTurn = false;
 }
 
 void Game::construct(QGraphicsScene* _scene)
@@ -93,7 +94,7 @@ void Game::GameOver() // still working on it
         break;
 
         case 2:
-            //delete l2;
+            delete l2;
         break;
 
         case 3:
@@ -135,6 +136,8 @@ void Game::startLevel(int levelnumber)
             this->construct(l1->getScene());
             l1->show();
             connect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            connect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            connect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
 
         break;
 
@@ -144,6 +147,8 @@ void Game::startLevel(int levelnumber)
             this->construct(l2->getScene());
             l2->show();
             connect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            connect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            connect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
 
         break;
 
@@ -157,12 +162,10 @@ void Game::BallinWater()
     {
         case 1:
             l1->getBall()->setPos(l1->getStartCoordinates());
-            l1->createArrow();
         break;
 
         case 2:
             l2->getBall()->setPos(l1->getStartCoordinates());
-            l2->createArrow();
         break;
 
         default: break;
@@ -177,6 +180,19 @@ void Game::calculateScore()
 
 void Game::BallinHole()
 {
+    switch(currentLevel)
+    {
+        case 1:
+            l1->getBall()->setPos(l1->getHoleCoordinates());
+        break;
+
+        case 2:
+            l2->getBall()->setPos(l1->getHoleCoordinates());
+        break;
+
+        default: break;
+    }
+
     nextPlayersTurn();
     stopTurn == true;
 }

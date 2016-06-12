@@ -51,7 +51,7 @@ public:
             break;
 
             case water_material:
-                frictionCoefficient = 0.2;
+                frictionCoefficient = 0.3;
             break;
 
             case nonNewtonian_material:

@@ -39,6 +39,9 @@ public:
     //! \brief Returns the start coordinates of the current level
     QPointF getStartCoordinates();
 
+    //! \brief Returns the hole coordinates of the current level
+    QPointF getHoleCoordinates();
+
     //! \brief Returns pointer to the active ball
     Ball* getBall();
 
@@ -77,6 +80,12 @@ protected:
     //! \brief Set the start coordinates of the level, overloaded function
     void setStartCoordinates(const qreal x, const qreal y);
 
+    //! \brief Set the hole coordinates of the level
+    void setHoleCoordinates(const QPointF startPoint);
+
+    //! \brief Set the hole coordinates of the level, overloaded function
+    void setHoleCoordinates(const qreal x, const qreal y);
+
     //! \brief Create ball and add to scene at start coordinates
     void createBall();
 
@@ -90,6 +99,7 @@ private:
 
 
     QPointF startCoordinates;
+    QPointF holeCoordinates;
 
     Ball* ball;
 

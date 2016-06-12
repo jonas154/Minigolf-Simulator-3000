@@ -5,7 +5,8 @@ Court::Court(QWidget *parent)
     :
     QWidget(parent),
     ui(new Ui::Court),
-    startCoordinates(0.0, 0.0)
+    startCoordinates(0.0, 0.0),
+    holeCoordinates(0.0, 0.0)
 {
     ui->setupUi(this);
 
@@ -63,9 +64,28 @@ void Court::setStartCoordinates(const qreal x, const qreal y)
 
 //------------------------------------------
 
+void Court::setHoleCoordinates(const QPointF startPoint)
+{
+    holeCoordinates = startPoint;
+};
+
+void Court::setHoleCoordinates(const qreal x, const qreal y)
+{
+    holeCoordinates = QPointF(x, y);
+};
+
+//------------------------------------------
+
 QPointF Court::getStartCoordinates()
 {
     return startCoordinates;
+}
+
+//------------------------------------------
+
+QPointF Court::getHoleCoordinates()
+{
+    return holeCoordinates;
 }
 
 //------------------------------------------

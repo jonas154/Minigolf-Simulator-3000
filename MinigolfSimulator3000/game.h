@@ -48,8 +48,7 @@ private:
     QGraphicsTextItem *TurnText;
     StartWindow* startW;
     int currentLevel;
-    bool stopTurn = false; // now game knows when to stop changing Turn
-
+    bool stopTurn; // now game knows when to stop changing Turn
 
     void construct(QGraphicsScene* _scene);
 

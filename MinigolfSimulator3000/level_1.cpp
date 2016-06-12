@@ -9,6 +9,7 @@ Level_1::Level_1(QWidget *parent)
 {
 
     this->setStartCoordinates(218.0, 600.0);
+    this->setHoleCoordinates(693.5, 296.0);
     this->constructLevel();
 
     this->createBall();
@@ -56,11 +57,16 @@ void Level_1::constructLevel()
     //grass material  [zum debuggen QPen(Qt::red) anstatt linepen verwenden]
     QPolygonF grassPolygon;
     grassPolygon << QPoint(126,664) << QPoint(310,665) <<QPoint(302,382) <<QPoint(343,345) <<QPoint(740,343) <<QPoint(739,245)
-    <<QPoint(292,253) <<QPoint(132,253);
+    <<QPoint(300,245) << QPoint(300, 265) <<QPoint(132,265);
     GroundMaterial* grass = new GroundMaterial(GroundMaterial::grass_material, grassPolygon);
-    grass->setPen(linepen);
+    grass->setPen(QPen(Qt::red));
     scene->addItem(grass);
 
+    QPolygonF holePoly;
+    holePoly << QPoint(691, 294) << QPoint(696, 294) << QPoint(696, 299) << QPoint(691, 299);
+    GroundMaterial* hole = new GroundMaterial(GroundMaterial::hole_material, holePoly);
+    hole->setPen(QPen(Qt::red));
+    scene->addItem(hole);
 
     continueItem->setRect(368,266,289,80);
     continueItem->setPen(linepen);

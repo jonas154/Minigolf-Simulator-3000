@@ -36,13 +36,14 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setPen(pen);
     painter->fillPath(path,brush);
     painter->drawPath(path);
+
 }
 
 void Ball::advance(int phase)
 {
     if(!phase) return;
 
-    setPos(mapToParent(0,speed));
+    setPos(mapToScene(0,speed));
 
     doCollision();
 
@@ -118,6 +119,46 @@ void Ball::doCollision()
 
                 switch(groundmaterial->getMaterial())
                 {
+                    case GroundMaterial::water_material:
+                    {
+                        speed -= friction*speed;
+
+                        if(speed<minspeed)
+                        {
+                            speed = 0.0;
+                            emit ballInWater();
+                        }
+                    }
+                    break;
+
+                    case GroundMaterial::nonNewtonian_material:
+
+                        if(speed > minspeed)
+                        {
+                            speed -= speed*friction;
+                        }
+                        else if(speed<minspeed)
+                        {
+                            speed = 0.0;
+                            emit ballInWater(); //Ist ja im Prinzip das gleiche wie bei Wasser
+                        }
+                    break;
+
+                    case GroundMaterial::hole_material:
+
+                        if(speed>maxspeed)
+                        {
+                            //speed -= speed*friction;
+                        }
+                        else
+                        {
+                            speed = 0.0;
+                            qDebug() << "ball in hole";
+                            emit ballInHole();
+                        }
+
+                    break;
+
                     case GroundMaterial::grass_material:
                     case GroundMaterial::concrete_material:
                     case GroundMaterial::wood_material:
@@ -133,44 +174,6 @@ void Ball::doCollision()
                             stopped = true;
                         }
                     }
-                    break;
-
-                    case GroundMaterial::water_material:
-
-//                        speed -= friction*speed;
-                        speed = 0.0;
-                        emit ballInWater();
-                        stopped = true;
-
-
-                    break;
-
-                    case GroundMaterial::nonNewtonian_material:
-
-                        if(speed > minspeed)
-                        {
-                            speed -= speed*friction;
-                        }
-                        else if(speed<minspeed)
-                        {
-                            //emit ballInNewtonian();
-                        }
-                    break;
-
-                    case GroundMaterial::hole_material:
-
-                        if(speed>maxspeed)
-                        {
-                            speed -= speed*friction;
-                        }
-                        else
-                        {
-                            speed = 0.0;
-//                            qDebug() << "ball in hole";
-                            emit ballInHole();
-                            stopped = true;
-                        }
-
                     break;
 
                     default: break;
