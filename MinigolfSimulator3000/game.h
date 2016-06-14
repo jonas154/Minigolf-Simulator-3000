@@ -26,13 +26,14 @@ public:
     QString getTurn();
     void nextPlayersTurn();
     void calculateScore();
+    int calculateScore1();
+    int calculateScore2();
 
     Bonus *bonus1, *bonus2;
     Score *score1, *score2;
     Strike *strike1, *strike2;
     Level_1 *l1;
     Level_2* l2;
-    int endScore1 = 0, endScore2 = 0;
 
 public slots:
 
@@ -48,7 +49,8 @@ private:
     QGraphicsTextItem *TurnText;
     StartWindow* startW;
     int currentLevel;
-    bool stopTurn; // now game knows when to stop changing Turn
+    bool stopTurn;
+    int endScore1 = 1000, endScore2 = 1000;
 
     void construct(QGraphicsScene* _scene);
 

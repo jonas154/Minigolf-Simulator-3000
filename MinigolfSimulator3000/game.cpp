@@ -4,7 +4,7 @@
 
 Game::Game(StartWindow* _startW)
     :
-    startW(_startW) // startW = _startW; Initialisierungsliste
+    startW(_startW)
 {
     stopTurn = false;
 }
@@ -99,7 +99,7 @@ void Game::GameOver() // still working on it
 
         case 3:
             //delete l3;
-            calculateScore();
+            //calculateScore();
             if (endScore1 > endScore2)
             {
                 TurnText->setPlainText(QString("Player 1 wins!"));
@@ -116,8 +116,6 @@ void Game::GameOver() // still working on it
 
         default: break;
     }
-
-    //back to main menu and move on next level?
 
     //wenn direkt das nächste Level aufgeht:
     ++currentLevel;
@@ -172,10 +170,18 @@ void Game::BallinWater()
     }
 }
 
-void Game::calculateScore()
+int Game::calculateScore1()
 {
-    endScore1 += (1000 - ((score1->getScore(1)-1)*200)) + ((bonus1->getBonus(1))*500);
-    endScore2 += (1000 - ((score2->getScore(2)-1)*200)) + ((bonus2->getBonus(2))*500);
+    //endScore1 += (1000 - ((score1->getScore(1)-1)*200)) + ((bonus1->getBonus(1))*500);
+    //endScore2 += (1000 - ((score2->getScore(2)-1)*200)) + ((bonus2->getBonus(2))*500);
+    endScore1 = endScore1 - 200 + ((bonus1->getBonus(1))*500);
+    return endScore1;
+}
+
+int Game::calculateScore2()
+{
+    endScore2 = endScore2 - 200 + ((bonus2->getBonus(2))*500);
+    return endScore2;
 }
 
 void Game::BallinHole()
@@ -184,6 +190,18 @@ void Game::BallinHole()
     {
         case 1:
             l1->getBall()->setPos(l1->getHoleCoordinates());
+            if (getTurn() == "PLAYER 1")
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+                qDebug() << "P1's L1 Score:" << calculateScore1();
+            }
+            else
+            {
+                strike2->decrease(2);
+                score2->increase(2);
+                qDebug() << "P2's' L1 Score:" << calculateScore2();
+            }
         break;
 
         case 2:
@@ -194,7 +212,7 @@ void Game::BallinHole()
     }
 
     nextPlayersTurn();
-    stopTurn == true;
+    stopTurn = true;
 }
 
 void Game::BallStopped()
@@ -206,6 +224,21 @@ void Game::BallStopped()
             QPointF coordinates = l1->getBall()->pos();
             //do something with the coordinates, maybe save for multiplayer?
             l1->createArrow();
+
+            if (getTurn() == QString("PLAYER 1"))
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+                qDebug() << "P1:" << calculateScore1();
+                nextPlayersTurn();
+            }
+            else
+            {
+                strike2->decrease(2);
+                score2->increase(2);
+                qDebug() << "P2:" << calculateScore2();
+                nextPlayersTurn();
+            }
         }
         break;
 
