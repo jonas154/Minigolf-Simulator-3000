@@ -34,17 +34,23 @@ public:
     QString matrix[10][4];
     int playercounter = 0;
     bool firstStart = false;
-
+    bool multiPlayerMode = false;
     void writeFile();
     void readLines();
     void createLevelBox();
     void createPlayerBox();
-    QString getActPlayerName();
+    QString getActPlayer1Name();
+    QString getActPlayer2Name();
+
     void setActLevel(int actLevel);
     int getActLevel();
-    int getActPlayerIndex();
-    void setActHighscore(int actHighscore);
-    int getActHighscore();
+    int getActPlayer1Index();
+    int getActPlayer2Index();
+    void setActPlayer1Highscore(int actHighscorePlayer1);
+    void setActPlayer2Highscore(int actHighscorePlayer2);
+    int getActHighscorePlayer1();
+    int getActHighscorePlayer2();
+    bool getGameMode();
 
 private slots:
     void on_Start_clicked();
@@ -54,7 +60,24 @@ private slots:
 
     void on_Highscore_clicked();
 
-    void on_pushButton_clicked();
+
+    void on_backToMainMenuButton_clicked();
+
+    void on_onMPModeButton_clicked();
+
+    void on_onSPModeButton_clicked();
+
+    void on_addPlayerMPButton_clicked();
+
+    void on_StartMPButton_clicked();
+
+    void on_HighscoreMPButton_clicked();
+
+    void on_exitMPButton_clicked();
+
+    void on_player1BoxMP_currentIndexChanged(int index);
+
+    void on_player2BoxMP_currentIndexChanged(int index);
 
 private:
     Ui::StartWindow* ui;
