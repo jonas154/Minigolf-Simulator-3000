@@ -2,12 +2,14 @@
 
 ArrowStartItem::ArrowStartItem(Ball* _ball, bool _firstCreate)
     :
-    ball(_ball), firstCreate(_firstCreate)
+    ball(_ball), firstCreate(_firstCreate), changeReceived(false)
 {
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
     this->setPos(ball->pos()-QPointF(0.0,-50.0));
+
+
 
 
 }
@@ -32,7 +34,7 @@ void ArrowStartItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
 void ArrowStartItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    emit arrowStartItemReleased();
+    if(changeReceived) emit arrowStartItemReleased();
 }
 
 
@@ -40,6 +42,8 @@ QVariant ArrowStartItem::itemChange(QGraphicsItem::GraphicsItemChange change, co
 {
     if(change==ItemPositionChange&&scene())
     {
+        changeReceived = true;
+
         QPointF newPos;
 
         //bug workaround

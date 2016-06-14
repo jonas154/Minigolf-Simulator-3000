@@ -46,6 +46,8 @@ private:
     //! needed to implement a limitation of the distance between the ball and the ArrowStartItem
     bool firstCreate;
 
+    bool changeReceived;
+
 };
 
 #endif // ARROWSTARTITEM_H

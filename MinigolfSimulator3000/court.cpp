@@ -121,8 +121,8 @@ void Court::deleteArrow()
     disconnect(arrowStart,SIGNAL(arrowStartItemReleased()),this,SLOT(shot()));
     scene->removeItem(arrowStart);
     scene->removeItem(arrow);
-    //delete arrowStart;
-    //delete arrow;
+    delete arrow;
+    delete arrowStart;
 }
 
 void Court::shot()
