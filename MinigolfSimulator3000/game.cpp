@@ -12,7 +12,7 @@ Game::Game(StartWindow* _startW)
 void Game::construct(QGraphicsScene* _scene)
 {
 
-    QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayerName());
+    QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayer1Name());
     p1->setPos(0,0);
     p1->setDefaultTextColor(Qt::white);
     _scene->addItem(p1);
@@ -48,7 +48,7 @@ void Game::construct(QGraphicsScene* _scene)
 
     //whose turn text
     TurnText = new QGraphicsTextItem();
-    setTurn(QString(startW->getActPlayerName()));
+    setTurn(QString(startW->getActPlayer1Name()));
     TurnText->setPos(400,0);
     TurnText->setDefaultTextColor(Qt::white);
     _scene->addItem(TurnText);
@@ -67,7 +67,7 @@ QString Game::getTurn()
 
 void Game::nextPlayersTurn()
 {
-    if (getTurn() == QString(startW->getActPlayerName()))
+    if (getTurn() == QString(startW->getActPlayer1Name()))
     {
         if(stopTurn == true)
             return;
@@ -79,7 +79,7 @@ void Game::nextPlayersTurn()
         if(stopTurn == true)
             return;
         else
-            setTurn(QString(startW->getActPlayerName()));
+            setTurn(QString(startW->getActPlayer1Name()));
     }
 }
 
@@ -101,7 +101,7 @@ void Game::GameOver() // still working on it
             //calculateScore();
             if (endScore1 > endScore2)
             {
-                TurnText->setPlainText(QString(startW->getActPlayerName() + " wins!"));
+                TurnText->setPlainText(QString(startW->getActPlayer1Name() + " wins!"));
             }
             else if (endScore1 == endScore2)
             {
@@ -189,7 +189,7 @@ void Game::BallinHole()
     {
         case 1:
             l1->getBall()->setPos(l1->getHoleCoordinates());
-            if (getTurn() == startW->getActPlayerName())
+            if (getTurn() == startW->getActPlayer1Name())
             {
                 strike1->decrease(1);
                 score1->increase(1);
@@ -224,7 +224,7 @@ void Game::BallStopped()
             //do something with the coordinates, maybe save for multiplayer?
             l1->createArrow();
 
-            if (getTurn() == QString(startW->getActPlayerName()))
+            if (getTurn() == QString(startW->getActPlayer1Name()))
             {
                 strike1->decrease(1);
                 score1->increase(1);
