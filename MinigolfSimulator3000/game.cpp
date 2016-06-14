@@ -12,8 +12,7 @@ Game::Game(StartWindow* _startW)
 void Game::construct(QGraphicsScene* _scene)
 {
 
-    // Player name will replace PLAYER 1
-    QGraphicsTextItem* p1 = new QGraphicsTextItem("PLAYER 1");
+    QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayerName());
     p1->setPos(0,0);
     p1->setDefaultTextColor(Qt::white);
     _scene->addItem(p1);
@@ -49,7 +48,7 @@ void Game::construct(QGraphicsScene* _scene)
 
     //whose turn text
     TurnText = new QGraphicsTextItem();
-    setTurn(QString("PLAYER 1"));
+    setTurn(QString(startW->getActPlayerName()));
     TurnText->setPos(400,0);
     TurnText->setDefaultTextColor(Qt::white);
     _scene->addItem(TurnText);
@@ -68,7 +67,7 @@ QString Game::getTurn()
 
 void Game::nextPlayersTurn()
 {
-    if (getTurn() == QString("PLAYER 1"))
+    if (getTurn() == QString(startW->getActPlayerName()))
     {
         if(stopTurn == true)
             return;
@@ -80,7 +79,7 @@ void Game::nextPlayersTurn()
         if(stopTurn == true)
             return;
         else
-            setTurn(QString("PLAYER 1"));
+            setTurn(QString(startW->getActPlayerName()));
     }
 }
 
@@ -102,7 +101,7 @@ void Game::GameOver() // still working on it
             //calculateScore();
             if (endScore1 > endScore2)
             {
-                TurnText->setPlainText(QString("Player 1 wins!"));
+                TurnText->setPlainText(QString(startW->getActPlayerName() + " wins!"));
             }
             else if (endScore1 == endScore2)
             {
@@ -190,7 +189,7 @@ void Game::BallinHole()
     {
         case 1:
             l1->getBall()->setPos(l1->getHoleCoordinates());
-            if (getTurn() == "PLAYER 1")
+            if (getTurn() == startW->getActPlayerName())
             {
                 strike1->decrease(1);
                 score1->increase(1);
@@ -225,7 +224,7 @@ void Game::BallStopped()
             //do something with the coordinates, maybe save for multiplayer?
             l1->createArrow();
 
-            if (getTurn() == QString("PLAYER 1"))
+            if (getTurn() == QString(startW->getActPlayerName()))
             {
                 strike1->decrease(1);
                 score1->increase(1);
