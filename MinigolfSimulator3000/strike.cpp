@@ -20,6 +20,8 @@ void Strike::decrease(int _strike)
             setPixmap(QPixmap(":/Images/Images/club2.png"));
         else if (strike1 == 1)
             setPixmap(QPixmap(":/Images/Images/club.png"));
+        else if (strike1 == 0)
+            setPixmap(QPixmap());
     }
     else if (_strike == 2)
     {
@@ -32,6 +34,8 @@ void Strike::decrease(int _strike)
             setPixmap(QPixmap(":/Images/Images/club2.png"));
         else if (strike2 == 1)
             setPixmap(QPixmap(":/Images/Images/club.png"));
+        else if (strike2 == 0)
+            setPixmap(QPixmap());
     }
 
 }

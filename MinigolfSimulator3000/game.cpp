@@ -248,12 +248,41 @@ void Game::BallinHole()
                 strike1->decrease(1);
                 score1->increase(1);
                 qDebug() << "P1's L1 Score:" << calculateScore1();
+                startLevel(2);
             }
 
         break;
 
         case 2:
             l2->getBall()->setPos(l1->getHoleCoordinates());
+
+            if (startW->getGameMode() == true)
+            {
+
+                if (getTurn() == startW->getActPlayer1Name())
+                {
+                    strike1->decrease(1);
+                    score1->increase(1);
+                    qDebug() << "P1's L1 Score:" << calculateScore1();
+                }
+                else
+                {
+                    strike2->decrease(2);
+                    score2->increase(2);
+                    qDebug() << "P2's' L1 Score:" << calculateScore2();
+                }
+                nextPlayersTurn();
+                stopTurn = true;
+
+            }
+
+            else
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+                qDebug() << "P1's L1 Score:" << calculateScore1();
+                //startLevel(3);
+            }
         break;
 
         default: break;
@@ -304,6 +333,32 @@ void Game::BallStopped()
             QPointF coordinates = l2->getBall()->pos();
             //do something with the coordinates, maybe save for multiplayer?
             l2->createArrow();
+
+            if (startW->getGameMode() == true)
+            {
+
+                if (getTurn() == QString(startW->getActPlayer1Name()))
+                {
+                    strike1->decrease(1);
+                    score1->increase(1);
+                    qDebug() << "P1:" << calculateScore1();
+                    nextPlayersTurn();
+                }
+                else
+                {
+                    strike2->decrease(2);
+                    score2->increase(2);
+                    qDebug() << "P2:" << calculateScore2();
+                    nextPlayersTurn();
+                }
+
+            }
+            else
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+                qDebug() << "P1:" << calculateScore1();
+            }
         }
         break;
 
