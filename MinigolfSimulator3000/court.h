@@ -31,7 +31,7 @@ public:
     explicit Court(QWidget *parent = 0);
 
     //! \brief Destructor
-    ~Court();
+    virtual ~Court();
 
     //! \brief Returns pointer to the current scene
     QGraphicsScene* getScene();
@@ -59,6 +59,9 @@ public slots:
 
     void shot();
 
+signals:
+    void destroyLevel();
+    void destroyLevel2();
 //---------------------------------
 
 protected:

@@ -11,7 +11,7 @@
 #include <QGraphicsPixmapItem>
 
 
-class Level_1 : public Court
+class Level_1 :  public Court
 {
 
 public:
@@ -27,10 +27,10 @@ public slots:
     void updateLevel() override;
     void menuLevel()  override;
     void leaveLevel() override;
+    void testslot();
 
- signals:
 
-    void destroyLevel();
+
 
 private:
     GroundMaterial *water;
