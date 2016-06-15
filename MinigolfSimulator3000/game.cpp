@@ -156,6 +156,7 @@ void Game::startLevel(int levelnumber)
             connect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l1, SIGNAL(destroyLevel()), this, SLOT(GameOver()));
 
         break;
 
