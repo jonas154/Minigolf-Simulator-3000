@@ -4,7 +4,7 @@
 StartWindow::StartWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::StartWindow)
-    {
+{
 
     ui->setupUi(this);
 
@@ -29,22 +29,55 @@ StartWindow::~StartWindow()
     delete ui;
 }
 
-//Gibt den Namen des ausgewählten Players als QString zurück
-QString StartWindow::getActPlayerName()
+QString StartWindow::getActPlayer1Name()
 {
-    QString _actPlayerName = matrix[ui->playerBox->currentIndex()][1];
+    if (multiPlayerMode == true)
+    {
+        QString _actPlayerName = matrix[ui->player1BoxMP->currentIndex()][1];
+        return _actPlayerName;
+    }
+    else
+    {
+        QString _actPlayerName = matrix[ui->playerBox->currentIndex()][1];
+        return _actPlayerName;
+    }
+
+
+}
+
+QString StartWindow::getActPlayer2Name()
+{
+    QString _actPlayerName = matrix[ui->player2BoxMP->currentIndex()][1];
     return _actPlayerName;
-
 }
 
-// Gibt die Index-Nummer (1...10) des ausgewählten Players zurück
-int StartWindow::getActPlayerIndex()
+int StartWindow::getActPlayer1Index()
 {
-    QString _actplayerindex = matrix[ui->playerBox->currentIndex()][0];
-    return _actplayerindex.toInt();
+    if(multiPlayerMode == true)
+    {
+        QString _actplayerindex = matrix[ui->player1BoxMP->currentIndex()][0];
+        return _actplayerindex.toInt();
+    }
+    else
+    {
+        QString _actplayerindex = matrix[ui->playerBox->currentIndex()][0];
+        return _actplayerindex.toInt();
+    }
+
 
 }
-//Gibt die für den ausgewählten Player freigespielten Level zurück
+
+int StartWindow::getActPlayer2Index()
+{
+    QString _actplayerindex = matrix[ui->player2BoxMP->currentIndex()][0];
+    return _actplayerindex.toInt();
+}
+
+bool StartWindow::getGameMode()
+{
+    return multiPlayerMode;
+}
+
 int StartWindow::getActLevel()
 {
     QString _actLevel = matrix[ui->playerBox->currentIndex()][2];
@@ -52,15 +85,6 @@ int StartWindow::getActLevel()
 
 }
 
-// tbd
-int StartWindow::getLevel()
-{
-    int level = ui->levelBox->currentIndex();
-    return level;
-}
-
-
-//Hiermit kann man von anderen Klassen einem Player mehr Level freischalten
 void StartWindow::setActLevel(int actLevel)
 {
     matrix[ui->playerBox->currentIndex()][2] = actLevel;
@@ -68,21 +92,50 @@ void StartWindow::setActLevel(int actLevel)
     this->createLevelBox();
 }
 
-// Hiermit kann man den Highscore des aktuellen Players verändern
-void StartWindow::setActHighscore(int actHighscore)
+void StartWindow::setActPlayer1Highscore(int actHighscore)
 {
-    matrix[ui->playerBox->currentIndex()][3] = actHighscore;
+    if(multiPlayerMode == true)
+    {
+        matrix[ui->player1BoxMP->currentIndex()][3] = actHighscore;
+
+    }
+    else
+    {
+        matrix[ui->playerBox->currentIndex()][3] = actHighscore;
+
+    }
 
 }
 
-// Hiermit kann man den Highscore des aktuell ausgewählten Players verändern
-int StartWindow::getActHighscore()
+void StartWindow::setActPlayer2Highscore(int actHighscore)
 {
-    QString _actHighscore = matrix[ui->playerBox->currentIndex()][3];
+    matrix[ui->player2BoxMP->currentIndex()][3] = actHighscore;
+
+}
+
+
+int StartWindow::getActHighscorePlayer1()
+{
+    if (multiPlayerMode == true)
+    {
+        QString _actHighscore = matrix[ui->player1BoxMP->currentIndex()][3];
+        return _actHighscore.toInt();
+    }
+    else
+    {
+        QString _actHighscore = matrix[ui->playerBox->currentIndex()][3];
+        return _actHighscore.toInt();
+    }
+
+}
+
+int StartWindow::getActHighscorePlayer2()
+{
+    QString _actHighscore = matrix[ui->player1BoxMP->currentIndex()][3];
     return _actHighscore.toInt();
 }
 
-void StartWindow::on_Start_clicked()
+void StartWindow::on_startButton_clicked()
 {
     game->startLevel(ui->levelBox->currentIndex() + 1);
 }
@@ -98,55 +151,105 @@ void StartWindow::closeEvent(QCloseEvent *)
     this->on_exitButton_clicked();
 }
 
-void StartWindow::on_addPlayer_clicked()
+void StartWindow::on_addPlayerButton_clicked()
 {
-
     if (playercounter < 10)
     {
-        addPlayerDialog playerDialog(this);
-        playerDialog.setModal(true);
-        playerDialog.exec();
-
-        if (firstStart == false)
+        if (multiPlayerMode == true)
         {
-            ui->playerBox->clear();
+            addPlayerDialog playerDialog(this);
+            playerDialog.setModal(true);
+            playerDialog.exec();
             this->createPlayerBox();
+        }
+        else{
+            addPlayerDialog playerDialog(this);
+            playerDialog.setModal(true);
+            playerDialog.exec();
+
+            if (firstStart == false)
+            {
+                this->createPlayerBox();
+            }
         }
     }
     else
     {
-        //tbd
-        //QMessageBox::(this,"Maximale Anzahl an Player ist erreicht.");
+       QMessageBox::information(this,"Information","Maximale Player-Anzahl erreicht");
     }
+
 }
 
 void StartWindow::on_playerBox_currentIndexChanged(int index)
 {
-    ui->levelBox->clear();
-    this->createLevelBox();
-}
+    if(ui->playerBox->count() != 0)
+    {
+        this->createLevelBox();
 
+    }
+}
 
 void StartWindow::createLevelBox()
 {
-    int playerlevel = this->getActLevel();
-    for (int i = 1;i <= playerlevel;i++)
+    if (multiPlayerMode == true)
     {
-        ui->levelBox->addItem("Level" + QString::number(i));
+        if(ui->levelBoxMP->count() != 0)
+        {
+            ui->levelBoxMP->clear();
+        }
+        for (int i = 1;i <= availableLevel;i++)
+        {
+            ui->levelBoxMP->addItem("Level" + QString::number(i));
+        }
     }
 
+    else
+    {
+        if(ui->levelBox->count() != 0)
+        {
+            ui->levelBox->clear();
+        }
+        int playerlevel = this->getActLevel();
+        for (int i = 1;i <= playerlevel;i++)
+        {
+            ui->levelBox->addItem("Level" + QString::number(i));
+        }
+    }
 }
 
 void StartWindow::createPlayerBox()
 {
-    for (int i = 0;i < playercounter;i++)
+
+    if(multiPlayerMode == true)
     {
-        ui->playerBox->addItem(matrix[i][1]);
+        if(ui->player1BoxMP->count() != 0)
+        {
+            ui->player1BoxMP->clear();
+        }
+        if(ui->player2BoxMP->count() != 0)
+        {
+            ui->player2BoxMP->clear();
+        }
+        for (int i = 0;i < playercounter;i++)
+        {
+            ui->player1BoxMP->addItem(matrix[i][1]);
+            ui->player2BoxMP->addItem(matrix[i][1]);
+        }
     }
+    else
+    {
+        if(ui->playerBox->count() != 0)
+        {
+            ui->playerBox->clear();
+        }
+        for (int i = 0;i < playercounter;i++)
+        {
+            ui->playerBox->addItem(matrix[i][1]);
+        }
+    }
+
 }
 
-
-// Aufbau der Datei: :Index:Name:Freigeschaltene_Levell:Highsccore:":2:Name:Level:":
 
 void StartWindow::checkFile()
 {
@@ -164,7 +267,7 @@ void StartWindow::checkFile()
         if (reader.isEmpty())
         {
             firstStart = true;
-            this->on_addPlayer_clicked();
+            this->on_addPlayerButton_clicked();
             firstStart = false;
         }
         else
@@ -246,24 +349,79 @@ void StartWindow::writeFile()
     file.close();
 }
 
-// tbd Für was wird diese Funktion benötigt?
-bool StartWindow::fileExists(QString filename){
-    if (QFile::exists(filename)){
-        return true;
-    }else{
-        return false;
+void StartWindow::on_backToMainMenuButton_clicked()
+{
+    if(multiPlayerMode == true)
+    {
+        ui->stackedWidget->setCurrentIndex(1);
     }
+    else{
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+}
+
+void StartWindow::on_mpModeButton_clicked()
+{
+    multiPlayerMode = true;
+    ui->stackedWidget->setCurrentIndex(1);
+    this->createPlayerBox();
+    this->createLevelBox();
 
 }
 
-void StartWindow::on_Highscore_clicked()
+void StartWindow::on_spModeButton_clicked()
+{
+    multiPlayerMode = false;
+    ui->stackedWidget->setCurrentIndex(0);
+    this->createPlayerBox();
+
+}
+
+void StartWindow::on_addPlayerMPButton_clicked()
+{
+    this->on_addPlayerButton_clicked();
+}
+
+void StartWindow::on_startMPButton_clicked()
+{
+    if(getActPlayer1Index() == getActPlayer2Index())
+    {
+        QMessageBox::information(this,"Fehler","Bitte zwei verschiedene Player auswählen.");
+    }
+    else
+    {
+        game->startLevel(ui->levelBoxMP->currentIndex() + 1);
+    }
+}
+
+void StartWindow::on_highscoreMPButton_clicked()
+{
+    this->on_highscoreButton_clicked();
+}
+
+void StartWindow::on_exitMPButton_clicked()
+{
+    this->on_exitButton_clicked();
+}
+
+//void StartWindow::on_player1BoxMP_currentIndexChanged(int index)
+//{
+//    this->createLevelBox();
+//}
+
+//void StartWindow::on_player2BoxMP_currentIndexChanged(int index)
+//{
+//    this->createLevelBox();
+//}
+
+void StartWindow::on_highscoreButton_clicked()
 {
     QStringList header;
     header << "Platz";
     header << "Name";
     header << "Punktzahl";
 
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(2);
     ui->highscoreViewer->setRowCount(playercounter);
     ui->highscoreViewer->setColumnCount(3);
     ui->highscoreViewer->verticalHeader()->setVisible(false);
@@ -310,10 +468,4 @@ void StartWindow::on_Highscore_clicked()
         QString place = QString::number(z+1);
         ui->highscoreViewer->setItem(z,0,new QTableWidgetItem(place));
     }
-}
-
-
-void StartWindow::on_pushButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
 }

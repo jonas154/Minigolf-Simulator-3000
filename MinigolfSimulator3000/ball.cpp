@@ -101,7 +101,6 @@ void Ball::doCollision()
                     setRotation(2*(angle+90.0-rotation()) + rotation());
 
                     speed = speed * borderline->getReflectionCoefficient();
-
                     //emit angleChanged();
 
                     canCollide = 4;
@@ -153,6 +152,7 @@ void Ball::doCollision()
                         else
                         {
                             speed = 0.0;
+                            stopped=true;
                             qDebug() << "ball in hole";
                             emit ballInHole();
                         }
@@ -170,7 +170,7 @@ void Ball::doCollision()
                         if(speed<minspeed)
                         {
                             speed = 0.0;
-                            emit ballStopped();
+                            if(!stopped) emit ballStopped();
                             stopped = true;
                         }
                     }

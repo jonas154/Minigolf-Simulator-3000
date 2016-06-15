@@ -27,10 +27,10 @@
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>1031</width>
-        <height>751</height>
+        <x>10</x>
+        <y>10</y>
+        <width>1001</width>
+        <height>731</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -43,7 +43,14 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_7">
                <item>
-                <widget class="QPushButton" name="Highscore">
+                <widget class="QPushButton" name="mpModeButton">
+                 <property name="text">
+                  <string>Multi-Player-Mode</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="highscoreButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -51,7 +58,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Highscore ein/ausklappen</string>
+                  <string>Highscore</string>
                  </property>
                 </widget>
                </item>
@@ -79,7 +86,7 @@
               <widget class="QComboBox" name="playerBox"/>
              </item>
              <item>
-              <widget class="QPushButton" name="addPlayer">
+              <widget class="QPushButton" name="addPlayerButton">
                <property name="text">
                 <string>Spieler hinzufügen</string>
                </property>
@@ -100,7 +107,7 @@
               <widget class="QComboBox" name="levelBox"/>
              </item>
              <item>
-              <widget class="QPushButton" name="Start">
+              <widget class="QPushButton" name="startButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -114,6 +121,128 @@
              </item>
              <item>
               <widget class="QPushButton" name="exitButton">
+               <property name="text">
+                <string>Beenden</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_2">
+     <widget class="QWidget" name="gridLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>1001</width>
+        <height>731</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_16">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_17">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_18">
+               <item>
+                <widget class="QPushButton" name="spModeButton">
+                 <property name="text">
+                  <string>Single-Player-Mode</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="highscoreMPButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Highscore</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_19"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_20">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_21">
+             <item>
+              <widget class="QLabel" name="labelPlayer_3">
+               <property name="text">
+                <string>Auswahl Player 1</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="player1BoxMP"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="labelPlayer_4">
+               <property name="text">
+                <string>Auswahl Player 2</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="player2BoxMP"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="addPlayerMPButton">
+               <property name="text">
+                <string>Spieler hinzufügen</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_22">
+             <item>
+              <widget class="QLabel" name="labelLevel_3">
+               <property name="text">
+                <string>Auswahl des Levels</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="levelBoxMP"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="startMPButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Start</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="exitMPButton">
                <property name="text">
                 <string>Beenden</string>
                </property>
@@ -143,57 +272,11 @@
         <widget class="QTableWidget" name="highscoreViewer"/>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="backToMainMenuButton">
          <property name="text">
           <string>Hauptmenü</string>
          </property>
         </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="page_2">
-     <widget class="QWidget" name="gridLayoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>1021</width>
-        <height>741</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3"/>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
-              <widget class="QPushButton" name="continueButton">
-               <property name="text">
-                <string>Fortsetzen</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="backtoMenueButton">
-               <property name="text">
-                <string>Menü</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5"/>
-         </item>
-        </layout>
        </item>
       </layout>
      </widget>
