@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>41</height>
+    <width>600</width>
+    <height>100</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,16 +16,41 @@
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Name:</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="inputName"/>
+    <widget class="QLineEdit" name="inputName">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="addButton">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>80</height>
+      </size>
+     </property>
      <property name="text">
       <string>Hinzufügen</string>
      </property>

@@ -8,6 +8,8 @@
 #include "QFile"
 #include "addplayerdialog.h"
 #include <QMessageBox>
+#include <QPalette>
+
 class Game;
 class addPlayerDialog;
 
