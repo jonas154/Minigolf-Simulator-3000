@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Minigolf Simulator 3000</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QStackedWidget" name="stackedWidget">
@@ -29,11 +29,14 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>1001</width>
+        <width>981</width>
         <height>731</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
@@ -43,29 +46,42 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_7">
                <item>
-                <widget class="QPushButton" name="mpModeButton">
-                 <property name="text">
-                  <string>Multi-Player-Mode</string>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="highscoreButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
-                 <property name="text">
-                  <string>Highscore</string>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>600</width>
+                   <height>20</height>
+                  </size>
                  </property>
-                </widget>
+                </spacer>
                </item>
               </layout>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_8"/>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>600</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -76,17 +92,86 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
+              <spacer name="verticalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>70</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <widget class="QLabel" name="labelPlayer">
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
                <property name="text">
-                <string>Auswahl des Spielers</string>
+                <string>Spieler:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="playerBox"/>
+              <widget class="QComboBox" name="playerBox">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QPushButton" name="addPlayerButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Spieler hinzufügen</string>
                </property>
@@ -98,29 +183,207 @@
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
               <widget class="QLabel" name="labelLevel">
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>16</pointsize>
+                </font>
+               </property>
                <property name="text">
-                <string>Auswahl des Levels</string>
+                <string>Level:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="levelBox"/>
+              <widget class="QComboBox" name="levelBox">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QPushButton" name="startButton">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Start</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>30</width>
+                 <height>16</height>
+                </size>
                </property>
               </widget>
              </item>
              <item>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="highscoreButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Highscore</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="mpModeButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Multi-Player-Mode</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <widget class="QPushButton" name="exitButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Beenden</string>
                </property>
@@ -141,7 +404,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>1001</width>
+        <width>981</width>
         <height>731</height>
        </rect>
       </property>
@@ -155,29 +418,42 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_18">
                <item>
-                <widget class="QPushButton" name="spModeButton">
-                 <property name="text">
-                  <string>Single-Player-Mode</string>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="highscoreMPButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
-                 <property name="text">
-                  <string>Highscore</string>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>600</width>
+                   <height>20</height>
+                  </size>
                  </property>
-                </widget>
+                </spacer>
                </item>
               </layout>
              </item>
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_19"/>
+              <layout class="QVBoxLayout" name="verticalLayout_19">
+               <item>
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>600</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -188,27 +464,99 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_21">
              <item>
+              <widget class="QLabel" name="labelPlayer_2">
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>16</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Spieler 1:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="player1BoxMP">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QLabel" name="labelPlayer_3">
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>16</pointsize>
+                </font>
+               </property>
                <property name="text">
-                <string>Auswahl Player 1</string>
+                <string>Spieler 2:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="player1BoxMP"/>
-             </item>
-             <item>
-              <widget class="QLabel" name="labelPlayer_4">
-               <property name="text">
-                <string>Auswahl Player 2</string>
+              <widget class="QComboBox" name="player2BoxMP">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>10</pointsize>
+                </font>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="player2BoxMP"/>
+              <spacer name="verticalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QPushButton" name="addPlayerMPButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Spieler hinzufügen</string>
                </property>
@@ -219,14 +567,55 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_22">
              <item>
-              <widget class="QLabel" name="labelLevel_3">
+              <widget class="QLabel" name="labelLevel_2">
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>16</pointsize>
+                </font>
+               </property>
                <property name="text">
-                <string>Auswahl des Levels</string>
+                <string>Level:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="levelBoxMP"/>
+              <widget class="QComboBox" name="levelBoxMP">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <widget class="QPushButton" name="startMPButton">
@@ -236,13 +625,129 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Start</string>
                </property>
               </widget>
              </item>
              <item>
+              <spacer name="verticalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="highscoreMPButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Highscore</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="spModeButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Single-Player-Mode</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
               <widget class="QPushButton" name="exitMPButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>80</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>361</width>
+                 <height>80</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Beenden</string>
                </property>
@@ -261,18 +766,97 @@
      <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>30</y>
-        <width>951</width>
-        <height>681</height>
+        <x>330</x>
+        <y>140</y>
+        <width>312</width>
+        <height>464</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
-       <item>
-        <widget class="QTableWidget" name="highscoreViewer"/>
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <family>Comic Sans MS</family>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Highscore</string>
+         </property>
+        </widget>
        </item>
        <item>
+        <spacer name="verticalSpacer_13">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="highscoreViewer">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>310</width>
+           <height>320</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Comic Sans MS</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_12">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item alignment="Qt::AlignHCenter">
         <widget class="QPushButton" name="backToMainMenuButton">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
          <property name="text">
           <string>Hauptmenü</string>
          </property>

@@ -13,7 +13,10 @@ StartWindow::StartWindow(QWidget *parent) :
     const int height = 768;
     this->setFixedSize(width,height);
     ui->stackedWidget->setCurrentIndex(0);
-
+    QPalette* palette = new QPalette();
+    //palette->setBrush(QPalette::Background,*(new QBrush(*(new QPixmap(":/Images/Images/test_background.jpg")))));
+    setPalette(*palette);
+   // ui->addPlayerButton->setStyleSheet("border-image:url(:/Images/Images/test_background.jpg);");
     this->checkFile();
 
     statusBar()->setFixedHeight(0);
@@ -78,7 +81,7 @@ bool StartWindow::getGameMode()
     return multiPlayerMode;
 }
 
-int StartWindow::getActLevel()
+int StartWindow::getActLevel() // HIER IST NOCH DEBUGGING CODE INSIDE !!!
 {
     QString _actLevel = matrix[ui->playerBox->currentIndex()][2];
       return 2;
