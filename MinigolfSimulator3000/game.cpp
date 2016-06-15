@@ -110,11 +110,22 @@ void Game::GameOver() // still working on it
     switch(currentLevel)
     {
         case 1:
-            delete l1;
+            disconnect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            disconnect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            disconnect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            disconnect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+
+        l1->hide();
+        //delete l1;
         break;
 
         case 2:
-            delete l2;
+            disconnect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            disconnect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            disconnect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            disconnect(l2.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+        l2->hide();
+        //delete l2;
         break;
 
         case 3:
@@ -138,7 +149,7 @@ void Game::GameOver() // still working on it
     }
 
     //wenn direkt das nächste Level aufgeht:
-    ++currentLevel;
+    //++currentLevel;
 
 }
 
@@ -150,24 +161,25 @@ void Game::startLevel(int levelnumber)
     {
         case 1:
 
-            l1 = new Level_1(startW->getUi()->stackedWidget);
+            l1.reset(new Level_1(startW->getUi()->stackedWidget));
             this->construct(l1->getScene());
             l1->show();
             connect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
-            connect(l1, SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+            connect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
 
         break;
 
         case 2:
 
-            l2 = new Level_2(startW->getUi()->stackedWidget);
+            l2.reset(new Level_2(startW->getUi()->stackedWidget));
             this->construct(l2->getScene());
             l2->show();
             connect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
 
         break;
 

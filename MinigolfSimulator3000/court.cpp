@@ -40,6 +40,7 @@ Court::Court(QWidget *parent)
 
 Court::~Court()
 {
+    //delete ball;
     delete ui;
 };
 
