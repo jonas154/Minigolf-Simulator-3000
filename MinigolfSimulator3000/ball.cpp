@@ -101,7 +101,6 @@ void Ball::doCollision()
                     setRotation(2*(angle+90.0-rotation()) + rotation());
 
                     speed = speed * borderline->getReflectionCoefficient();
-
                     //emit angleChanged();
 
                     canCollide = 4;

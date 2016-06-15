@@ -1,30 +1,38 @@
-#include <QObject>
 #include <QSound>
-#include <memory>
-#include <ball.h>
 #include <QObject>
 
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
 
-
-
-class SoundEngine : private QObject
+class SoundEngine : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 public:
-    SoundEngine();
-public slots:
+    SoundEngine()
+        :
+        borderCollision(new QSound(":/Sounds/Sounds/click_dummy_sound.wav"))
+    {
 
-  void playCollisionSound();
-  void playWinSound();
-  void playWaterSound();
-  void playLooseSound();
-  void playStrikeSound();
+    }
+
+    virtual ~SoundEngine(){};
+
+    enum eSound{borderCollisionSound=0, waterSound, holeSound};
+
+public slots:
+    void playSound(int soundNumber)
+    {
+        switch(soundNumber)
+        {
+        case borderCollisionSound:
+            borderCollision->play();
+            break;
+        }
+    }
 
 private:
   //pointer
-    std::unique_ptr<QSound> collision;
+    QScopedPointer<QSound> borderCollision;
 
 };
 

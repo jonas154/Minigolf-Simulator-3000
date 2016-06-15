@@ -17,7 +17,6 @@ SOURCES += main.cpp\
     ball.cpp \
     level_1.cpp \
     level_2.cpp \
-    soundengine.cpp \
     arrow.cpp \
     arrowstartitem.cpp \
     court.cpp \
