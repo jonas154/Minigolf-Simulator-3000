@@ -29,8 +29,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>982</width>
-        <height>747</height>
+        <width>981</width>
+        <height>731</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -102,7 +102,7 @@
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>70</height>
+                 <height>80</height>
                 </size>
                </property>
               </spacer>
@@ -112,7 +112,7 @@
                <property name="font">
                 <font>
                  <family>Comic Sans MS</family>
-                 <pointsize>14</pointsize>
+                 <pointsize>15</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -125,13 +125,13 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>40</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
                  <width>361</width>
-                 <height>80</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="font">
@@ -175,7 +175,7 @@
                <property name="font">
                 <font>
                  <family>Comic Sans MS</family>
-                 <pointsize>10</pointsize>
+                 <pointsize>12</pointsize>
                  <italic>true</italic>
                 </font>
                </property>
@@ -193,7 +193,7 @@
                <property name="font">
                 <font>
                  <family>Comic Sans MS</family>
-                 <pointsize>16</pointsize>
+                 <pointsize>15</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -206,7 +206,7 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>40</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -268,6 +268,12 @@
                  <height>0</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Start</string>
                </property>
@@ -315,6 +321,12 @@
                  <height>80</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Highscore</string>
                </property>
@@ -349,6 +361,12 @@
                  <width>361</width>
                  <height>80</height>
                 </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
                </property>
                <property name="text">
                 <string>Multi-Player-Mode</string>
@@ -391,10 +409,32 @@
                  <height>80</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Beenden</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>
@@ -412,7 +452,7 @@
         <x>10</x>
         <y>10</y>
         <width>981</width>
-        <height>769</height>
+        <height>731</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
@@ -475,7 +515,7 @@
                <property name="font">
                 <font>
                  <family>Comic Sans MS</family>
-                 <pointsize>16</pointsize>
+                 <pointsize>15</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -488,7 +528,7 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>40</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="font">
@@ -504,7 +544,7 @@
                <property name="font">
                 <font>
                  <family>Comic Sans MS</family>
-                 <pointsize>16</pointsize>
+                 <pointsize>15</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -517,7 +557,7 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>40</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -564,6 +604,12 @@
                  <height>80</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Spieler hinzufügen</string>
                </property>
@@ -578,7 +624,7 @@
                <property name="font">
                 <font>
                  <family>Comic Sans MS</family>
-                 <pointsize>16</pointsize>
+                 <pointsize>15</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -591,7 +637,7 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
-                 <height>40</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -644,6 +690,12 @@
                  <height>80</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Start</string>
                </property>
@@ -685,6 +737,12 @@
                  <height>80</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Highscore</string>
                </property>
@@ -719,6 +777,12 @@
                  <width>361</width>
                  <height>80</height>
                 </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
                </property>
                <property name="text">
                 <string>Single-Player-Mode</string>
@@ -755,10 +819,32 @@
                  <height>80</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>Beenden</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_15">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>4</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>

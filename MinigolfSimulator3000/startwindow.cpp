@@ -16,6 +16,7 @@ StartWindow::StartWindow(QWidget *parent) :
     QPalette* palette = new QPalette();
     palette->setBrush(QPalette::Background,*(new QBrush(*(new QPixmap(":/Images/Images/Hauptmenue.png")))));
     setPalette(*palette);
+
     ui->addPlayerButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
     ui->addPlayerMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
     ui->backToMainMenuButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
@@ -27,6 +28,7 @@ StartWindow::StartWindow(QWidget *parent) :
     ui->spModeButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
     ui->mpModeButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
     ui->startMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+
 
 
     this->checkFile();
@@ -217,6 +219,11 @@ void StartWindow::createLevelBox()
         {
             ui->levelBoxMP->addItem("Level" + QString::number(i));
         }
+        QPalette pal = ui->levelBoxMP->palette();
+        QColor backColor = QColor(188,73,73);
+        pal.setColor(QPalette::Base, backColor);
+        ui->levelBoxMP->setPalette(pal);
+
     }
 
     else
@@ -230,7 +237,14 @@ void StartWindow::createLevelBox()
         {
             ui->levelBox->addItem("Level" + QString::number(i));
         }
+
+        QPalette pal = ui->levelBox->palette();
+        QColor backColor = QColor(188,73,73);
+        pal.setColor(QPalette::Base, backColor);
+        ui->levelBox->setPalette(pal);
     }
+
+
 }
 
 void StartWindow::createPlayerBox()
@@ -251,6 +265,16 @@ void StartWindow::createPlayerBox()
             ui->player1BoxMP->addItem(matrix[i][1]);
             ui->player2BoxMP->addItem(matrix[i][1]);
         }
+
+        QPalette pal = ui->player1BoxMP->palette();
+        QColor backColor = QColor(188,73,73);
+        pal.setColor(QPalette::Base, backColor);
+        ui->player1BoxMP->setPalette(pal);
+
+        QPalette pal2 = ui->player2BoxMP->palette();
+        pal2.setColor(QPalette::Base, backColor);
+        ui->player2BoxMP->setPalette(pal2);
+
     }
     else
     {
@@ -262,6 +286,11 @@ void StartWindow::createPlayerBox()
         {
             ui->playerBox->addItem(matrix[i][1]);
         }
+
+        QPalette pal = ui->playerBox->palette();
+        QColor backColor = QColor(188,73,73);
+        pal.setColor(QPalette::Base, backColor);
+        ui->playerBox->setPalette(pal);
     }
 
 }
