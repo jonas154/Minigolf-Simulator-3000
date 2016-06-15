@@ -153,6 +153,7 @@ void Ball::doCollision()
                         else
                         {
                             speed = 0.0;
+                            stopped=true;
                             qDebug() << "ball in hole";
                             emit ballInHole();
                         }
@@ -170,7 +171,7 @@ void Ball::doCollision()
                         if(speed<minspeed)
                         {
                             speed = 0.0;
-                            emit ballStopped();
+                            if(!stopped) emit ballStopped();
                             stopped = true;
                         }
                     }
