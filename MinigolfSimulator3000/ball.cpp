@@ -15,6 +15,9 @@ Ball::Ball()
     birdDeadPicture = ":/Images/Images/vtot.png";
     birdDeadCounter = 0;
 
+    soundEnginePointer = new SoundEngine();
+    connect(this,SIGNAL(soundPlay(int)),soundEnginePointer,SLOT(playSound(int)));
+
 }
 
 QRectF Ball::boundingRect() const
@@ -102,6 +105,8 @@ void Ball::doCollision()
 
                     speed = speed * borderline->getReflectionCoefficient();
                     //emit angleChanged();
+
+                    emit soundPlay(SoundEngine::borderCollisionSound);
 
                     canCollide = 4;
                 }
