@@ -32,8 +32,8 @@ public:
     Bonus *bonus1, *bonus2;
     Score *score1, *score2;
     Strike *strike1, *strike2;
-    Level_1 *l1;
-    Level_2* l2;
+    QScopedPointer<Level_1> l1;
+    QScopedPointer<Level_2> l2;
 
 public slots:
 

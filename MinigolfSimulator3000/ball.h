@@ -11,6 +11,9 @@
 #include <QStyleOptionGraphicsItem>
 #include <QObject>
 
+#include <soundengine.h>
+
+
 #include <QDebug>
 
 //! This class displays and handles the Ball on the QMainWindow
@@ -47,6 +50,8 @@ signals:
 
     void ballInWater();
     void ballInHole();
+    void soundPlay(int);
+
 
 private:
 
@@ -64,6 +69,10 @@ private:
     QGraphicsPixmapItem* removeBird;
 
     bool stopped;
+
+    SoundEngine *soundEnginePointer;
+
+
 };
 
 #endif // BALL_H

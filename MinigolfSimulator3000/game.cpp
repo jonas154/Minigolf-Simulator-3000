@@ -11,47 +11,68 @@ Game::Game(StartWindow* _startW)
 
 void Game::construct(QGraphicsScene* _scene)
 {
+    if (startW->getGameMode() == true)
+    {
+        QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayer1Name());
+        p1->setPos(0,0);
+        p1->setDefaultTextColor(Qt::white);
+        _scene->addItem(p1);
 
-    QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayer1Name());
-    p1->setPos(0,0);
-    p1->setDefaultTextColor(Qt::white);
-    _scene->addItem(p1);
+        score1 = new Score();
+        score1->setPos(0,25);
+        _scene->addItem(score1);
 
-    score1 = new Score();
-    score1->setPos(0,25);
-    _scene->addItem(score1);
+        bonus1 = new Bonus();
+        bonus1->setPos(0,50);
+        _scene->addItem(bonus1);
 
-    bonus1 = new Bonus();
-    bonus1->setPos(0,50);
-    _scene->addItem(bonus1);
+        strike1 = new Strike();
+        strike1->setPos(0,90);
+        _scene->addItem(strike1);
 
-    strike1 = new Strike();
-    strike1->setPos(0,90);
-    _scene->addItem(strike1);
+        QGraphicsTextItem* p2 = new QGraphicsTextItem(startW->getActPlayer2Name());
+        p2->setPos(200,0);
+        p2->setDefaultTextColor(Qt::white);
+        _scene->addItem(p2);
 
-    QGraphicsTextItem* p2 = new QGraphicsTextItem("PLAYER 2");
-    p2->setPos(200,0);
-    p2->setDefaultTextColor(Qt::white);
-    _scene->addItem(p2);
+        score2 = new Score();
+        score2->setPos(200,25);
+        _scene->addItem(score2);
 
-    score2 = new Score();
-    score2->setPos(200,25);
-    _scene->addItem(score2);
+        bonus2 = new Bonus();
+        bonus2->setPos(200,50);
+        _scene->addItem(bonus2);
 
-    bonus2 = new Bonus();
-    bonus2->setPos(200,50);
-    _scene->addItem(bonus2);
+        strike2 = new Strike();
+        strike2->setPos(200,90);
+        _scene->addItem(strike2);
 
-    strike2 = new Strike();
-    strike2->setPos(200,90);
-    _scene->addItem(strike2);
+        //whose turn text
+        TurnText = new QGraphicsTextItem();
+        setTurn(QString(startW->getActPlayer1Name()));
+        TurnText->setPos(400,0);
+        TurnText->setDefaultTextColor(Qt::white);
+        _scene->addItem(TurnText);
+    }
+    else
+    {
+        QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayer1Name());
+        p1->setPos(0,0);
+        p1->setDefaultTextColor(Qt::white);
+        _scene->addItem(p1);
 
-    //whose turn text
-    TurnText = new QGraphicsTextItem();
-    setTurn(QString(startW->getActPlayer1Name()));
-    TurnText->setPos(400,0);
-    TurnText->setDefaultTextColor(Qt::white);
-    _scene->addItem(TurnText);
+        score1 = new Score();
+        score1->setPos(0,25);
+        _scene->addItem(score1);
+
+        bonus1 = new Bonus();
+        bonus1->setPos(0,50);
+        _scene->addItem(bonus1);
+
+        strike1 = new Strike();
+        strike1->setPos(0,90);
+        _scene->addItem(strike1);
+    }
 }
 
 void Game::setTurn(QString player)
@@ -72,7 +93,7 @@ void Game::nextPlayersTurn()
         if(stopTurn == true)
             return;
         else
-            setTurn(QString("PLAYER 2"));
+            setTurn(QString(startW->getActPlayer2Name()));
     }
     else
     {
@@ -89,11 +110,22 @@ void Game::GameOver() // still working on it
     switch(currentLevel)
     {
         case 1:
-            delete l1;
+            disconnect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            disconnect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            disconnect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            disconnect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+
+        l1->hide();
+        //delete l1;
         break;
 
         case 2:
-            delete l2;
+            disconnect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            disconnect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            disconnect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            disconnect(l2.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+        l2->hide();
+        //delete l2;
         break;
 
         case 3:
@@ -117,7 +149,7 @@ void Game::GameOver() // still working on it
     }
 
     //wenn direkt das nächste Level aufgeht:
-    ++currentLevel;
+    //++currentLevel;
 
 }
 
@@ -129,23 +161,25 @@ void Game::startLevel(int levelnumber)
     {
         case 1:
 
-            l1 = new Level_1(startW->getUi()->stackedWidget);
+            l1.reset(new Level_1(startW->getUi()->stackedWidget));
             this->construct(l1->getScene());
             l1->show();
             connect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
 
         break;
 
         case 2:
 
-            l2 = new Level_2(startW->getUi()->stackedWidget);
+            l2.reset(new Level_2(startW->getUi()->stackedWidget));
             this->construct(l2->getScene());
             l2->show();
             connect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
 
         break;
 
@@ -189,18 +223,33 @@ void Game::BallinHole()
     {
         case 1:
             l1->getBall()->setPos(l1->getHoleCoordinates());
-            if (getTurn() == startW->getActPlayer1Name())
+            if (startW->getGameMode() == true)
+            {
+
+                if (getTurn() == startW->getActPlayer1Name())
+                {
+                    strike1->decrease(1);
+                    score1->increase(1);
+                    qDebug() << "P1's L1 Score:" << calculateScore1();
+                }
+                else
+                {
+                    strike2->decrease(2);
+                    score2->increase(2);
+                    qDebug() << "P2's' L1 Score:" << calculateScore2();
+                }
+                nextPlayersTurn();
+                stopTurn = true;
+
+            }
+
+            else
             {
                 strike1->decrease(1);
                 score1->increase(1);
                 qDebug() << "P1's L1 Score:" << calculateScore1();
             }
-            else
-            {
-                strike2->decrease(2);
-                score2->increase(2);
-                qDebug() << "P2's' L1 Score:" << calculateScore2();
-            }
+
         break;
 
         case 2:
@@ -210,8 +259,6 @@ void Game::BallinHole()
         default: break;
     }
 
-    nextPlayersTurn();
-    stopTurn = true;
 }
 
 void Game::BallStopped()
@@ -224,19 +271,30 @@ void Game::BallStopped()
             //do something with the coordinates, maybe save for multiplayer?
             l1->createArrow();
 
-            if (getTurn() == QString(startW->getActPlayer1Name()))
+            if (startW->getGameMode() == true)
+            {
+
+                if (getTurn() == QString(startW->getActPlayer1Name()))
+                {
+                    strike1->decrease(1);
+                    score1->increase(1);
+                    qDebug() << "P1:" << calculateScore1();
+                    nextPlayersTurn();
+                }
+                else
+                {
+                    strike2->decrease(2);
+                    score2->increase(2);
+                    qDebug() << "P2:" << calculateScore2();
+                    nextPlayersTurn();
+                }
+
+            }
+            else
             {
                 strike1->decrease(1);
                 score1->increase(1);
                 qDebug() << "P1:" << calculateScore1();
-                nextPlayersTurn();
-            }
-            else
-            {
-                strike2->decrease(2);
-                score2->increase(2);
-                qDebug() << "P2:" << calculateScore2();
-                nextPlayersTurn();
             }
         }
         break;

@@ -169,8 +169,8 @@ else
 }
 void Level_2::leaveLevel()
 {
-    emit destroyLevel();
-    qDebug() << "destroyLevel emittiert";
+    emit destroyLevel2();
+    qDebug() << "destroyLevel2 emittiert";
 }
 void Level_2::keyPressEvent(QKeyEvent *event) {
 
@@ -179,8 +179,7 @@ void Level_2::keyPressEvent(QKeyEvent *event) {
      menuLevel();
    }
 }
-void Level_2::destroyLevel()
-{}
+
 //------------------------------------
 void Level_2::updateLevel()
 {
