@@ -179,8 +179,7 @@ void Level_2::keyPressEvent(QKeyEvent *event) {
      menuLevel();
    }
 }
-void Level_2::destroyLevel()
-{}
+
 //------------------------------------
 void Level_2::updateLevel()
 {
