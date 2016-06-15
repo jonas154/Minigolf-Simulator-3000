@@ -18,6 +18,7 @@ Court::Court(QWidget *parent)
     ui->graphicsView->setFrameStyle(0);
 
     scene = new QGraphicsScene(this);
+    scene->setSceneRect(0,0,1024,768);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
@@ -100,7 +101,7 @@ Ball* Court::getBall()
 
 void Court::createBall()
 {
-    ball = new Ball;
+    ball = new Ball(startCoordinates);
     scene->addItem(ball);
     ball->setPos(startCoordinates);
 }

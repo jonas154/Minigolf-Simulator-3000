@@ -26,7 +26,7 @@ Q_OBJECT
 public:
 
     //! Constructor
-    Ball();
+    Ball(QPointF _startCoordinates);
 
     //! overrides the boundingRect() function of QGraphicsItem
     QRectF boundingRect() const override;
@@ -42,6 +42,8 @@ public:
 
     //! set the speed of the Ball
     void setSpeed(qreal s);
+
+    QPainterPath shape() const override;
 
 signals:
 
@@ -69,6 +71,8 @@ private:
     QGraphicsPixmapItem* removeBird;
 
     bool stopped;
+
+    QPointF startCoordinates;
 
     SoundEngine *soundEnginePointer;
 

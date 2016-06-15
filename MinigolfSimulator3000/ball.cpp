@@ -2,7 +2,9 @@
 
 #include "ball.h"
 
-Ball::Ball()
+Ball::Ball(QPointF _startCoordinates)
+    :
+    startCoordinates(_startCoordinates)
 
 {
     setFlag(ItemUsesExtendedStyleOption);
@@ -32,8 +34,7 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QPen pen;
     pen.setColor(Qt::white);
 
-    QPainterPath path(QPointF(0.0, -5.0));
-    path.arcTo(QRectF(-5.0,-5.0,10.0,10.0), 90.0, 360.0);
+    QPainterPath path(shape());
 
     painter->setClipPath(path);
     painter->setPen(pen);
@@ -47,6 +48,12 @@ void Ball::advance(int phase)
     if(!phase) return;
 
     setPos(mapToScene(0,speed));
+
+    if(!scene()->sceneRect().contains(pos()))
+    {
+        setPos(startCoordinates);
+        setSpeed(0);
+    }
 
     doCollision();
 
@@ -64,6 +71,13 @@ void Ball::setSpeed(qreal s)
 {
     if(s>0.0) stopped = false;
     speed = s;
+}
+
+QPainterPath Ball::shape() const
+{
+    QPainterPath path;
+    path.addEllipse(QRectF(-5,-5,10,10));
+    return path;
 }
 
 void Ball::doCollision()
@@ -108,7 +122,7 @@ void Ball::doCollision()
 
                     emit soundPlay(SoundEngine::borderCollisionSound);
 
-                    canCollide = 4;
+                    canCollide = 2;
                 }
             }
             break;
