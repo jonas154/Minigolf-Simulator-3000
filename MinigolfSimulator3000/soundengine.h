@@ -1,38 +1,74 @@
-#include <QSound>
-#include <QObject>
-
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
+
+
+#include <QSoundEffect>
+#include <QObject>
+#include <QtConcurrent/QtConcurrent>
+#include <QThreadPool>
+
 
 class SoundEngine : public QObject
 {
     Q_OBJECT
+
 public:
+
+    enum eSound{borderCollisionSound=0, waterSound, holeSound};
+
     SoundEngine()
         :
-        borderCollision(new QSound(":/Sounds/Sounds/click_dummy_sound.wav"))
+        borderCollision(new QSoundEffect)
     {
+        borderCollision->setSource(QUrl::fromLocalFile(":/Sounds/Sounds/click_dummy_sound.wav"));
 
+        pool.setMaxThreadCount(1);
+        pool.setExpiryTimeout(-1);
+        pool.reserveThread();
     }
 
     virtual ~SoundEngine(){};
 
-    enum eSound{borderCollisionSound=0, waterSound, holeSound};
 
 public slots:
+
     void playSound(int soundNumber)
     {
-        switch(soundNumber)
+
+        //define lambda which should be executed on different thread
+        auto play = [this](int num)
         {
-        case borderCollisionSound:
-            borderCollision->play();
-            break;
-        }
+            switch(num)
+            {
+                case borderCollisionSound:
+
+                    if(!borderCollision->isPlaying())
+                    {
+                        borderCollision->play();
+                    }
+
+                break;
+
+                case waterSound:
+
+                break;
+
+                default: break;
+
+            }
+
+        }; //lambda end
+
+        //start the lambda on a different thread
+        QtConcurrent::run(&pool, play, soundNumber);
+
     }
 
 private:
-  //pointer
-    QScopedPointer<QSound> borderCollision;
+
+    QScopedPointer<QSoundEffect> borderCollision;
+
+    QThreadPool pool;
 
 };
 
