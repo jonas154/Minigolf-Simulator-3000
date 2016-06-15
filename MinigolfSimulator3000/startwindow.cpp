@@ -29,7 +29,6 @@ StartWindow::~StartWindow()
     delete ui;
 }
 
-//Gibt den Namen des ausgewählten Players als QString zurück
 QString StartWindow::getActPlayer1Name()
 {
     if (multiPlayerMode == true)
@@ -52,7 +51,6 @@ QString StartWindow::getActPlayer2Name()
     return _actPlayerName;
 }
 
-// Gibt die Index-Nummer (1...10) des ausgewählten Players zurück
 int StartWindow::getActPlayer1Index()
 {
     if(multiPlayerMode == true)
@@ -80,7 +78,6 @@ bool StartWindow::getGameMode()
     return multiPlayerMode;
 }
 
-//Gibt die für den ausgewählten Player freigespielten Level zurück
 int StartWindow::getActLevel()
 {
     QString _actLevel = matrix[ui->playerBox->currentIndex()][2];
@@ -88,9 +85,6 @@ int StartWindow::getActLevel()
 
 }
 
-
-
-//Hiermit kann man von anderen Klassen einem Player mehr Level freischalten
 void StartWindow::setActLevel(int actLevel)
 {
     matrix[ui->playerBox->currentIndex()][2] = actLevel;
@@ -98,7 +92,6 @@ void StartWindow::setActLevel(int actLevel)
     this->createLevelBox();
 }
 
-// Hiermit kann man den Highscore des aktuellen Players verändern
 void StartWindow::setActPlayer1Highscore(int actHighscore)
 {
     if(multiPlayerMode == true)
@@ -121,7 +114,6 @@ void StartWindow::setActPlayer2Highscore(int actHighscore)
 }
 
 
-// Hiermit kann man den Highscore des aktuell ausgewählten Players verändern
 int StartWindow::getActHighscorePlayer1()
 {
     if (multiPlayerMode == true)
@@ -161,8 +153,6 @@ void StartWindow::closeEvent(QCloseEvent *)
 
 void StartWindow::on_addPlayerButton_clicked()
 {
-
-
     if (playercounter < 10)
     {
         if (multiPlayerMode == true)
@@ -185,8 +175,7 @@ void StartWindow::on_addPlayerButton_clicked()
     }
     else
     {
-        //tbd
-        //QMessageBox::(this,"Maximale Anzahl an Player ist erreicht.");
+       QMessageBox::information(this,"Information","Maximale Player-Anzahl erreicht");
     }
 
 }
@@ -395,7 +384,14 @@ void StartWindow::on_addPlayerMPButton_clicked()
 
 void StartWindow::on_startMPButton_clicked()
 {
-    game->startLevel(ui->levelBoxMP->currentIndex() + 1);
+    if(getActPlayer1Index() == getActPlayer2Index())
+    {
+        QMessageBox::information(this,"Fehler","Bitte zwei verschiedene Player auswählen.");
+    }
+    else
+    {
+        game->startLevel(ui->levelBoxMP->currentIndex() + 1);
+    }
 }
 
 void StartWindow::on_highscoreMPButton_clicked()
