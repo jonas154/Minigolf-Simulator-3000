@@ -14,9 +14,21 @@ StartWindow::StartWindow(QWidget *parent) :
     this->setFixedSize(width,height);
     ui->stackedWidget->setCurrentIndex(0);
     QPalette* palette = new QPalette();
-    //palette->setBrush(QPalette::Background,*(new QBrush(*(new QPixmap(":/Images/Images/test_background.jpg")))));
+    palette->setBrush(QPalette::Background,*(new QBrush(*(new QPixmap(":/Images/Images/Hauptmenue.png")))));
     setPalette(*palette);
-   // ui->addPlayerButton->setStyleSheet("border-image:url(:/Images/Images/test_background.jpg);");
+    ui->addPlayerButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->addPlayerMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->backToMainMenuButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->exitMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->highscoreMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->startButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->exitButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->highscoreButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->spModeButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->mpModeButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    ui->startMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+
+
     this->checkFile();
 
     statusBar()->setFixedHeight(0);

@@ -26,6 +26,8 @@
         <file>Images/bonus3-3.png</file>
         <file>Images/Level_1_ESC_Menu.png</file>
         <file>Images/Level_2_ESC_Menu.png</file>
+        <file>Images/Hauptmenue.png</file>
+        <file>Images/button_template.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/click_dummy_sound.wav</file>

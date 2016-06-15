@@ -29,8 +29,8 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>981</width>
-        <height>731</height>
+        <width>982</width>
+        <height>747</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -171,6 +171,13 @@
                  <width>361</width>
                  <height>80</height>
                 </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Comic Sans MS</family>
+                 <pointsize>10</pointsize>
+                 <italic>true</italic>
+                </font>
                </property>
                <property name="text">
                 <string>Spieler hinzufügen</string>
@@ -405,7 +412,7 @@
         <x>10</x>
         <y>10</y>
         <width>981</width>
-        <height>731</height>
+        <height>769</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
@@ -769,7 +776,7 @@
         <x>330</x>
         <y>140</y>
         <width>312</width>
-        <height>464</height>
+        <height>476</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
