@@ -59,6 +59,8 @@ public slots:
 
     void shot();
 
+signals:
+    void destroyLevel();
 //---------------------------------
 
 protected:

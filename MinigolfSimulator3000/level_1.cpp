@@ -147,8 +147,8 @@ void Level_1::leaveLevel()
     emit destroyLevel();
     qDebug() << "destroy level emittiert";
 }
-void Level_1::destroyLevel()
-{}
+//void Level_1::destroyLevel();
+
 //------------------------------------
 void Level_1::keyPressEvent(QKeyEvent *event) {
 
@@ -234,3 +234,4 @@ void Level_1::updateLevel()
     }
 
 }
+void Level_1::testslot(){};
