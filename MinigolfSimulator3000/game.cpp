@@ -157,6 +157,11 @@ void Game::startLevel(int levelnumber)
 {
     currentLevel = levelnumber;
 
+    if(l1)
+        l1.reset(nullptr);
+    if(l2)
+        l2.reset(nullptr);
+
     switch(levelnumber)
     {
         case 1:
