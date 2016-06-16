@@ -194,6 +194,12 @@ void Game::startLevel(int levelnumber)
 
 void Game::BallinWater()
 {
+    // time delay for regretting your incompetence and sound being played
+    QTime dieTime= QTime::currentTime().addSecs(1);
+    while (QTime::currentTime() < dieTime) {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
+
     switch(currentLevel)
     {
         case 1:
