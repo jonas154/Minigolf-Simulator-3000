@@ -73,6 +73,11 @@ void Ball::setSpeed(qreal s)
     speed = s;
 }
 
+void Ball::playShotSound()
+{
+    emit soundPlay(SoundEngine::shotSound);
+}
+
 QPainterPath Ball::shape() const
 {
     QPainterPath path;
@@ -120,7 +125,7 @@ void Ball::doCollision()
                     speed = speed * borderline->getReflectionCoefficient();
                     //emit angleChanged();
 
-                    emit soundPlay(SoundEngine::borderCollisionSound);
+//                    emit soundPlay(SoundEngine::borderCollisionSound);
 
                     canCollide = 2;
                 }
@@ -144,6 +149,7 @@ void Ball::doCollision()
                         if(speed<minspeed)
                         {
                             speed = 0.0;
+                            emit soundPlay(SoundEngine::waterSound);
                             emit ballInWater();
                         }
                     }
@@ -158,6 +164,7 @@ void Ball::doCollision()
                         else if(speed<minspeed)
                         {
                             speed = 0.0;
+                            emit soundPlay(SoundEngine::waterSound);
                             emit ballInWater(); //Ist ja im Prinzip das gleiche wie bei Wasser
                         }
                     break;
@@ -173,6 +180,7 @@ void Ball::doCollision()
                             speed = 0.0;
                             stopped=true;
                             qDebug() << "ball in hole";
+//                            emit soundPlay(SoundEngine::cheeringSound);
                             emit ballInHole();
                         }
 
@@ -202,6 +210,7 @@ void Ball::doCollision()
 
             case 7: //Vogel abgeschossen! (7 = Pixmap)
             {
+                emit soundPlay(SoundEngine::birdHitSound);
                 removeBird = static_cast<QGraphicsPixmapItem*>(collideList.at(i));
                 removeBird->setPixmap(birdDeadPicture);
                 birdDeadCounter = 30;
