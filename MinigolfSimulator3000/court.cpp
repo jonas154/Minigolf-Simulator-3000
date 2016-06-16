@@ -41,7 +41,12 @@ Court::Court(QWidget *parent)
 
 Court::~Court()
 {
-    //delete ball;
+    delete ball;
+    delete timer;
+    delete graphicsTimer;
+    delete continueItem;
+    delete leaveItem;
+    delete scene;
     delete ui;
 };
 
