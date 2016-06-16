@@ -43,6 +43,8 @@ public:
     //! set the speed of the Ball
     void setSpeed(qreal s);
 
+    void playShotSound();
+
     QPainterPath shape() const override;
 
 signals:

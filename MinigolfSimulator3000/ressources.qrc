@@ -26,9 +26,16 @@
         <file>Images/bonus3-3.png</file>
         <file>Images/Level_1_ESC_Menu.png</file>
         <file>Images/Level_2_ESC_Menu.png</file>
+        <file>Images/Hauptmenue.png</file>
+        <file>Images/button_template.png</file>
     </qresource>
     <qresource prefix="/Sounds">
-        <file>Sounds/click_dummy_sound.wav</file>
+        <file>Sounds/birdHit.wav</file>
+        <file>Sounds/cheering.wav</file>
+        <file>Sounds/sand.wav</file>
+        <file>Sounds/bounce2.wav</file>
+        <file>Sounds/shot2.wav</file>
+        <file>Sounds/water2.wav</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

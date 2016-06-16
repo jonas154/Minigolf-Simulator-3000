@@ -7,6 +7,7 @@ addPlayerDialog::addPlayerDialog(StartWindow* _startwindow, QWidget *parent) :
     ui(new Ui::addPlayerDialog)
 {
     ui->setupUi(this);
+   // ui->addButton
 }
 
 addPlayerDialog::~addPlayerDialog()

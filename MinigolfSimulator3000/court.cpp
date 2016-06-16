@@ -134,6 +134,7 @@ void Court::deleteArrow()
 
 void Court::shot()
 {
+    ball->playShotSound();
     ball->setAngle(arrow->getAngle());
     ball->setSpeed(arrow->getSpeed());
 //    qDebug() << "speed handed to ball: " << arrow->getSpeed();
