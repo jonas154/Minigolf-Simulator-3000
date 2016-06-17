@@ -144,12 +144,13 @@ void Ball::doCollision()
                 {
                     case GroundMaterial::water_material:
                     {
+                        emit soundPlay(SoundEngine::waterSound);
                         speed -= friction*speed;
 
                         if(speed<minspeed)
                         {
                             speed = 0.0;
-                            emit soundPlay(SoundEngine::waterSound);
+
                             emit ballInWater();
                         }
                     }
