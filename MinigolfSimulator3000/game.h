@@ -7,7 +7,10 @@
 #include "score.h"
 #include "strike.h"
 #include "level_1.h"
+
+#include "level_1.h"
 #include "level_2.h"
+#include "level_3.h"
 #include "startwindow.h"
 #include "ball.h"
 
@@ -34,6 +37,7 @@ public:
     Strike *strike1, *strike2;
     QScopedPointer<Level_1> l1;
     QScopedPointer<Level_2> l2;
+    QScopedPointer<Level_3> l3;
 
 public slots:
 

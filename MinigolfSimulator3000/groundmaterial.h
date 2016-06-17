@@ -46,7 +46,7 @@ public:
             break;
 
             case sand_material:
-                frictionCoefficient = 0.05;
+                frictionCoefficient = 0.08;
                 minSpeed = 0.1;
             break;
 

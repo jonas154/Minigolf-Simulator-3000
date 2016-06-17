@@ -7,6 +7,7 @@ Level_2::Level_2(QWidget *parent)
 {
 
     this->setStartCoordinates(195.0, 590.0);
+    this->setHoleCoordinates(689,318);
     this->constructLevel();
     this->createBall();
 
@@ -33,19 +34,6 @@ void Level_2::constructLevel()
     // Hintergrundbild
     scene->setBackgroundBrush(QImage(bgroundimage));
 
-
-    // Wasserbilder
-
-    QPolygon water_polygon;
-    water_polygon << QPoint(140,250) << QPoint(140,152) << QPoint(293,152) << QPoint(294,252);
-    water = new GroundMaterial(GroundMaterial::water_material,water_polygon);
-    water->setBrush(QImage(waterimage));
-    //scene->addItem(water);
-    water->setVisible(true);
-    water->setPen(Qt::NoPen);
-
-
-
     // QPen setzen
     QPen linepen;
     linepen.setWidth(2);
@@ -54,14 +42,25 @@ void Level_2::constructLevel()
     linepen.setCapStyle(Qt::RoundCap);
 
 
-    //grass material
-    QPolygonF grassPolygon;
-    grassPolygon << QPointF(140,638) << QPointF(134,154) << QPointF(400,154) << QPointF(410,576) << QPointF(504,577) << QPointF(505,269)
-                 << QPointF(747,269) << QPointF(752,377) << QPointF(595,375) << QPointF(601,506) << QPointF(729,495) << QPointF(718,658);
-    GroundMaterial* grass = new GroundMaterial(GroundMaterial::grass_material, grassPolygon);
-    grass->setPen(linepen);
-    scene->addItem(grass);
+    //grass material   [zum debuggen QPen(Qt::red) anstatt linepen verwenden]
+    QPolygonF grassPolygon1;
+    QPolygonF grassPolygon2;
+    grassPolygon1 << QPointF(140,638) << QPointF(134,154) << QPointF(400,154) << QPointF(410,576) << QPointF(398,590) << QPointF(390,649);
+    grassPolygon2 << QPointF(529,648)  << QPointF(526,591)  << QPointF(504,577)  << QPointF(505,269)  << QPointF(747,269) << QPointF(752,377)
+                  << QPointF(595,375) << QPointF(601,506) << QPointF(729,495) << QPointF(718,658);
+    GroundMaterial* grass1 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon1);
+    GroundMaterial* grass2 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon2);
+    grass1->setPen(linepen);
+    scene->addItem(grass1);
 
+    grass2->setPen(linepen);
+    scene->addItem(grass2);
+
+    QPolygonF sandPolygon;
+    sandPolygon << QPointF(403,648) << QPointF(520,648) << QPointF(519,592) << QPointF(404,590);
+    GroundMaterial* sand = new GroundMaterial(GroundMaterial::sand_material, sandPolygon);
+    sand->setPen(linepen);
+    scene->addItem(sand);
 
     continueItem->setRect(368,266,289,80);
     continueItem->setPen(linepen);
@@ -72,6 +71,12 @@ void Level_2::constructLevel()
     leaveItem->setPen(linepen);
     leaveItem->setVisible(false);
     scene->addItem(leaveItem);
+
+    QPolygonF holePoly;
+    holePoly << QPoint(689, 318) << QPoint(689, 343) << QPoint(694, 348) << QPoint(689, 343);
+    GroundMaterial* hole = new GroundMaterial(GroundMaterial::hole_material, holePoly);
+    hole->setPen(linepen);
+    scene->addItem(hole);
 
     //Begrenzungslinien zur Liste hinzufügen
     lineVec.push_back( new BorderLine(143,590,143,269,BorderLine::metal_material));
@@ -191,29 +196,6 @@ void Level_2::updateLevel()
     x = vogel2->x();
     y = vogel2->y();
 
-    if (wassercounter < 6)
-    {
-        water->setBrush(QImage(":/Images/Images/wasser1.png"));
-
-    }
-
-    if (wassercounter > 6 && wassercounter <= 12)
-    {
-        water->setBrush(QImage(":/Images/Images/wasser2.png"));
-
-    }
-
-    if (wassercounter > 12 && wassercounter <= 16)
-    {
-        water->setBrush(QImage(":/Images/Images/wasser3.png"));
-
-    }
-
-    if (wassercounter > 16 && wassercounter <= 20)
-    {
-        water->setBrush(QImage(":/Images/Images/wasser4.png"));
-
-    }
 
     if (rand < 0.001)
     {
