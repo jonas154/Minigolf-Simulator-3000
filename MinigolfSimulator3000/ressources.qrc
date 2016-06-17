@@ -28,6 +28,12 @@
         <file>Images/Level_2_ESC_Menu.png</file>
         <file>Images/Hauptmenue.png</file>
         <file>Images/button_template.png</file>
+        <file>Images/Level_3.png</file>
+        <file>Images/Level_3_ESC_Menu.png</file>
+        <file>Images/wasser3_1.png</file>
+        <file>Images/wasser3_2.png</file>
+        <file>Images/newton_1.png</file>
+        <file>Images/newton_2.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/birdHit.wav</file>

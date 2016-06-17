@@ -62,6 +62,7 @@ public slots:
 signals:
     void destroyLevel();
     void destroyLevel2();
+    void destroyLevel3();
 //---------------------------------
 
 protected:

@@ -1,5 +1,5 @@
 ﻿#include "game.h"
-#include "level_1.h"
+
 #include <QGraphicsTextItem>
 
 Game::Game(StartWindow* _startW)
@@ -114,7 +114,6 @@ void Game::GameOver() // still working on it
             disconnect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
-
         l1->hide();
         //delete l1;
         break;
@@ -129,8 +128,15 @@ void Game::GameOver() // still working on it
         break;
 
         case 3:
-            //delete l3;
-            //calculateScore();
+
+            disconnect(l3->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            disconnect(l3->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            disconnect(l3->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            disconnect(l3.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+        l3->hide();
+
+        /*
+            calculateScore();
             if (endScore1 > endScore2)
             {
                 TurnText->setPlainText(QString(startW->getActPlayer1Name() + " wins!"));
@@ -143,6 +149,7 @@ void Game::GameOver() // still working on it
             {
                 TurnText->setPlainText(QString("Player 2 wins!"));
             }
+        */
         break;
 
         default: break;
@@ -161,6 +168,8 @@ void Game::startLevel(int levelnumber)
         l1.reset(nullptr);
     if(l2)
         l2.reset(nullptr);
+    if(l3)
+        l3.reset(nullptr);
 
     switch(levelnumber)
     {
@@ -185,6 +194,16 @@ void Game::startLevel(int levelnumber)
             connect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             connect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
+        break;
+        case 3:
+
+            l3.reset(new Level_3(startW->getUi()->stackedWidget));
+            this->construct(l3->getScene());
+            l3->show();
+            connect(l3->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            connect(l3->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            connect(l3->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(GameOver()));
 
         break;
 
@@ -207,9 +226,12 @@ void Game::BallinWater()
         break;
 
         case 2:
-            l2->getBall()->setPos(l1->getStartCoordinates());
+            l2->getBall()->setPos(l2->getStartCoordinates());
         break;
 
+        case 3:
+            l3->getBall()->setPos(l3->getStartCoordinates());
+        break;
         default: break;
     }
 }
@@ -265,7 +287,39 @@ void Game::BallinHole()
         break;
 
         case 2:
-            l2->getBall()->setPos(l1->getHoleCoordinates());
+            l2->getBall()->setPos(l2->getHoleCoordinates());
+
+            if (startW->getGameMode() == true)
+            {
+
+                if (getTurn() == startW->getActPlayer1Name())
+                {
+                    strike1->decrease(1);
+                    score1->increase(1);
+                    qDebug() << "P1's L1 Score:" << calculateScore1();
+                }
+                else
+                {
+                    strike2->decrease(2);
+                    score2->increase(2);
+                    qDebug() << "P2's' L1 Score:" << calculateScore2();
+                }
+                nextPlayersTurn();
+                stopTurn = true;
+
+            }
+
+            else
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+                qDebug() << "P1's L1 Score:" << calculateScore1();
+                startLevel(3);
+            }
+        break;
+
+        case 3:
+            l3->getBall()->setPos(l3->getHoleCoordinates());
 
             if (startW->getGameMode() == true)
             {
@@ -293,8 +347,7 @@ void Game::BallinHole()
                 score1->increase(1);
                 qDebug() << "P1's L1 Score:" << calculateScore1();
                 //startLevel(3);
-            }
-        break;
+        }
 
         default: break;
     }
@@ -371,8 +424,42 @@ void Game::BallStopped()
                 qDebug() << "P1:" << calculateScore1();
             }
         }
+
         break;
 
+        case 3:
+        {
+            QPointF coordinates = l3->getBall()->pos();
+            //do something with the coordinates, maybe save for multiplayer?
+            l3->createArrow();
+
+            if (startW->getGameMode() == true)
+            {
+
+                if (getTurn() == QString(startW->getActPlayer1Name()))
+                {
+                    strike1->decrease(1);
+                    score1->increase(1);
+                    qDebug() << "P1:" << calculateScore1();
+                    nextPlayersTurn();
+                }
+                else
+                {
+                    strike2->decrease(2);
+                    score2->increase(2);
+                    qDebug() << "P2:" << calculateScore2();
+                    nextPlayersTurn();
+                }
+
+            }
+            else
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+                qDebug() << "P1:" << calculateScore1();
+            }
+        }
+        break;
         default: break;
     }
 
