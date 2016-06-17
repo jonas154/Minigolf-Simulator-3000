@@ -41,6 +41,8 @@ Court::Court(QWidget *parent)
 
 Court::~Court()
 {
+    timer->stop();
+    graphicsTimer->stop();
     delete ball;
     delete timer;
     delete graphicsTimer;
@@ -121,6 +123,13 @@ void Court::createArrow(bool firstCreate)
     scene->addItem(arrow);
     //arrow->updatePosition();
     connect(arrowStart,SIGNAL(arrowStartItemReleased()),this,SLOT(shot()));
+}
+
+void Court::stopAndHide()
+{
+    timer->stop();
+    graphicsTimer->stop();
+    this->hide();
 }
 
 void Court::deleteArrow()

@@ -48,6 +48,8 @@ public:
     //! \brief Create Arrow including the ArrowStartItem
     void createArrow(bool firstCreate = false);
 
+    void stopAndHide();
+
 
 
 public slots:

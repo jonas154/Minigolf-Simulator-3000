@@ -7,6 +7,10 @@ Game::Game(StartWindow* _startW)
     startW(_startW)
 {
     stopTurn = false;
+
+    connect(&deleteLevel1Timer, SIGNAL(timeout()), this, SLOT(deleteLevel1()));
+    connect(&deleteLevel2Timer, SIGNAL(timeout()), this, SLOT(deleteLevel2()));
+    connect(&deleteLevel3Timer, SIGNAL(timeout()), this, SLOT(deleteLevel3()));
 }
 
 void Game::construct(QGraphicsScene* _scene)
@@ -110,12 +114,16 @@ void Game::GameOver() // still working on it
     switch(currentLevel)
     {
         case 1:
+        {
             disconnect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             disconnect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
-        l1->hide();
-        //delete l1;
+
+            l1->stopAndHide();
+            startW->getUi()->stackedWidget->removeWidget(l1.data());
+            deleteLevel1Timer.start(1000);
+        }
         break;
 
         case 2:
@@ -123,8 +131,11 @@ void Game::GameOver() // still working on it
             disconnect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
-        l2->hide();
-        //delete l2;
+
+            l2->stopAndHide();
+            startW->getUi()->stackedWidget->removeWidget(l2.data());
+            deleteLevel2Timer.start(1000);
+
         break;
 
         case 3:
@@ -133,7 +144,11 @@ void Game::GameOver() // still working on it
             disconnect(l3->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l3->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(GameOver()));
-        l3->hide();
+
+            l3->stopAndHide();
+            startW->getUi()->stackedWidget->removeWidget(l3.data());
+            deleteLevel3Timer.start(1000);
+
 
         /*
             calculateScore();
@@ -163,13 +178,6 @@ void Game::GameOver() // still working on it
 void Game::startLevel(int levelnumber)
 {
     currentLevel = levelnumber;
-
- //   if(l1)
- //       l1.reset(nullptr);
- //   if(l2)
-//        l2.reset(nullptr);
-//    if(l3)
-//        l3.reset(nullptr);
 
     switch(levelnumber)
     {
@@ -281,6 +289,7 @@ void Game::BallinHole()
                 strike1->decrease(1);
                 score1->increase(1);
                 qDebug() << "P1's L1 Score:" << calculateScore1();
+                GameOver();
                 startLevel(2);
             }
 
@@ -314,6 +323,7 @@ void Game::BallinHole()
                 strike1->decrease(1);
                 score1->increase(1);
                 qDebug() << "P1's L1 Score:" << calculateScore1();
+                GameOver();
                 startLevel(3);
             }
         break;
@@ -347,7 +357,6 @@ void Game::BallinHole()
                 score1->increase(1);
                 qDebug() << "P1's L1 Score:" << calculateScore1();
                 GameOver();
-                //hier sieht man dann das Level2 da es als nächstes im StackedWidgetkommt liegt
         }
         break;
 
@@ -467,4 +476,22 @@ void Game::BallStopped()
 
     //??
     //this->nextPlayersTurn();
+}
+
+void Game::deleteLevel1()
+{
+    deleteLevel1Timer.stop();
+    l1.reset(nullptr);
+}
+
+void Game::deleteLevel2()
+{
+    deleteLevel2Timer.stop();
+    l2.reset(nullptr);
+}
+
+void Game::deleteLevel3()
+{
+    deleteLevel3Timer.stop();
+    l3.reset(nullptr);
 }

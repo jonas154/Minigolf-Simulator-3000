@@ -58,6 +58,17 @@ private:
 
     void construct(QGraphicsScene* _scene);
 
+    QTimer deleteLevel1Timer;
+    QTimer deleteLevel2Timer;
+    QTimer deleteLevel3Timer;
+
+private slots:
+
+    void deleteLevel1();
+    void deleteLevel2();
+    void deleteLevel3();
+
+
 };
 
 #endif // GAME_H
