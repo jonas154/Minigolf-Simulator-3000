@@ -122,7 +122,7 @@ void Game::GameOver() // still working on it
             disconnect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             disconnect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
-            disconnect(l2.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+            disconnect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
         l2->hide();
         //delete l2;
         break;
@@ -132,7 +132,7 @@ void Game::GameOver() // still working on it
             disconnect(l3->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             disconnect(l3->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l3->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
-            disconnect(l3.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+            disconnect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(GameOver()));
         l3->hide();
 
         /*
@@ -164,12 +164,12 @@ void Game::startLevel(int levelnumber)
 {
     currentLevel = levelnumber;
 
-    if(l1)
-        l1.reset(nullptr);
-    if(l2)
-        l2.reset(nullptr);
-    if(l3)
-        l3.reset(nullptr);
+ //   if(l1)
+ //       l1.reset(nullptr);
+ //   if(l2)
+//        l2.reset(nullptr);
+//    if(l3)
+//        l3.reset(nullptr);
 
     switch(levelnumber)
     {
@@ -346,8 +346,10 @@ void Game::BallinHole()
                 strike1->decrease(1);
                 score1->increase(1);
                 qDebug() << "P1's L1 Score:" << calculateScore1();
-                //startLevel(3);
+                GameOver();
+                //hier sieht man dann das Level2 da es als nächstes im StackedWidgetkommt liegt
         }
+        break;
 
         default: break;
     }

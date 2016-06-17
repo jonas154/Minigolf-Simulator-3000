@@ -8,7 +8,8 @@ Level_3::Level_3(QWidget *parent)
     Court(parent)
 {
 
-    this->setStartCoordinates(234.0, 576.0);
+    //this->setStartCoordinates(234.0, 576.0);
+    this->setStartCoordinates(528,298);
     this->setHoleCoordinates(517.0,291.0);
     this->constructLevel();
 
