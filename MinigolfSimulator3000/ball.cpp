@@ -125,7 +125,7 @@ void Ball::doCollision()
                     speed = speed * borderline->getReflectionCoefficient();
                     //emit angleChanged();
 
-//                    emit soundPlay(SoundEngine::borderCollisionSound);
+                    emit soundPlay(SoundEngine::borderCollisionSound);
 
                     canCollide = 2;
                 }
@@ -180,7 +180,7 @@ void Ball::doCollision()
                             speed = 0.0;
                             stopped=true;
                             qDebug() << "ball in hole";
-//                            emit soundPlay(SoundEngine::cheeringSound);
+                            emit soundPlay(SoundEngine::cheeringSound);
                             emit ballInHole();
                         }
 

@@ -263,7 +263,9 @@ void Game::BallinHole()
     switch(currentLevel)
     {
         case 1:
+
             l1->getBall()->setPos(l1->getHoleCoordinates());
+
             if (startW->getGameMode() == true)
             {
 
@@ -279,6 +281,13 @@ void Game::BallinHole()
                     score2->increase(2);
                     qDebug() << "P2's' L1 Score:" << calculateScore2();
                 }
+
+                if(!stopTurn)
+                {
+                    l1->getBall()->setPos(l1->getStartCoordinates());
+                    l1->createArrow();
+                }
+
                 nextPlayersTurn();
                 stopTurn = true;
 
@@ -313,8 +322,16 @@ void Game::BallinHole()
                     score2->increase(2);
                     qDebug() << "P2's' L1 Score:" << calculateScore2();
                 }
+
+                if(!stopTurn)
+                {
+                    l2->getBall()->setPos(l2->getStartCoordinates());
+                    l2->createArrow();
+                }
+
                 nextPlayersTurn();
                 stopTurn = true;
+
 
             }
 
@@ -346,6 +363,13 @@ void Game::BallinHole()
                     score2->increase(2);
                     qDebug() << "P2's' L1 Score:" << calculateScore2();
                 }
+
+                if(!stopTurn)
+                {
+                    l3->getBall()->setPos(l3->getStartCoordinates());
+                    l3->createArrow();
+                }
+
                 nextPlayersTurn();
                 stopTurn = true;
 
@@ -383,14 +407,14 @@ void Game::BallStopped()
                     strike1->decrease(1);
                     score1->increase(1);
                     qDebug() << "P1:" << calculateScore1();
-                    nextPlayersTurn();
+                    //nextPlayersTurn();
                 }
                 else
                 {
                     strike2->decrease(2);
                     score2->increase(2);
                     qDebug() << "P2:" << calculateScore2();
-                    nextPlayersTurn();
+                    //nextPlayersTurn();
                 }
 
             }
