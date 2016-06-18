@@ -119,13 +119,12 @@ void Ball::doCollision()
 
                 if(canCollide<=0)
                 {
+                    emit soundPlay(SoundEngine::borderCollisionSound);
+
                     //angle ist relativ zu 3 Uhr (Uhrzeigersinn), rotation ist relativ zu 12 Uhr (Uhrzeigersinn)
                     setRotation(2*(angle+90.0-rotation()) + rotation());
 
                     speed = speed * borderline->getReflectionCoefficient();
-                    //emit angleChanged();
-
-                    emit soundPlay(SoundEngine::borderCollisionSound);
 
                     canCollide = 2;
                 }
@@ -199,9 +198,6 @@ void Ball::doCollision()
                     }
                     break;
 
-//                    case GroundMaterial::concrete_material:
-//                    case GroundMaterial::wood_material:
-
                     case GroundMaterial::sand_material:
                     {
                         emit(soundPlay(SoundEngine::sandSound));
@@ -216,7 +212,10 @@ void Ball::doCollision()
                     }
                     break;
 
+//              unused materials:
 //                    case GroundMaterial::speedUp_material:
+//                    case GroundMaterial::concrete_material:
+//                    case GroundMaterial::wood_material:
 
                     default: break;
                 }
