@@ -34,6 +34,7 @@
         <file>Images/wasser3_2.png</file>
         <file>Images/newton_1.png</file>
         <file>Images/newton_2.png</file>
+        <file>Images/addPlayerDialog.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/birdHit.wav</file>

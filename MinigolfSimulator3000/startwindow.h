@@ -10,10 +10,12 @@
 #include <QMessageBox>
 #include <QPalette>
 
+
 class Game;
 class addPlayerDialog;
 
 namespace Ui {
+//! This class creates the startwindow and manages the player and their parameter.
 class StartWindow;
 }
 
@@ -22,6 +24,8 @@ class StartWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
+    //! \brief Constructor
     explicit StartWindow(QWidget *parent = 0);
     ~StartWindow();
     Game* game;
@@ -95,6 +99,7 @@ private slots:
     void on_addPlayerButton_clicked();
 
     //! \brief Opens the Highscore-Screen (page 2 in Stacked-Widget)
+    //! As sort algorithm for sorting the player names according to the highscore points is a bubble sort implemented.
     void on_highscoreButton_clicked();
 
     //! \brief Changes to the the MultiPlayer-Mode (page 1 in Stacked-Widget)
@@ -132,7 +137,7 @@ private:
     Ui::StartWindow* ui;
 
     //! \brief Variable with the number of available levels
-    int availableLevel = 2;
+    int availableLevel = 3;
 
     bool firstStart = false;
 

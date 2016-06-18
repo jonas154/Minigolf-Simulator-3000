@@ -7,9 +7,15 @@ addPlayerDialog::addPlayerDialog(StartWindow* _startwindow, QWidget *parent) :
     ui(new Ui::addPlayerDialog)
 {
     ui->setupUi(this);
-   // ui->addButton
-}
+    const int width2 = 600;
+    const int height2 = 100;
+    this->setFixedSize(width2,height2);
+    ui->addButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
+    QPalette pale;
+    pale.setBrush(this->backgroundRole(),QBrush(QImage(":/Images/Images/addPlayerDialog.png")));
+    this->setPalette(pale);
 
+}
 addPlayerDialog::~addPlayerDialog()
 {
     delete ui;

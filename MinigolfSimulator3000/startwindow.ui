@@ -563,7 +563,7 @@
                <property name="maximumSize">
                 <size>
                  <width>361</width>
-                 <height>80</height>
+                 <height>30</height>
                 </size>
                </property>
                <property name="font">
@@ -946,6 +946,12 @@
            <width>200</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Comic Sans MS</family>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>

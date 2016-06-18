@@ -12,6 +12,7 @@ StartWindow::StartWindow(QWidget *parent) :
     const int width = 1024;
     const int height = 768;
     this->setFixedSize(width,height);
+    statusBar()->setFixedHeight(0);
     ui->stackedWidget->setCurrentIndex(0);
     QPalette* palette = new QPalette();
     palette->setBrush(QPalette::Background,*(new QBrush(*(new QPixmap(":/Images/Images/Hauptmenue.png")))));
@@ -29,16 +30,10 @@ StartWindow::StartWindow(QWidget *parent) :
     ui->mpModeButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
     ui->startMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
 
-
-
     this->checkFile();
-
-    statusBar()->setFixedHeight(0);
-
-
+    this->createPlayerBox();
     game = new Game(this);
 
-    this->createPlayerBox();
 
 }
 StartWindow::~StartWindow()
@@ -509,7 +504,6 @@ void StartWindow::on_highscoreButton_clicked()
 
     for(z=0;z<playercounter;z++)
     {
-        // tbd Hier fehlt eine Logik, die bei zwei gleichen Punktzahlen, den gleichen Platz vergibt.
         QString place = QString::number(z+1);
         ui->highscoreViewer->setItem(z,0,new QTableWidgetItem(place));
     }

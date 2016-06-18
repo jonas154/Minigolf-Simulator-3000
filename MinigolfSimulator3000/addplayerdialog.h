@@ -5,11 +5,17 @@
 #include "startwindow.h"
 #include <QString>
 #include <QMessageBox>
-
+#include <QPalette>
+#include <QBrush>
+#include <QPalette>
 class StartWindow;
 
 
+
+
 namespace Ui {
+
+//! This class is needed for creating new player and is called by the startwindow.
 class addPlayerDialog;
 }
 
