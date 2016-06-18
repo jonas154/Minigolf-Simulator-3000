@@ -55,6 +55,7 @@ signals:
     void ballInWater();
     void ballInHole();
     void soundPlay(int);
+    void birdHit();
 
 
 private:

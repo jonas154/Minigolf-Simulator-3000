@@ -225,6 +225,7 @@ void Ball::doCollision()
             case 7: //Vogel abgeschossen! (7 = Pixmap)
             {
                 emit soundPlay(SoundEngine::birdHitSound);
+                emit birdHit();
                 removeBird = static_cast<QGraphicsPixmapItem*>(collideList.at(i));
                 removeBird->setPixmap(birdDeadPicture);
                 birdDeadCounter = 30;
