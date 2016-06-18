@@ -157,7 +157,7 @@ void Ball::doCollision()
                     break;
 
                     case GroundMaterial::nonNewtonian_material:
-
+                        emit soundPlay(SoundEngine::waterSound);
                         if(speed > minspeed)
                         {
                             speed -= speed*friction;
@@ -165,7 +165,7 @@ void Ball::doCollision()
                         else if(speed<minspeed)
                         {
                             speed = 0.0;
-                            emit soundPlay(SoundEngine::waterSound);
+
                             emit ballInWater(); //Ist ja im Prinzip das gleiche wie bei Wasser
                         }
                     break;
