@@ -201,7 +201,7 @@ void Ball::doCollision()
                     case GroundMaterial::sand_material:
                     {
                         emit(soundPlay(SoundEngine::sandSound));
-                        speed -= friction;
+                        speed -= 1.5*friction;
 
                         if(speed<minspeed)
                         {
