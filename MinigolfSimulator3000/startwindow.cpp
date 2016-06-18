@@ -100,7 +100,8 @@ int StartWindow::getActLevel() // HIER IST NOCH DEBUGGING CODE INSIDE !!!
 
 void StartWindow::setActLevel(int actLevel)
 {
-    matrix[ui->playerBox->currentIndex()][2] = actLevel;
+    QString actLevelString = QString::number(actLevel);
+    matrix[ui->playerBox->currentIndex()][2] = actLevelString;
     ui->levelBox->clear();
     this->createLevelBox();
 }
@@ -109,12 +110,14 @@ void StartWindow::setActPlayer1Highscore(int actHighscore)
 {
     if(multiPlayerMode == true)
     {
-        matrix[ui->player1BoxMP->currentIndex()][3] = actHighscore;
+        QString actHighscoreString = QString::number(actHighscore);
+        matrix[ui->player1BoxMP->currentIndex()][3] = actHighscoreString;
 
     }
     else
     {
-        matrix[ui->playerBox->currentIndex()][3] = actHighscore;
+        QString actHighscoreString = QString::number(actHighscore);
+        matrix[ui->playerBox->currentIndex()][3] = actHighscoreString;
 
     }
 
@@ -122,7 +125,8 @@ void StartWindow::setActPlayer1Highscore(int actHighscore)
 
 void StartWindow::setActPlayer2Highscore(int actHighscore)
 {
-    matrix[ui->player2BoxMP->currentIndex()][3] = actHighscore;
+    QString actHighscoreString = QString::number(actHighscore);
+    matrix[ui->player2BoxMP->currentIndex()][3] = actHighscoreString;
 
 }
 
