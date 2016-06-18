@@ -14,12 +14,6 @@
         <file>Images/vtot.png</file>
         <file>Images/Level_1.png</file>
         <file>Images/Level_2.png</file>
-        <file>Images/ball0-5.png</file>
-        <file>Images/ball1-5.png</file>
-        <file>Images/ball2-5.png</file>
-        <file>Images/ball3-5.png</file>
-        <file>Images/ball4-5.png</file>
-        <file>Images/ball5-5.png</file>
         <file>Images/bonus0-3.png</file>
         <file>Images/bonus1-3.png</file>
         <file>Images/bonus2-3.png</file>
@@ -35,6 +29,14 @@
         <file>Images/newton_1.png</file>
         <file>Images/newton_2.png</file>
         <file>Images/addPlayerDialog.png</file>
+        <file>Images/ball0-7.png</file>
+        <file>Images/ball1-7.png</file>
+        <file>Images/ball2-7.png</file>
+        <file>Images/ball3-7.png</file>
+        <file>Images/ball4-7.png</file>
+        <file>Images/ball5-7.png</file>
+        <file>Images/ball6-7.png</file>
+        <file>Images/ball7-7.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/birdHit.wav</file>
