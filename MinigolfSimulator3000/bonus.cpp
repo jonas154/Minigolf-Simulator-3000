@@ -12,11 +12,22 @@ void Bonus::increase(int _bonus)
     if (_bonus == 1)
     {
         bonus1++;
-        //new pixmap for more bonus
+        if (bonus1 == 1)
+            setPixmap(QPixmap(":/Images/Images/bonus1-3.png"));
+        else if (bonus1 == 2)
+            setPixmap(QPixmap(":/Images/Images/bonus2-3.png"));
+        else if (bonus1 == 3)
+            setPixmap(QPixmap(":/Images/Images/bonus3-3.png"));
     }
     else if (_bonus == 2)
     {
         bonus2++;
+        if (bonus2 == 1)
+            setPixmap(QPixmap(":/Images/Images/bonus1-3.png"));
+        else if (bonus2 == 2)
+            setPixmap(QPixmap(":/Images/Images/bonus2-3.png"));
+        else if (bonus2 == 3)
+            setPixmap(QPixmap(":/Images/Images/bonus3-3.png"));
     }
 }
 

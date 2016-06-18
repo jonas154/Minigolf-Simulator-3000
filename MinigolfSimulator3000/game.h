@@ -53,8 +53,7 @@ private:
     QGraphicsTextItem *TurnText;
     StartWindow* startW;
     int currentLevel;
-    bool stopTurn;
-    int endScore1 = 1000, endScore2 = 1000;
+    int endScore1 = 0, endScore2 = 0;
 
     void construct(QGraphicsScene* _scene);
 

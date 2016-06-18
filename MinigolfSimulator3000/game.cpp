@@ -6,8 +6,6 @@ Game::Game(StartWindow* _startW)
     :
     startW(_startW)
 {
-    stopTurn = false;
-
     connect(&deleteLevel1Timer, SIGNAL(timeout()), this, SLOT(deleteLevel1()));
     connect(&deleteLevel2Timer, SIGNAL(timeout()), this, SLOT(deleteLevel2()));
     connect(&deleteLevel3Timer, SIGNAL(timeout()), this, SLOT(deleteLevel3()));
@@ -17,6 +15,7 @@ void Game::construct(QGraphicsScene* _scene)
 {
     if (startW->getGameMode() == true)
     {
+
         QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayer1Name());
         p1->setPos(0,0);
         p1->setDefaultTextColor(Qt::white);
@@ -57,6 +56,7 @@ void Game::construct(QGraphicsScene* _scene)
         TurnText->setPos(400,0);
         TurnText->setDefaultTextColor(Qt::white);
         _scene->addItem(TurnText);
+
     }
     else
     {
@@ -76,7 +76,10 @@ void Game::construct(QGraphicsScene* _scene)
         strike1 = new Strike();
         strike1->setPos(0,90);
         _scene->addItem(strike1);
+
     }
+
+
 }
 
 void Game::setTurn(QString player)
@@ -94,21 +97,15 @@ void Game::nextPlayersTurn()
 {
     if (getTurn() == QString(startW->getActPlayer1Name()))
     {
-        if(stopTurn == true)
-            return;
-        else
             setTurn(QString(startW->getActPlayer2Name()));
     }
     else
     {
-        if(stopTurn == true)
-            return;
-        else
             setTurn(QString(startW->getActPlayer1Name()));
     }
 }
 
-void Game::GameOver() // still working on it
+void Game::GameOver()
 {
 
     switch(currentLevel)
@@ -148,6 +145,9 @@ void Game::GameOver() // still working on it
             l3->stopAndHide();
             startW->getUi()->stackedWidget->removeWidget(l3.data());
             deleteLevel3Timer.start(1000);
+
+            endScore1 = 0;
+            endScore2 = 0;
 
 
         /*
@@ -190,7 +190,7 @@ void Game::startLevel(int levelnumber)
             connect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             connect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
-
+            //connect(l1->getBall(), SIGNAL(BirdDead()), bonus1, SLOT(increase(1)));
         break;
 
         case 2:
@@ -202,6 +202,7 @@ void Game::startLevel(int levelnumber)
             connect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             connect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
+
         break;
         case 3:
 
@@ -246,15 +247,13 @@ void Game::BallinWater()
 
 int Game::calculateScore1()
 {
-    //endScore1 += (1000 - ((score1->getScore(1)-1)*200)) + ((bonus1->getBonus(1))*500);
-    //endScore2 += (1000 - ((score2->getScore(2)-1)*200)) + ((bonus2->getBonus(2))*500);
-    endScore1 = endScore1 - 200 + ((bonus1->getBonus(1))*500);
+    endScore1 += (1000 - ((score1->getScore(1))*200)) + ((bonus1->getBonus(1))*500);
     return endScore1;
 }
 
 int Game::calculateScore2()
 {
-    endScore2 = endScore2 - 200 + ((bonus2->getBonus(2))*500);
+    endScore2 += (1000 - ((score2->getScore(2))*200)) + ((bonus2->getBonus(2))*500);
     return endScore2;
 }
 
@@ -274,22 +273,26 @@ void Game::BallinHole()
                     strike1->decrease(1);
                     score1->increase(1);
                     qDebug() << "P1's L1 Score:" << calculateScore1();
+
+                    startW->setActPlayer1Highscore(endScore1);
+                    qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                    nextPlayersTurn();
+                    l1->getBall()->setPos(l1->getStartCoordinates());
+                    l1->createArrow();
                 }
                 else
                 {
                     strike2->decrease(2);
                     score2->increase(2);
-                    qDebug() << "P2's' L1 Score:" << calculateScore2();
-                }
+                    qDebug() << "P2's L1 Score:" << calculateScore2();
 
-                if(!stopTurn)
-                {
-                    l1->getBall()->setPos(l1->getStartCoordinates());
-                    l1->createArrow();
-                }
+                    startW->setActPlayer2Highscore(endScore2);
+                    qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
 
-                nextPlayersTurn();
-                stopTurn = true;
+                    GameOver();
+                    startLevel(2);
+                }
 
             }
 
@@ -297,7 +300,12 @@ void Game::BallinHole()
             {
                 strike1->decrease(1);
                 score1->increase(1);
+                qDebug() << "Score: " << score1->getScore(1) ;
                 qDebug() << "P1's L1 Score:" << calculateScore1();
+
+                startW->setActPlayer1Highscore(endScore1);
+                qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
                 GameOver();
                 startLevel(2);
             }
@@ -314,24 +322,27 @@ void Game::BallinHole()
                 {
                     strike1->decrease(1);
                     score1->increase(1);
-                    qDebug() << "P1's L1 Score:" << calculateScore1();
+                    qDebug() << "P1's L2 Score:" << calculateScore1();
+
+                    startW->setActPlayer1Highscore(endScore1);
+                    qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                    nextPlayersTurn();
+                    l2->getBall()->setPos(l2->getStartCoordinates());
+                    l2->createArrow();
                 }
                 else
                 {
                     strike2->decrease(2);
                     score2->increase(2);
-                    qDebug() << "P2's' L1 Score:" << calculateScore2();
+                    qDebug() << "P2's' L2 Score:" << calculateScore2();
+
+                    startW->setActPlayer2Highscore(endScore2);
+                    qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
+
+                    GameOver();
+                    startLevel(3);
                 }
-
-                if(!stopTurn)
-                {
-                    l2->getBall()->setPos(l2->getStartCoordinates());
-                    l2->createArrow();
-                }
-
-                nextPlayersTurn();
-                stopTurn = true;
-
 
             }
 
@@ -339,7 +350,11 @@ void Game::BallinHole()
             {
                 strike1->decrease(1);
                 score1->increase(1);
-                qDebug() << "P1's L1 Score:" << calculateScore1();
+                qDebug() << "P1's L2 Score:" << calculateScore1();
+
+                startW->setActPlayer1Highscore(endScore1);
+                qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
                 GameOver();
                 startLevel(3);
             }
@@ -355,23 +370,26 @@ void Game::BallinHole()
                 {
                     strike1->decrease(1);
                     score1->increase(1);
-                    qDebug() << "P1's L1 Score:" << calculateScore1();
+                    qDebug() << "P1's L3 Score:" << calculateScore1();
+
+                    startW->setActPlayer1Highscore(endScore1);
+                    qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                    nextPlayersTurn();
+                    l3->getBall()->setPos(l3->getStartCoordinates());
+                    l3->createArrow();
                 }
                 else
                 {
                     strike2->decrease(2);
                     score2->increase(2);
-                    qDebug() << "P2's' L1 Score:" << calculateScore2();
-                }
+                    qDebug() << "P2's' L3 Score:" << calculateScore2();
 
-                if(!stopTurn)
-                {
-                    l3->getBall()->setPos(l3->getStartCoordinates());
-                    l3->createArrow();
-                }
+                    startW->setActPlayer2Highscore(endScore2);
+                    qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
 
-                nextPlayersTurn();
-                stopTurn = true;
+                    GameOver();
+                }
 
             }
 
@@ -379,7 +397,11 @@ void Game::BallinHole()
             {
                 strike1->decrease(1);
                 score1->increase(1);
-                qDebug() << "P1's L1 Score:" << calculateScore1();
+                qDebug() << "P1's L3 Score:" << calculateScore1();
+
+                startW->setActPlayer1Highscore(endScore1);
+                qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
                 GameOver();
         }
         break;
@@ -406,15 +428,33 @@ void Game::BallStopped()
                 {
                     strike1->decrease(1);
                     score1->increase(1);
-                    qDebug() << "P1:" << calculateScore1();
-                    //nextPlayersTurn();
+                    if (score1->getScore(1) == 5)
+                    {
+                        qDebug() << "P1's L1 Score: " << calculateScore1();
+
+                        startW->setActPlayer1Highscore(endScore1);
+                        qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                        nextPlayersTurn();
+                        l1->deleteArrow();
+                        l1->getBall()->setPos(l1->getStartCoordinates());
+                        l1->createArrow();
+                    }
                 }
                 else
                 {
                     strike2->decrease(2);
                     score2->increase(2);
-                    qDebug() << "P2:" << calculateScore2();
-                    //nextPlayersTurn();
+                    if (score2->getScore(2) == 5)
+                    {
+                        qDebug() << "P2's L1 Score: " << calculateScore2();
+
+                        startW->setActPlayer2Highscore(endScore2);
+                        qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
+
+                        GameOver();
+                        startLevel(2);
+                    }
                 }
 
             }
@@ -422,7 +462,17 @@ void Game::BallStopped()
             {
                 strike1->decrease(1);
                 score1->increase(1);
-                qDebug() << "P1:" << calculateScore1();
+
+                if(score1->getScore(1) == 5)
+                {
+                    qDebug() << "P1's L1 Score: " << calculateScore1();
+
+                    startW->setActPlayer1Highscore(endScore1);
+                    qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                    GameOver();
+                    startLevel(2);
+                }
             }
         }
         break;
@@ -436,19 +486,37 @@ void Game::BallStopped()
             if (startW->getGameMode() == true)
             {
 
-                if (getTurn() == QString(startW->getActPlayer1Name()))
+                if (getTurn() == startW->getActPlayer1Name())
                 {
                     strike1->decrease(1);
                     score1->increase(1);
-                    qDebug() << "P1:" << calculateScore1();
-                    nextPlayersTurn();
+                    if (score1->getScore(1) == 5)
+                    {
+                        qDebug() << "P1's L2 Score: " << calculateScore1();
+
+                        startW->setActPlayer1Highscore(endScore1);
+                        qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                        nextPlayersTurn();
+                        l2->deleteArrow();
+                        l2->getBall()->setPos(l2->getStartCoordinates());
+                        l2->createArrow();
+                    }
                 }
                 else
                 {
                     strike2->decrease(2);
                     score2->increase(2);
-                    qDebug() << "P2:" << calculateScore2();
-                    nextPlayersTurn();
+                    if (score2->getScore(2) == 5)
+                    {
+                        qDebug() << "P2's L2 Score: " << calculateScore2();
+
+                        startW->setActPlayer2Highscore(endScore2);
+                        qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
+
+                        GameOver();
+                        startLevel(3);
+                    }
                 }
 
             }
@@ -456,7 +524,16 @@ void Game::BallStopped()
             {
                 strike1->decrease(1);
                 score1->increase(1);
-                qDebug() << "P1:" << calculateScore1();
+                if(score1->getScore(1) == 5)
+                {
+                    qDebug() << "P1's L2 Score: " << calculateScore1();
+
+                    startW->setActPlayer1Highscore(endScore1);
+                    qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                    GameOver();
+                    startLevel(3);
+                }
             }
         }
 
@@ -475,15 +552,32 @@ void Game::BallStopped()
                 {
                     strike1->decrease(1);
                     score1->increase(1);
-                    qDebug() << "P1:" << calculateScore1();
-                    nextPlayersTurn();
+                    if (score1->getScore(1) == 5)
+                    {
+                        qDebug() << "P1's L3 Score: " << calculateScore1();
+
+                        startW->setActPlayer1Highscore(endScore1);
+                        qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                        nextPlayersTurn();
+                        l3->deleteArrow();
+                        l3->getBall()->setPos(l3->getStartCoordinates());
+                        l3->createArrow();
+                    }
                 }
                 else
                 {
                     strike2->decrease(2);
                     score2->increase(2);
-                    qDebug() << "P2:" << calculateScore2();
-                    nextPlayersTurn();
+                    if (score2->getScore(2) == 5)
+                    {
+                        qDebug() << "P2's L3 Score: " << calculateScore2();
+
+                        startW->setActPlayer2Highscore(endScore2);
+                        qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
+
+                        GameOver();
+                    }
                 }
 
             }
@@ -491,15 +585,22 @@ void Game::BallStopped()
             {
                 strike1->decrease(1);
                 score1->increase(1);
-                qDebug() << "P1:" << calculateScore1();
+
+                if(score1->getScore(1) == 5)
+                {
+                    qDebug() << "P1's L3 Score: " << calculateScore1();
+
+                    startW->setActPlayer1Highscore(endScore1);
+                    qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                    GameOver();
+                }
             }
         }
         break;
         default: break;
     }
 
-    //??
-    //this->nextPlayersTurn();
 }
 
 void Game::deleteLevel1()

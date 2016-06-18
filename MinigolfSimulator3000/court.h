@@ -49,6 +49,9 @@ public:
     void createArrow(bool firstCreate = false);
 
     void stopAndHide();
+    
+    //! \brief Create Arrow including the ArrowStartItem
+    void deleteArrow();
 
 
 
@@ -94,9 +97,6 @@ protected:
 
     //! \brief Create ball and add to scene at start coordinates
     void createBall();
-
-    //! \brief Create Arrow including the ArrowStartItem
-    void deleteArrow();
 
 
 //---------------------------------
