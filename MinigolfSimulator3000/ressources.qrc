@@ -38,11 +38,11 @@
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/birdHit.wav</file>
-        <file>Sounds/cheering.wav</file>
-        <file>Sounds/sand.wav</file>
-        <file>Sounds/bounce2.wav</file>
         <file>Sounds/shot2.wav</file>
         <file>Sounds/water2.wav</file>
+        <file>Sounds/bounce5.wav</file>
+        <file>Sounds/sand2.wav</file>
+        <file>Sounds/cheering2.wav</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

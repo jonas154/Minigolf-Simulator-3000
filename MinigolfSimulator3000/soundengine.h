@@ -21,11 +21,11 @@ public:
         sand(new QMediaPlayer),
         shot(new QMediaPlayer)
     {
-        borderCollision->setMedia(QUrl("qrc:/Sounds/Sounds/bounce2.wav"));
+        borderCollision->setMedia(QUrl("qrc:/Sounds/Sounds/bounce5.wav"));
         water->setMedia(QUrl("qrc:/Sounds/Sounds/water2.wav"));
         birdHit->setMedia(QUrl("qrc:/Sounds/Sounds/birdHit.wav"));
-        cheering->setMedia(QUrl("qrc:/Sounds/Sounds/cheering.wav"));
-        sand->setMedia(QUrl("qrc:/Sounds/Sounds/sand.wav"));
+        cheering->setMedia(QUrl("qrc:/Sounds/Sounds/cheering2.wav"));
+        sand->setMedia(QUrl("qrc:/Sounds/Sounds/sand2.wav"));
         shot->setMedia(QUrl("qrc:/Sounds/Sounds/shot2.wav"));
 
     }

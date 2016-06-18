@@ -259,6 +259,12 @@ int Game::calculateScore2()
 
 void Game::BallinHole()
 {
+    // time for joy
+    QTime dieTime= QTime::currentTime().addSecs(2);
+    while (QTime::currentTime() < dieTime) {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
+
     switch(currentLevel)
     {
         case 1:

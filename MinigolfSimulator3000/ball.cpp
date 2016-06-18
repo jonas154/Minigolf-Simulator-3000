@@ -178,21 +178,33 @@ void Ball::doCollision()
                         }
                         else
                         {
+                            emit soundPlay(SoundEngine::cheeringSound);
                             speed = 0.0;
                             stopped=true;
-                            qDebug() << "ball in hole";
-                            emit soundPlay(SoundEngine::cheeringSound);
                             emit ballInHole();
                         }
 
                     break;
 
                     case GroundMaterial::grass_material:
-                    case GroundMaterial::concrete_material:
-                    case GroundMaterial::wood_material:
-                    case GroundMaterial::sand_material:
-                    case GroundMaterial::speedUp_material:
                     {
+                       speed -= friction;
+
+                        if(speed<minspeed)
+                        {
+                            speed = 0.0;
+                            if(!stopped) emit ballStopped();
+                            stopped = true;
+                        }
+                    }
+                    break;
+
+//                    case GroundMaterial::concrete_material:
+//                    case GroundMaterial::wood_material:
+
+                    case GroundMaterial::sand_material:
+                    {
+                        emit(soundPlay(SoundEngine::sandSound));
                         speed -= friction;
 
                         if(speed<minspeed)
@@ -203,6 +215,8 @@ void Ball::doCollision()
                         }
                     }
                     break;
+
+//                    case GroundMaterial::speedUp_material:
 
                     default: break;
                 }
