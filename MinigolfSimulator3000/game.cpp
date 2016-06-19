@@ -11,6 +11,8 @@ Game::Game(StartWindow* _startW)
     connect(&deleteLevel3Timer, SIGNAL(timeout()), this, SLOT(deleteLevel3()));
 }
 
+//------------------------------------------
+
 void Game::construct(QGraphicsScene* _scene)
 {
     if (startW->getGameMode() == true)
@@ -79,6 +81,7 @@ void Game::construct(QGraphicsScene* _scene)
 
     }
 
+//------------------------------------------
 
 }
 
@@ -88,10 +91,14 @@ void Game::setTurn(QString player)
     TurnText->setPlainText(player + QString("'s Turn"));
 }
 
+//------------------------------------------
+
 QString Game::getTurn()
 {
     return Turn;
 }
+
+//------------------------------------------
 
 void Game::nextPlayersTurn()
 {
@@ -104,6 +111,8 @@ void Game::nextPlayersTurn()
             setTurn(QString(startW->getActPlayer1Name()));
     }
 }
+
+//------------------------------------------
 
 void Game::GameOver()
 {
@@ -175,6 +184,8 @@ void Game::GameOver()
 
 }
 
+//------------------------------------------
+
 void Game::startLevel(int levelnumber)
 {
     currentLevel = levelnumber;
@@ -220,6 +231,8 @@ void Game::startLevel(int levelnumber)
     }
 }
 
+//------------------------------------------
+
 void Game::BallinWater()
 {
     // time delay for regretting your incompetence and sound being played
@@ -245,17 +258,23 @@ void Game::BallinWater()
     }
 }
 
+//------------------------------------------
+
 int Game::calculateScore1()
 {
     endScore1 += (1400 - ((score1->getScore(1))*200)) + ((bonus1->getBonus(1))*500);
     return endScore1;
 }
 
+//------------------------------------------
+
 int Game::calculateScore2()
 {
     endScore2 += (1400 - ((score2->getScore(2))*200)) + ((bonus2->getBonus(2))*500);
     return endScore2;
 }
+
+//------------------------------------------
 
 void Game::BallinHole()
 {
@@ -487,6 +506,8 @@ void Game::BallinHole()
 
 }
 
+//------------------------------------------
+
 void Game::BallStopped()
 {
     switch(currentLevel)
@@ -583,17 +604,23 @@ void Game::BallStopped()
 
 }
 
+//------------------------------------------
+
 void Game::deleteLevel1()
 {
     deleteLevel1Timer.stop();
     l1.reset(nullptr);
 }
 
+//------------------------------------------
+
 void Game::deleteLevel2()
 {
     deleteLevel2Timer.stop();
     l2.reset(nullptr);
 }
+
+//------------------------------------------
 
 void Game::deleteLevel3()
 {

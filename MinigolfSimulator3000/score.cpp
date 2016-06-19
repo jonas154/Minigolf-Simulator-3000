@@ -7,6 +7,8 @@ Score::Score(QGraphicsItem *parent) : QObject(),QGraphicsPixmapItem(parent)
     setPixmap(QPixmap(":/Images/Images/ball0-7.png"));
 }
 
+//------------------------------------------
+
 void Score::increase(int _score)
 {
     if (_score == 1)
@@ -48,6 +50,8 @@ void Score::increase(int _score)
     }
 
 }
+
+//------------------------------------------
 
 int Score::getScore(int _score)
 {

@@ -7,6 +7,8 @@ Bonus::Bonus(QGraphicsItem *parent) : QObject(), QGraphicsPixmapItem(parent)
     setPixmap(QPixmap(":/Images/Images/bonus0-3.png"));
 }
 
+//------------------------------------------
+
 void Bonus::increase(int _bonus)
 {
     if (_bonus == 1)
@@ -30,6 +32,8 @@ void Bonus::increase(int _bonus)
             setPixmap(QPixmap(":/Images/Images/bonus3-3.png"));
     }
 }
+
+//------------------------------------------
 
 int Bonus::getBonus(int _bonus)
 {

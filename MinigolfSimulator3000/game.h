@@ -23,13 +23,22 @@ class Game : public QObject
 
 public:
 
+    //! \brief Constructor
     Game(StartWindow* _startW);
 
+    //! \brief Set turn to current player name
     void setTurn(QString player);
+
+    //! \brief Return current turn
     QString getTurn();
+
+    //! \brief Proceed to second player's turn
     void nextPlayersTurn();
-    void calculateScore();
+
+    //! \brief Return the first player's score
     int calculateScore1();
+
+    //! \brief Return the second player's score
     int calculateScore2();
 
     Bonus *bonus1, *bonus2;
@@ -41,10 +50,19 @@ public:
 
 public slots:
 
+    //! \brief Calculate score and proceed to next player's turn (MP Mode) or next level(SP Mode)
     void BallinHole();
+
+    //! \brief Increase score bar and decrease strike bar
     void BallStopped();
+
+    //! \brief Reset ball position to the start point
     void BallinWater();
+
+    //! \brief Hide current level and disconnect current signals/slots
     void GameOver();
+
+    //! \brief Start a chosen level and connect required signals/slots
     void startLevel(int levelnumber);
 
 private:
@@ -55,6 +73,7 @@ private:
     int currentLevel;
     int endScore1 = 0, endScore2 = 0;
 
+    //! \brief Display player's name, score, strike, turn
     void construct(QGraphicsScene* _scene);
 
     QTimer deleteLevel1Timer;
@@ -63,8 +82,13 @@ private:
 
 private slots:
 
+    //! \brief Delete level 1
     void deleteLevel1();
+
+    //! \brief Delete level 2
     void deleteLevel2();
+
+    //! \brief Delete level 3
     void deleteLevel3();
 
 
