@@ -176,7 +176,7 @@
                 <font>
                  <family>Comic Sans MS</family>
                  <pointsize>12</pointsize>
-                 <italic>true</italic>
+                 <italic>false</italic>
                 </font>
                </property>
                <property name="text">
@@ -859,10 +859,10 @@
      <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>140</y>
-        <width>312</width>
-        <height>476</height>
+        <x>590</x>
+        <y>170</y>
+        <width>341</width>
+        <height>471</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">

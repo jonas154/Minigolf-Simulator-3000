@@ -90,10 +90,9 @@ bool StartWindow::getGameMode()
     return multiPlayerMode;
 }
 
-int StartWindow::getActLevel() // HIER IST NOCH DEBUGGING CODE INSIDE !!!
+int StartWindow::getActLevel()
 {
     QString _actLevel = matrix[ui->playerBox->currentIndex()][2];
-    //return 3;
     return _actLevel.toInt();
 
 }
@@ -170,7 +169,7 @@ void StartWindow::closeEvent(QCloseEvent *)
 
 void StartWindow::on_addPlayerButton_clicked()
 {
-    if (playercounter < 10)
+    if (playercounter < maxPlayer)
     {
         if (multiPlayerMode == true)
         {

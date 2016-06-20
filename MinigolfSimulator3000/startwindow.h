@@ -36,7 +36,7 @@ public:
     };
 
     //! \brief In this matrix all player data is stored
-    QString matrix[10][4];
+    QString matrix[100][4];
 
     //! \brief Counts how many players are already added
     int playercounter = 0;
@@ -140,6 +140,8 @@ private:
     int availableLevel = 3;
 
     bool firstStart = false;
+
+    int maxPlayer = 100;
 
 
     //! \brief Functions for checking and file-handling if we are in the first start of the programm
