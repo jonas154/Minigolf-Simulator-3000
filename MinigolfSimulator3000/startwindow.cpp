@@ -93,8 +93,8 @@ bool StartWindow::getGameMode()
 int StartWindow::getActLevel() // HIER IST NOCH DEBUGGING CODE INSIDE !!!
 {
     QString _actLevel = matrix[ui->playerBox->currentIndex()][2];
-      return 3;
-    //return _actLevel.toInt();
+    //return 3;
+    return _actLevel.toInt();
 
 }
 

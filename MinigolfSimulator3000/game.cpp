@@ -9,6 +9,7 @@ Game::Game(StartWindow* _startW)
     connect(&deleteLevel1Timer, SIGNAL(timeout()), this, SLOT(deleteLevel1()));
     connect(&deleteLevel2Timer, SIGNAL(timeout()), this, SLOT(deleteLevel2()));
     connect(&deleteLevel3Timer, SIGNAL(timeout()), this, SLOT(deleteLevel3()));
+    startW->setActLevel(1);
 }
 
 //------------------------------------------
@@ -332,6 +333,7 @@ void Game::BallinHole()
 
                     GameOver();
                     startLevel(2);
+                    startW->setActLevel(2);
                 }
 
             }
@@ -355,6 +357,7 @@ void Game::BallinHole()
 
                 GameOver();
                 startLevel(2);
+                startW->setActLevel(2);
             }
 
         break;
@@ -405,6 +408,7 @@ void Game::BallinHole()
 
                     GameOver();
                     startLevel(3);
+                    startW->setActLevel(3);
                 }
 
             }
@@ -428,6 +432,7 @@ void Game::BallinHole()
 
                 GameOver();
                 startLevel(3);
+                startW->setActLevel(3);
             }
         break;
 
