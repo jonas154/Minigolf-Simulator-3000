@@ -16,10 +16,16 @@ public:
     //! \brief Return chosen player's bonus
     int getBonus(int _bonus);
 
+    //! \brief Set the bonus to 3
+    void setBonus3(int _bonus);
+
 public slots:
 
-    //! \brief Increase the bonus bar
-    void increase(int _bonus);
+    //! \brief Increase the player 1's bonus bar
+    void increase1();
+
+    //! \brief Increase the player 2's bonus bar
+    void increase2();
 
 private:
     int bonus1, bonus2;

@@ -37,6 +37,8 @@
         <file>Images/ball5-7.png</file>
         <file>Images/ball6-7.png</file>
         <file>Images/ball7-7.png</file>
+        <file>Images/club6.png</file>
+        <file>Images/club7.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/birdHit.wav</file>
