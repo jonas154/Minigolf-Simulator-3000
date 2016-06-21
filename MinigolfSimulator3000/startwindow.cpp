@@ -147,7 +147,7 @@ int StartWindow::getActHighscorePlayer1()
 
 int StartWindow::getActHighscorePlayer2()
 {
-    QString _actHighscore = matrix[ui->player1BoxMP->currentIndex()][3];
+    QString _actHighscore = matrix[ui->player2BoxMP->currentIndex()][3];
     return _actHighscore.toInt();
 }
 
@@ -459,6 +459,7 @@ void StartWindow::on_exitMPButton_clicked()
 
 void StartWindow::on_highscoreButton_clicked()
 {
+
     QStringList header;
     header << "Platz";
     header << "Name";
