@@ -442,8 +442,6 @@ void Game::BallinHole()
                             }
                             endScore1 += (bonus1->getBonus(1))*500;
                         }
-                        //else
-                        //    endScore1 = 0;
                     }
                     else
                     {
@@ -482,8 +480,6 @@ void Game::BallinHole()
                             }
                             endScore2 += (bonus2->getBonus(2))*500;
                         }
-                        //else
-                        //    endScore2 = 0;
                     }
                     else
                     {
@@ -521,8 +517,6 @@ void Game::BallinHole()
                         }
                         endScore1 += (bonus1->getBonus(1))*500;
                     }
-                    //else
-                    //    endScore1 = 0;
                 }
                 else
                 {
@@ -564,10 +558,8 @@ void Game::BallinHole()
                             {
                                 bonus1->setBonus3(1);
                             }
-                            endScore1 = (bonus1->getBonus(1))*500;
+                            endScore1 += (bonus1->getBonus(1))*500;
                         }
-                        else
-                            endScore1 = 0;
                     }
                     else
                     {
@@ -603,10 +595,8 @@ void Game::BallinHole()
                             {
                                 bonus2->setBonus3(2);
                             }
-                            endScore2 = (bonus2->getBonus(2))*500;
+                            endScore2 += (bonus2->getBonus(2))*500;
                         }
-                        else
-                            endScore2 = 0;
                     }
                     else
                     {
@@ -640,10 +630,8 @@ void Game::BallinHole()
                         {
                             bonus1->setBonus3(1);
                         }
-                        endScore1 = (bonus1->getBonus(1))*500;
+                        endScore1 += (bonus1->getBonus(1))*500;
                     }
-                    else
-                        endScore1 = 0;
                 }
                 else
                 {

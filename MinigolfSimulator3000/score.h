@@ -18,7 +18,7 @@ public:
 
 public slots:
 
-    //! \brief Increase the score bar
+    //! \brief Increase the chosen player's score bar
     void increase(int _score);
 
 private:
