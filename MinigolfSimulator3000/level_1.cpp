@@ -210,7 +210,6 @@ void Level_1::updateLevel()
     }
     else
     {
-        scene->addItem(vogel2);
         vogel2->setPos(0,500);
         vogel2->setVisible(false);
         vogelaction = false;

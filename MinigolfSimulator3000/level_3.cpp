@@ -22,35 +22,44 @@ Level_3::Level_3(QWidget *parent)
 
 void Level_3::constructLevel()
 {
-    // Dateipfad als String
+    // Pfade der Bilder in Strings Speichern
     QString bgroundimage = ":/Images/Images/Level_3.png";
     waterimage = ":/Images/Images/wasser3_1.png";
     vogelimage = ":/Images/Images/v.png";
     vogelimage2 = ":/Images/Images/v2.png";
+
     nonnewtonimage = ":/Images/Images/newton_1.png";
     nonnewtonimage2 = ":/Images/Images/newton_2.png";
+
+    //Couter für Update Level initialisiern
     vogelcounter = 0;
     wassercounter = 0;
     vogelaction = false;
-    std::vector<BorderLine*> lineVec;
+
+    //Mini Menü mit false initialisieren
     menuActive = false;
 
-    // Hintergrundbild
+    //Vector für Verbindungslinien erstellen
+    std::vector<BorderLine*> lineVec;
+
+    // Hintergrundbild der scene setzen
     scene->setBackgroundBrush(QImage(bgroundimage));
 
 
-    // Wasserbilder
+    // Wasserbilder Polygon erstellen
     QPolygon water_polygon;
     water_polygon << QPoint(180,322) << QPoint(180,319)  << QPoint(155,319) << QPoint(155,256)
                   << QPoint(322,256) << QPoint(322,319)  << QPoint(297,319)  << QPoint(297,323);
     water = new GroundMaterial(GroundMaterial::water_material,water_polygon);
+
+    // Bilder einbinden und zu Scene hinzufügen
     water->setBrush(QImage(waterimage));
     scene->addItem(water);
     water->setVisible(true);
     water->setPen(Qt::NoPen);
 
 
-    //nonnewtonsches Fluid
+    //Nonnewtonsches Fluid erstellen und zur scene hinzufügen
     QPolygon nonnewton_polygon;
     nonnewton_polygon << QPoint(356,370) << QPoint(356,448) << QPoint(437,448) << QPoint(437,370);
     nonnewton = new GroundMaterial(GroundMaterial::nonNewtonian_material,nonnewton_polygon);
@@ -59,15 +68,15 @@ void Level_3::constructLevel()
     nonnewton->setVisible(true);
     nonnewton->setPen(Qt::NoPen);
 
-    // QPen setzen
+    // Unsichtbaren QPen für linien erstellen
     QPen linepen;
     linepen.setWidth(2);
     linepen.setColor(QColor(0,0,0,0));
     linepen.setJoinStyle(Qt::RoundJoin);
     linepen.setCapStyle(Qt::RoundCap);
 
-
-    //grassPolygon1  [zum debuggen QPen(Qt::red) anstatt linepen verwenden]
+    //Grass Material erstellen und zur scene hinzufügen
+    //[zum debuggen QPen(Qt::red) anstatt linepen verwenden]
     QPolygonF grassPolygon1;
     grassPolygon1 << QPoint(170,625) << QPoint(178,330) << QPoint(298,329) << QPoint(411,329)
                   << QPoint(411,364) << QPoint(383,362) << QPoint(382,353) << QPoint(304,356)
@@ -76,7 +85,8 @@ void Level_3::constructLevel()
     grass1->setPen(linepen);
     scene->addItem(grass1);
 
-    //grassPolygon2  [zum debuggen QPen(Qt::red) anstatt linepen verwenden]
+    //Grass Material erstellen und zur scene hinzufügen
+    //[zum debuggen QPen(Qt::red) anstatt linepen verwenden]
     QPolygonF grassPolygon2;
     grassPolygon2 << QPoint(371,454) << QPoint(423,454) << QPoint(423,511) << QPoint(629,511)
                   << QPoint(629,322) << QPoint(490,322) << QPoint(490,262) << QPoint(681,258)
@@ -85,17 +95,20 @@ void Level_3::constructLevel()
     grass2->setPen(linepen);
     scene->addItem(grass2);
 
+    // Loch erstellen und zur scene hinzufügen
     QPolygonF holePoly;
     holePoly << QPoint(515,288) << QPoint(515,293) << QPoint(520,293) << QPoint(520,288);
     GroundMaterial* hole = new GroundMaterial(GroundMaterial::hole_material, holePoly);
     hole->setPen(linepen);
     scene->addItem(hole);
 
+    //Items für das mini menü erstellen und unsichtbar setzen
     continueItem->setRect(368,266,289,80);
     continueItem->setPen(linepen);
     continueItem->setVisible(false);
     scene->addItem(continueItem);
 
+    //Items für das mini menü erstellen und unsichtbar setzen
     leaveItem->setRect(368,362,289,80);
     leaveItem->setPen(linepen);
     leaveItem->setVisible(false);
@@ -142,7 +155,7 @@ void Level_3::constructLevel()
 
 
     //Linien unsichtbar machen + Linien zur Scene hinzufügen
-    for (int i=0;i< lineVec.size();i++)
+    for (int i=0;i< static_cast<int>(lineVec.size());i++)
     {
         lineVec[i]->setPen(linepen);
         scene->addItem(lineVec[i]);
@@ -155,7 +168,7 @@ void Level_3::constructLevel()
     vogel2->setPos(50,100);
     scene->addItem(vogel2);
 
-    //erst connecten, wenn Wasser und Vögel schon initialisiert sind!
+    //Connecten der Slots
     connect(graphicsTimer, SIGNAL(timeout()),this, SLOT(updateLevel()));
     connect(continueItem,SIGNAL(mousePressed()),this,SLOT(menuLevel()));
     connect(leaveItem,SIGNAL(mousePressed()),this,SLOT(leaveLevel()));
@@ -165,6 +178,8 @@ void Level_3::constructLevel()
 void Level_3::menuLevel()
 {   if (menuActive == false)
     {
+
+    // Mini menü wird aufgerufen, brushes verändert und pausiert.
     scene->setForegroundBrush(QImage(QString(":/Images/Images/Level_3_ESC_Menu.png")));
     continueItem->setVisible(true);
     leaveItem->setVisible(true);
@@ -174,6 +189,8 @@ void Level_3::menuLevel()
     }
 else
     {
+
+    // Mini menü wird geschlossen, brushes verändert und timer gestartet.
     scene->setForegroundBrush(Qt::NoBrush);
     continueItem->setVisible(false);
     leaveItem->setVisible(false);
@@ -188,11 +205,10 @@ void Level_3::leaveLevel()
     emit destroyLevel3();
     qDebug() << "destroy level emittiert";
 }
-//void Level_1::destroyLevel();
-
 //------------------------------------
 void Level_3::keyPressEvent(QKeyEvent *event) {
 
+   // ESC taste wird eingefangen und menuLevel aufgerufen
    if (event->key() == Qt::Key_Escape)
    {
      menuLevel();
@@ -209,6 +225,7 @@ void Level_3::updateLevel()
     x = vogel2->x();
     y = vogel2->y();
 
+    // Wasserimage wird ständig aktualisiert
     if (wassercounter < 6)
     {
         water->setBrush(QImage(":/Images/Images/wasser1.png"));
@@ -235,12 +252,13 @@ void Level_3::updateLevel()
 
     }
 
+    // Vogelaction wird mit gewisser Wahrscheinlichkeit ausgelöst
     if (rand < 0.001)
     {
         vogelaction = true;
     }
 
-
+    // Vogel wird versetzt und Bilder aktualisiert
     if(x < 1024  && vogelaction == true)
     {
         vogel2->setVisible(true);
@@ -263,14 +281,17 @@ void Level_3::updateLevel()
         vogel2->setPixmap(vogelimage2);
     }
 
+    //Counter werden erhöht um spezielle Timesteps erreichen zu können
     vogelcounter++;
     wassercounter++;
 
+    // Counter wird zurückgesetz
     if(vogelcounter >10)
     {
         vogelcounter = 0;
     }
 
+     // Counter wird zurückgesetz
     if(wassercounter  >20)
     {
         wassercounter = 0;
