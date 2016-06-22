@@ -10,6 +10,7 @@
 #include "courtelement.h"
 #include <QStyleOptionGraphicsItem>
 #include <QObject>
+#include <QTimer>
 
 #include <soundengine.h>
 
@@ -78,6 +79,8 @@ private:
     QPointF startCoordinates;
 
     SoundEngine *soundEnginePointer;
+
+    QTimer *birdTimer;
 
 
 };

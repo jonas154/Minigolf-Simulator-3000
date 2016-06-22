@@ -29,7 +29,6 @@ public slots:
     void updateLevel() override;
     void menuLevel()  override;
     void leaveLevel() override;
-    void testslot();
 
 
 
