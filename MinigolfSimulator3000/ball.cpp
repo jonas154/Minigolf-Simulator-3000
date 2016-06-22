@@ -19,6 +19,9 @@ Ball::Ball(QPointF _startCoordinates)
 
     soundEnginePointer = new SoundEngine();
     connect(this,SIGNAL(soundPlay(int)),soundEnginePointer,SLOT(playSound(int)));
+    isBirdDead = false;
+
+
 
 }
 
@@ -224,11 +227,17 @@ void Ball::doCollision()
 
             case 7: //Vogel abgeschossen! (7 = Pixmap)
             {
-                emit soundPlay(SoundEngine::birdHitSound);
-                emit birdHit();
+                if (isBirdDead == false)
+                {
+                    emit soundPlay(SoundEngine::birdHitSound);
+                    emit birdHit();
+                    isBirdDead = true;
+                }
                 removeBird = static_cast<QGraphicsPixmapItem*>(collideList.at(i));
                 removeBird->setPixmap(birdDeadPicture);
                 birdDeadCounter = 30;
+
+
             }
             break;
 

@@ -188,7 +188,7 @@ void Level_1::updateLevel()
 
     }
 
-    if (rand < 0.001)
+    if (rand < 0.01)
     {
         vogelaction = true;
     }
@@ -230,4 +230,4 @@ void Level_1::updateLevel()
     }
 
 }
-void Level_1::testslot(){};
+

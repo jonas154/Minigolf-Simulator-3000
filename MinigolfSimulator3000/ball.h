@@ -10,6 +10,7 @@
 #include "courtelement.h"
 #include <QStyleOptionGraphicsItem>
 #include <QObject>
+#include <QTimer>
 
 #include <soundengine.h>
 
@@ -47,6 +48,8 @@ public:
 
     QPainterPath shape() const override;
 
+    bool isBirdDead;
+
 signals:
 
     //! signal that the Ball does not move
@@ -78,6 +81,8 @@ private:
     QPointF startCoordinates;
 
     SoundEngine *soundEnginePointer;
+
+
 
 
 };
