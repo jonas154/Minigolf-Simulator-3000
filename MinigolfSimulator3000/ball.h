@@ -48,6 +48,8 @@ public:
 
     QPainterPath shape() const override;
 
+    bool isBirdDead;
+
 signals:
 
     //! signal that the Ball does not move
@@ -80,7 +82,7 @@ private:
 
     SoundEngine *soundEnginePointer;
 
-    QTimer *birdTimer;
+
 
 
 };
