@@ -22,9 +22,15 @@ public:
     virtual ~Level_2(){};
 
 public slots:
-
+    //! \brief This slot updates the level graphic pictures with each timestep
     void updateLevel() override;
+
+    /*! \brief This slot brings the game into a mini menu where the game
+    *   gets paused and the player can continue or go back to the main menu
+    */
     void menuLevel() override;
+
+    //! \brief This slot brings the user back to the main menu
     void leaveLevel() override;
 
 
@@ -45,6 +51,8 @@ private:
     bool menuActive;
 
 protected:
+
+    //! Catches ESC key presses in game to get to mini menu
     void keyPressEvent(QKeyEvent * e);
 
 

@@ -48,7 +48,7 @@ public:
 
     QPainterPath shape() const override;
 
-    bool isBirdDead;
+
 
 signals:
 
@@ -82,7 +82,7 @@ private:
 
     SoundEngine *soundEnginePointer;
 
-
+    bool isBirdDead;
 
 
 };
