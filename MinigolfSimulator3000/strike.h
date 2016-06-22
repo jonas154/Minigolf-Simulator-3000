@@ -9,10 +9,18 @@ class Strike : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
+
+    //! \brief Constructor
     Strike(QGraphicsItem *parent=0);
+
+    //! \brief Return chosen player's strike
     int getStrike(int _strike);
+
 public slots:
+
+    //! \brief Decrease the chosen player's strike bar
     void decrease(int _strike);
+
 private:
     int strike1, strike2;
 };
