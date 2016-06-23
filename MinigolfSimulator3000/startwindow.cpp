@@ -481,7 +481,6 @@ void StartWindow::on_highscoreButton_clicked()
         QString _widgetHighscore = matrix[i][3];
         ui->highscoreViewer->setItem(i,1,new QTableWidgetItem(_widgetName));
         ui->highscoreViewer->setItem(i,2,new QTableWidgetItem(_widgetHighscore));
-        //ui->highscoreViewer->sortItems(1,Qt::AscendingOrder);
     }
 
     //Bubble-Sort
