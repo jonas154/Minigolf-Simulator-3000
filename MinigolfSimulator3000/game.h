@@ -72,6 +72,7 @@ private:
     StartWindow* startW;
     int currentLevel;
     int endScore1 = 0, endScore2 = 0;
+    int bonus_count1 = 0, bonus_count2 = 0;
 
     //! \brief Display player's name, score, strike, turn
     void construct(QGraphicsScene* _scene);

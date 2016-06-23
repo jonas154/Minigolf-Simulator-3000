@@ -18,6 +18,7 @@ void Game::construct(QGraphicsScene* _scene)
 {
     if (startW->getGameMode() == true)
     {
+
         QGraphicsTextItem* p1 = new QGraphicsTextItem(startW->getActPlayer1Name());
         p1->setPos(0,0);
         p1->setDefaultTextColor(Qt::white);
@@ -30,6 +31,40 @@ void Game::construct(QGraphicsScene* _scene)
         bonus1 = new Bonus();
         bonus1->setPos(0,50);
         _scene->addItem(bonus1);
+
+        if (bonus_count1 == 1)
+        {
+            bonus1->increase1();
+        }
+        else if (bonus_count1 == 2)
+        {
+            bonus1->increase1();
+            bonus1->increase1();
+        }
+        else if (bonus_count1 == 3)
+        {
+            bonus1->increase1();
+            bonus1->increase1();
+            bonus1->increase1();
+        }
+
+        if (bonus_count2 == 1)
+        {
+            bonus2->increase2();
+        }
+        else if (bonus_count2 == 2)
+        {
+            bonus2->increase2();
+            bonus2->increase2();
+        }
+        else if (bonus_count2 == 3)
+        {
+            bonus2->increase2();
+            bonus2->increase2();
+            bonus2->increase2();
+        }
+
+
 
         strike1 = new Strike();
         strike1->setPos(0,90);
@@ -74,6 +109,22 @@ void Game::construct(QGraphicsScene* _scene)
         bonus1 = new Bonus();
         bonus1->setPos(0,50);
         _scene->addItem(bonus1);
+
+        if (bonus_count1 == 1)
+        {
+            bonus1->increase1();
+        }
+        else if (bonus_count1 == 2)
+        {
+            bonus1->increase1();
+            bonus1->increase1();
+        }
+        else if (bonus_count1 == 3)
+        {
+            bonus1->increase1();
+            bonus1->increase1();
+            bonus1->increase1();
+        }
 
         strike1 = new Strike();
         strike1->setPos(0,90);
@@ -126,7 +177,6 @@ void Game::GameOver()
             disconnect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
             disconnect(l1->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
-            //disconnect(l1->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
 
             l1->stopAndHide();
             startW->getUi()->stackedWidget->removeWidget(l1.data());
@@ -140,7 +190,6 @@ void Game::GameOver()
             disconnect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
             disconnect(l2->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
-            //disconnect(l2->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
 
             l2->stopAndHide();
             startW->getUi()->stackedWidget->removeWidget(l2.data());
@@ -155,14 +204,11 @@ void Game::GameOver()
             disconnect(l3->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(GameOver()));
             disconnect(l3->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
-            //disconnect(l3->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
 
             l3->stopAndHide();
             startW->getUi()->stackedWidget->removeWidget(l3.data());
             deleteLevel3Timer.start(1000);
 
-            endScore1 = 0;
-            endScore2 = 0;
         break;
 
         case 4:
@@ -172,7 +218,6 @@ void Game::GameOver()
             disconnect(l4->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l4.data(), SIGNAL(destroyLevel4()), this, SLOT(GameOver()));
             disconnect(l4->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
-            //disconnect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
 
             l4->stopAndHide();
             startW->getUi()->stackedWidget->removeWidget(l4.data());
@@ -180,6 +225,9 @@ void Game::GameOver()
 
             endScore1 = 0;
             endScore2 = 0;
+
+            bonus_count1 = 0;
+            bonus_count2 = 0;
 
 
         /*
@@ -200,9 +248,6 @@ void Game::GameOver()
 
         default: break;
     }
-
-    //wenn direkt das nächste Level aufgeht:
-    //++currentLevel;
 
 }
 
@@ -346,21 +391,20 @@ void Game::BallinHole()
                         if (bonus1->getBonus(1) > 0)
                         {
                             qDebug() << "Bonus: " << bonus1->getBonus(1);
-                            if (bonus1->getBonus(1) > 3)
-                            {
-                                bonus1->setBonus3(1);
-                            }
-                            endScore1 = (bonus1->getBonus(1))*500;
+                            endScore1 = 500;
+                            bonus_count1 = 1;
                         }
                         else
                             endScore1 = 0;
                     }
                     else
                     {
-                        if (bonus1->getBonus(1) > 3)
+                        qDebug() << "Bonus: " << bonus1->getBonus(1);
+                        if (bonus1->getBonus(1) > 0)
                         {
-                            bonus1->setBonus3(1);
+                           bonus_count1 = 1;
                         }
+
                         qDebug() << "P1's L1 Score:" << calculateScore1();
                     }
 
@@ -370,8 +414,6 @@ void Game::BallinHole()
                     nextPlayersTurn();
                     l1->getBall()->setPos(l1->getStartCoordinates());
                     l1->createArrow();
-
-                    connect(l1->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
                 }
 
     //second player L1
@@ -384,21 +426,17 @@ void Game::BallinHole()
                     {
                         if (bonus2->getBonus(2) > 0)
                         {
-                            qDebug() << "Bonus: " << bonus2->getBonus(2);
-                            if (bonus2->getBonus(2) > 3)
-                            {
-                                bonus2->setBonus3(2);
-                            }
-                            endScore2 = (bonus2->getBonus(2))*500;
+                            endScore2 = 500;
+                            bonus_count2 = 1;
                         }
                         else
                             endScore2 = 0;
                     }
                     else
                     {
-                        if (bonus2->getBonus(2) > 3)
+                        if (bonus2->getBonus(2) > 0)
                         {
-                            bonus2->setBonus3(2);
+                            bonus_count2 = 1;
                         }
                         qDebug() << "P2's L1 Score:" << calculateScore2();
                     }
@@ -407,6 +445,9 @@ void Game::BallinHole()
                     qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
 
                     GameOver();
+
+                    disconnect(l1->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
+
                     startLevel(2);
                     startW->setActLevel(2);
                 }
@@ -424,20 +465,17 @@ void Game::BallinHole()
                     if (bonus1->getBonus(1) > 0)
                     {
                         qDebug() << "Bonus: " << bonus1->getBonus(1);
-                        if (bonus1->getBonus(1) > 3)
-                        {
-                            bonus1->setBonus3(1);
-                        }
-                        endScore1 = (bonus1->getBonus(1))*500;
+                        endScore1 = 500;
+                        bonus_count1 = 1;
                     }
                     else
                         endScore1 = 0;
                 }
                 else
                 {
-                    if (bonus1->getBonus(1) > 3)
+                    if (bonus1->getBonus(1) > 0)
                     {
-                        bonus1->setBonus3(1);
+                        bonus_count1 = 1;
                     }
                     qDebug() << "P1's L1 Score:" << calculateScore1();
                 }
@@ -470,18 +508,15 @@ void Game::BallinHole()
                         if (bonus1->getBonus(1) > 0)
                         {
                             qDebug() << "Bonus: " << bonus1->getBonus(1);
-                            if (bonus1->getBonus(1) > 3)
-                            {
-                                bonus1->setBonus3(1);
-                            }
-                            endScore1 += (bonus1->getBonus(1))*500;
+                            endScore1 += 500;
+                            bonus_count1 += 1;
                         }
                     }
                     else
                     {
-                        if (bonus1->getBonus(1) > 3)
+                        if (bonus1->getBonus(1) > 0)
                         {
-                            bonus1->setBonus3(1);
+                            bonus_count1 += 1;
                         }
                         qDebug() << "P1's L2 Score:" << calculateScore1();
                     }
@@ -507,19 +542,15 @@ void Game::BallinHole()
                     {
                         if (bonus2->getBonus(2) > 0)
                         {
-                            qDebug() << "Bonus: " << bonus2->getBonus(2);
-                            if (bonus2->getBonus(2) > 3)
-                            {
-                                bonus2->setBonus3(2);
-                            }
-                            endScore2 += (bonus2->getBonus(2))*500;
+                            endScore2 += 500;
+                            bonus_count2 += 1;
                         }
                     }
                     else
                     {
-                        if (bonus2->getBonus(2) > 3)
+                        if (bonus2->getBonus(2) > 0)
                         {
-                            bonus2->setBonus3(2);
+                            bonus_count2 += 1;
                         }
                         qDebug() << "P2's L2 Score:" << calculateScore2();
                     }
@@ -528,6 +559,9 @@ void Game::BallinHole()
                     qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
 
                     GameOver();
+
+                    disconnect(l2->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
+
                     startLevel(3);
                     startW->setActLevel(3);
                 }
@@ -545,18 +579,15 @@ void Game::BallinHole()
                     if (bonus1->getBonus(1) > 0)
                     {
                         qDebug() << "Bonus: " << bonus1->getBonus(1);
-                        if (bonus1->getBonus(1) > 3)
-                        {
-                            bonus1->setBonus3(1);
-                        }
-                        endScore1 += (bonus1->getBonus(1))*500;
+                        endScore1 += 500;
+                        bonus_count1 += 1;
                     }
                 }
                 else
                 {
-                    if (bonus1->getBonus(1) > 3)
+                    if (bonus1->getBonus(1) > 0)
                     {
-                        bonus1->setBonus3(1);
+                        bonus_count1 += 1;
                     }
                     qDebug() << "P1's L2 Score:" << calculateScore1();
                 }
@@ -588,18 +619,15 @@ void Game::BallinHole()
                         if (bonus1->getBonus(1) > 0)
                         {
                             qDebug() << "Bonus: " << bonus1->getBonus(1);
-                            if (bonus1->getBonus(1) > 3)
-                            {
-                                bonus1->setBonus3(1);
-                            }
-                            endScore1 += (bonus1->getBonus(1))*500;
+                            endScore1 += 500;
+                            bonus_count1 += 1;
                         }
                     }
                     else
                     {
-                        if (bonus1->getBonus(1) > 3)
+                        if (bonus1->getBonus(1) > 0)
                         {
-                            bonus1->setBonus3(1);
+                            bonus_count1 += 1;
                         }
                         qDebug() << "P1's L3 Score:" << calculateScore1();
                     }
@@ -625,18 +653,15 @@ void Game::BallinHole()
                         if (bonus2->getBonus(2) > 0)
                         {
                             qDebug() << "Bonus: " << bonus2->getBonus(2);
-                            if (bonus2->getBonus(2) > 3)
-                            {
-                                bonus2->setBonus3(2);
-                            }
-                            endScore2 += (bonus2->getBonus(2))*500;
+                            endScore2 += 500;
+                            bonus_count2 += 1;
                         }
                     }
                     else
                     {
-                        if (bonus1->getBonus(1) > 3)
+                        if (bonus1->getBonus(1) > 0)
                         {
-                            bonus1->setBonus3(1);
+                            bonus_count2 += 1;
                         }
                         qDebug() << "P2's L3 Score:" << calculateScore2();
                     }
@@ -645,6 +670,9 @@ void Game::BallinHole()
                     qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
 
                     GameOver();
+
+                    disconnect(l3->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
+
                     startLevel(4);
                     startW->setActLevel(4);
                 }
@@ -662,18 +690,15 @@ void Game::BallinHole()
                     if (bonus1->getBonus(1) > 0)
                     {
                         qDebug() << "Bonus: " << bonus1->getBonus(1);
-                        if (bonus1->getBonus(1) > 3)
-                        {
-                            bonus1->setBonus3(1);
-                        }
-                        endScore1 += (bonus1->getBonus(1))*500;
+                        endScore1 += 500;
+                        bonus_count1 += 1;
                     }
                 }
                 else
                 {
-                    if (bonus1->getBonus(1) > 3)
+                    if (bonus1->getBonus(1) > 0)
                     {
-                        bonus1->setBonus3(1);
+                        bonus_count1 += 1;
                     }
                     qDebug() << "P1's L3 Score:" << calculateScore1();
                 }
@@ -705,18 +730,15 @@ void Game::BallinHole()
                     if (bonus1->getBonus(1) > 0)
                     {
                         qDebug() << "Bonus: " << bonus1->getBonus(1);
-                        if (bonus1->getBonus(1) > 3)
-                        {
-                            bonus1->setBonus3(1);
-                        }
-                        endScore1 += (bonus1->getBonus(1))*500;
+                        endScore1 += 500;
+                        bonus_count1 += 1;
                     }
                 }
                 else
                 {
-                    if (bonus1->getBonus(1) > 3)
+                    if (bonus1->getBonus(1) > 0)
                     {
-                        bonus1->setBonus3(1);
+                        bonus_count1 += 1;
                     }
                     qDebug() << "P1's L3 Score:" << calculateScore1();
                 }
@@ -742,18 +764,15 @@ void Game::BallinHole()
                     if (bonus2->getBonus(2) > 0)
                     {
                         qDebug() << "Bonus: " << bonus2->getBonus(2);
-                        if (bonus2->getBonus(2) > 3)
-                        {
-                            bonus2->setBonus3(2);
-                        }
-                        endScore2 += (bonus2->getBonus(2))*500;
+                        endScore2 += 500;
+                        bonus_count2 += 1;
                     }
                 }
                 else
                 {
-                    if (bonus1->getBonus(1) > 3)
+                    if (bonus1->getBonus(1) > 0)
                     {
-                        bonus1->setBonus3(1);
+                        bonus_count2 += 1;
                     }
                     qDebug() << "P2's L3 Score:" << calculateScore2();
                 }
@@ -762,6 +781,8 @@ void Game::BallinHole()
                 qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
 
                 GameOver();
+
+                disconnect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
             }
 
         }
@@ -777,18 +798,15 @@ void Game::BallinHole()
                 if (bonus1->getBonus(1) > 0)
                 {
                     qDebug() << "Bonus: " << bonus1->getBonus(1);
-                    if (bonus1->getBonus(1) > 3)
-                    {
-                        bonus1->setBonus3(1);
-                    }
-                    endScore1 += (bonus1->getBonus(1))*500;
+                    endScore1 += 500;
+                    bonus_count1 += 1;
                 }
             }
             else
             {
-                if (bonus1->getBonus(1) > 3)
+                if (bonus1->getBonus(1) > 0)
                 {
-                    bonus1->setBonus3(1);
+                    bonus_count1 += 1;
                 }
                 qDebug() << "P1's L4 Score:" << calculateScore1();
             }
