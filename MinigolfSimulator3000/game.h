@@ -7,10 +7,9 @@
 #include "score.h"
 #include "strike.h"
 #include "level_1.h"
-
-#include "level_1.h"
 #include "level_2.h"
 #include "level_3.h"
+#include "level_4.h"
 #include "startwindow.h"
 #include "ball.h"
 
@@ -47,6 +46,7 @@ public:
     QScopedPointer<Level_1> l1;
     QScopedPointer<Level_2> l2;
     QScopedPointer<Level_3> l3;
+    QScopedPointer<Level_4> l4;
 
 public slots:
 
@@ -79,6 +79,7 @@ private:
     QTimer deleteLevel1Timer;
     QTimer deleteLevel2Timer;
     QTimer deleteLevel3Timer;
+    QTimer deleteLevel4Timer;
 
 private slots:
 
@@ -90,6 +91,9 @@ private slots:
 
     //! \brief Delete level 3
     void deleteLevel3();
+
+    //! \brief Delete level 4
+    void deleteLevel4();
 
 
 };

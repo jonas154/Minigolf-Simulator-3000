@@ -9,6 +9,7 @@ Game::Game(StartWindow* _startW)
     connect(&deleteLevel1Timer, SIGNAL(timeout()), this, SLOT(deleteLevel1()));
     connect(&deleteLevel2Timer, SIGNAL(timeout()), this, SLOT(deleteLevel2()));
     connect(&deleteLevel3Timer, SIGNAL(timeout()), this, SLOT(deleteLevel3()));
+    connect(&deleteLevel4Timer, SIGNAL(timeout()), this, SLOT(deleteLevel4()));
     startW->setActLevel(1);
 }
 
@@ -163,6 +164,23 @@ void Game::GameOver()
 
             endScore1 = 0;
             endScore2 = 0;
+        break;
+
+        case 4:
+
+            disconnect(l4->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            disconnect(l4->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            disconnect(l4->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            disconnect(l4.data(), SIGNAL(destroyLevel4()), this, SLOT(GameOver()));
+            disconnect(l4->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
+            //disconnect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
+
+            l4->stopAndHide();
+            startW->getUi()->stackedWidget->removeWidget(l4.data());
+            deleteLevel4Timer.start(1000);
+
+            endScore1 = 0;
+            endScore2 = 0;
 
 
         /*
@@ -235,6 +253,19 @@ void Game::startLevel(int levelnumber)
 
         break;
 
+        case 4:
+
+            l4.reset(new Level_4(startW->getUi()->stackedWidget));
+            this->construct(l4->getScene());
+            l4->show();
+            connect(l4->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
+            connect(l4->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
+            connect(l4->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l4.data(), SIGNAL(destroyLevel4()), this, SLOT(GameOver()));
+            connect(l4->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
+
+         break;
+
         default: break;
     }
 }
@@ -261,6 +292,10 @@ void Game::BallinWater()
 
         case 3:
             l3->getBall()->setPos(l3->getStartCoordinates());
+        break;
+
+        case 4:
+            l4->getBall()->setPos(l4->getStartCoordinates());
         break;
         default: break;
     }
@@ -611,6 +646,8 @@ void Game::BallinHole()
                     qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
 
                     GameOver();
+                    startLevel(4);
+                    startW->setActLevel(4);
                 }
 
             }
@@ -646,8 +683,123 @@ void Game::BallinHole()
                 qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
 
                 GameOver();
+                startLevel(4);
+                startW->setActLevel(4);
         }
         break;
+
+    case 4:
+        l4->getBall()->setPos(l4->getHoleCoordinates());
+
+//Multiplayer Mode L4
+        if (startW->getGameMode() == true)
+        {
+
+//first player L4
+            if (getTurn() == startW->getActPlayer1Name())
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+
+                if (score1->getScore(1) > 6)
+                {
+                    if (bonus1->getBonus(1) > 0)
+                    {
+                        qDebug() << "Bonus: " << bonus1->getBonus(1);
+                        if (bonus1->getBonus(1) > 3)
+                        {
+                            bonus1->setBonus3(1);
+                        }
+                        endScore1 += (bonus1->getBonus(1))*500;
+                    }
+                }
+                else
+                {
+                    if (bonus1->getBonus(1) > 3)
+                    {
+                        bonus1->setBonus3(1);
+                    }
+                    qDebug() << "P1's L3 Score:" << calculateScore1();
+                }
+
+                startW->setActPlayer1Highscore(endScore1);
+                qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                nextPlayersTurn();
+                l4->getBall()->setPos(l4->getStartCoordinates());
+                l4->createArrow();
+
+                connect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
+            }
+
+//second player L4
+            else
+            {
+                strike2->decrease(2);
+                score2->increase(2);
+
+                if (score2->getScore(2) > 6)
+                {
+                    if (bonus2->getBonus(2) > 0)
+                    {
+                        qDebug() << "Bonus: " << bonus2->getBonus(2);
+                        if (bonus2->getBonus(2) > 3)
+                        {
+                            bonus2->setBonus3(2);
+                        }
+                        endScore2 += (bonus2->getBonus(2))*500;
+                    }
+                }
+                else
+                {
+                    if (bonus1->getBonus(1) > 3)
+                    {
+                        bonus1->setBonus3(1);
+                    }
+                    qDebug() << "P2's L3 Score:" << calculateScore2();
+                }
+
+                startW->setActPlayer2Highscore(endScore2);
+                qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
+
+                GameOver();
+            }
+
+        }
+
+//Single Player Mode L4
+        else
+        {
+            strike1->decrease(1);
+            score1->increase(1);
+
+            if (score1->getScore(1) > 6)
+            {
+                if (bonus1->getBonus(1) > 0)
+                {
+                    qDebug() << "Bonus: " << bonus1->getBonus(1);
+                    if (bonus1->getBonus(1) > 3)
+                    {
+                        bonus1->setBonus3(1);
+                    }
+                    endScore1 += (bonus1->getBonus(1))*500;
+                }
+            }
+            else
+            {
+                if (bonus1->getBonus(1) > 3)
+                {
+                    bonus1->setBonus3(1);
+                }
+                qDebug() << "P1's L4 Score:" << calculateScore1();
+            }
+
+            startW->setActPlayer1Highscore(endScore1);
+            qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+            GameOver();
+    }
+    break;
 
         default: break;
     }
@@ -774,4 +926,10 @@ void Game::deleteLevel3()
 {
     deleteLevel3Timer.stop();
     l3.reset(nullptr);
+}
+
+void Game::deleteLevel4()
+{
+    deleteLevel4Timer.stop();
+    l4.reset(nullptr);
 }

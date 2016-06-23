@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     addplayerdialog.cpp \
     bonus.cpp \
     rectitem.cpp \
-    level_3.cpp
+    level_3.cpp \
+    level_4.cpp
 
 
 HEADERS  += \
@@ -49,7 +50,8 @@ HEADERS  += \
     borderlinecurvedrawer.h \
     bonus.h \
     rectitem.h \
-    level_3.h
+    level_3.h \
+    level_4.h
 
 
 FORMS    += \

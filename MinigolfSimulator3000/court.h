@@ -68,6 +68,7 @@ signals:
     void destroyLevel();
     void destroyLevel2();
     void destroyLevel3();
+    void destroyLevel4();
 //---------------------------------
 
 protected:
