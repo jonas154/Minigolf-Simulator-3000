@@ -899,6 +899,35 @@ void Game::BallStopped()
             }
         }
         break;
+
+    case 4:
+    {
+        QPointF coordinates = l4->getBall()->pos();
+        //do something with the coordinates, maybe save for multiplayer?
+        l4->createArrow();
+
+        if (startW->getGameMode() == true)
+        {
+
+            if (getTurn() == QString(startW->getActPlayer1Name()))
+            {
+                strike1->decrease(1);
+                score1->increase(1);
+            }
+            else
+            {
+                strike2->decrease(2);
+                score2->increase(2);
+            }
+
+        }
+        else
+        {
+            strike1->decrease(1);
+            score1->increase(1);
+        }
+    }
+    break;
         default: break;
     }
 
