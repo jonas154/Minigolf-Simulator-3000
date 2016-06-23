@@ -8,8 +8,8 @@ Level_4::Level_4(QWidget *parent)
     Court(parent)
 {
 
-    this->setStartCoordinates(234.0, 576.0);
-    //this->setStartCoordinates(528,298);
+   // this->setStartCoordinates(234.0, 576.0);
+    this->setStartCoordinates(374,495);
     this->setHoleCoordinates(517.0,291.0);
     this->constructLevel();
 
@@ -28,12 +28,10 @@ void Level_4::constructLevel()
     vogelimage = ":/Images/Images/v.png";
     vogelimage2 = ":/Images/Images/v2.png";
 
-    nonnewtonimage = ":/Images/Images/newton_1.png";
-    nonnewtonimage2 = ":/Images/Images/newton_2.png";
-
     //Couter für Update Level initialisiern
-    vogelcounter = 0;
-    wassercounter = 0;
+    vogelCounter = 0;
+    graphicsCounterFast = 0;
+    graphicsCounterSlow = 0;
     vogelaction = false;
 
     //Mini Menü mit false initialisieren
@@ -45,23 +43,54 @@ void Level_4::constructLevel()
     // Hintergrundbild der scene setzen
     scene->setBackgroundBrush(QImage(bgroundimage));
 
-
-    // Wasserbilder Polygon erstellen
-    QPolygon water_polygon;
-    water_polygon << QPoint(180,322) << QPoint(180,319)  << QPoint(155,319) << QPoint(155,256)
-                  << QPoint(322,256) << QPoint(322,319)  << QPoint(297,319)  << QPoint(297,323);
-    water = new GroundMaterial(GroundMaterial::water_material,water_polygon);
+    // Wasserbilder 1 Polygon erstellen
+    QPolygon water_polygon_1;
+    water_polygon_1 << QPoint(180,256) << QPoint(322,256) << QPoint(322,323) << QPoint(180,323);
+    water_1 = new GroundMaterial(GroundMaterial::water_material,water_polygon_1);
 
     // Bilder einbinden und zu Scene hinzufügen
-    water->setBrush(QImage(waterimage));
-    scene->addItem(water);
-    water->setVisible(true);
-    water->setPen(Qt::NoPen);
+    water_1->setBrush(QImage(waterimage));
+    scene->addItem(water_1);
+    water_1->setVisible(true);
+    water_1->setPen(Qt::NoPen);
 
+
+    QPolygon water_polygon_2;
+    water_polygon_2 << QPoint(334,256) << QPoint(422,256) << QPoint(422,323) << QPoint(334,323);
+    water_2 = new GroundMaterial(GroundMaterial::water_material,water_polygon_2);
+
+    // Bilder einbinden und zu Scene hinzufügen
+    water_2->setBrush(QImage(waterimage));
+    scene->addItem(water_2);
+    water_2->setVisible(true);
+    water_2->setPen(Qt::NoPen);
+
+
+    QPolygon water_polygon_3;
+    water_polygon_3 << QPoint(595,374) << QPoint(622,374) << QPoint(622,443) << QPoint(595,443);
+    water_3 = new GroundMaterial(GroundMaterial::water_material,water_polygon_3);
+
+    // Bilder einbinden und zu Scene hinzufügen
+    water_3->setBrush(QImage(waterimage));
+    scene->addItem(water_3);
+    water_3->setVisible(true);
+    water_3->setPen(Qt::NoPen);
+
+
+    QPolygon water_polygon_4;
+    water_polygon_4 << QPoint(640,374) << QPoint(640,443) << QPoint(667,443) << QPoint(667,374);
+    water_4 = new GroundMaterial(GroundMaterial::water_material,water_polygon_4);
+
+    // Bilder einbinden und zu Scene hinzufügen
+    water_4->setBrush(QImage(waterimage));
+    scene->addItem(water_4);
+    water_4->setVisible(true);
+    water_4->setPen(Qt::NoPen);
 
     //Nonnewtonsches Fluid erstellen und zur scene hinzufügen
     QPolygon nonnewton_polygon;
-    nonnewton_polygon << QPoint(356,370) << QPoint(356,448) << QPoint(437,448) << QPoint(437,370);
+    nonnewton_polygon << QPoint(397,462) << QPoint(472,462) << QPoint(472,498) << QPoint(472,521)
+                      << QPoint(397,521);
     nonnewton = new GroundMaterial(GroundMaterial::nonNewtonian_material,nonnewton_polygon);
     nonnewton->setBrush(QImage(nonnewtonimage));
     scene->addItem(nonnewton);
@@ -77,27 +106,53 @@ void Level_4::constructLevel()
 
     //Grass Material erstellen und zur scene hinzufügen
     //[zum debuggen QPen(Qt::red) anstatt linepen verwenden]
+
+
     QPolygonF grassPolygon1;
-    grassPolygon1 << QPoint(170,625) << QPoint(178,330) << QPoint(298,329) << QPoint(411,329)
-                  << QPoint(411,364) << QPoint(383,362) << QPoint(382,353) << QPoint(304,356)
-                  << QPoint(304,356) << QPoint(313,643);
+    grassPolygon1 << QPoint(161,641) << QPoint(176,334) << QPoint(429,331) << QPoint(432,455)
+                     << QPoint(389,459) << QPoint(388,526) << QPoint(280,638);
     GroundMaterial* grass1 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon1);
     grass1->setPen(linepen);
     scene->addItem(grass1);
 
+    gate1 = new QGraphicsRectItem();
+
+    gate1->setRect(439,522,4,40);
+    gate1->setPen(linepen);
+    gate1->setBrush(QImage(":/Images/Images/gatter.png"));
+    scene->addItem(gate1);
+
+
+    gate2 = new QGraphicsRectItem();
+
+    gate2->setRect(439,422,4,40);
+    gate2->setPen(linepen);
+    gate2->setBrush(QImage(":/Images/Images/gatter.png"));
+    scene->addItem(gate2);
+
+    gateline1 = new BorderLine(439,461,439,522,BorderLine::metal_material);
+    gateline2 = new BorderLine(442,461,442,522,BorderLine::metal_material);
+    gateline1->setPen(linepen);
+    gateline2->setPen(linepen);
+
+    scene->addItem(gateline1);
+    scene->addItem(gateline2);
+
+
     //Grass Material erstellen und zur scene hinzufügen
     //[zum debuggen QPen(Qt::red) anstatt linepen verwenden]
+
     QPolygonF grassPolygon2;
-    grassPolygon2 << QPoint(371,454) << QPoint(423,454) << QPoint(423,511) << QPoint(629,511)
-                  << QPoint(629,322) << QPoint(490,322) << QPoint(490,262) << QPoint(681,258)
-                  << QPoint(684,560) << QPoint(367,558);
+    grassPolygon2 << QPoint(484,528) << QPoint(484,494) << QPoint(627,447) << QPoint(627,370)
+                     << QPoint(529,278) << QPoint(629,184) << QPoint(761,272) << QPoint(634,369)
+                       << QPoint(634,451) << QPoint(673,534);
     GroundMaterial* grass2 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon2);
     grass2->setPen(linepen);
     scene->addItem(grass2);
 
     // Loch erstellen und zur scene hinzufügen
     QPolygonF holePoly;
-    holePoly << QPoint(515,288) << QPoint(515,293) << QPoint(520,293) << QPoint(520,288);
+    holePoly << QPoint(628,278) << QPoint(634,278) << QPoint(634,282) << QPoint(629,282);
     GroundMaterial* hole = new GroundMaterial(GroundMaterial::hole_material, holePoly);
     hole->setPen(linepen);
     scene->addItem(hole);
@@ -115,42 +170,34 @@ void Level_4::constructLevel()
     scene->addItem(leaveItem);
 
     //Begrenzungslinien zur Liste hinzufügen
-    lineVec.push_back( new BorderLine(179,565,179,324,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(298,320,298,332,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(298,332,408,332,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(408,332,408,369,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(408,369,438,369,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(438,369,438,449,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(438,449,418,449,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(418,449,418,515,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(418,515,635,515,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(635,515,635,316,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(635,316,495,316,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(495,316,495,266,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(495,266,664,266,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(675,276,675,535,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(664,549,387,549,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(375,539,375,449,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(375,449,355,449,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(355,449,355,369,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(355,369,385,369,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(385,369,385,349,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(385,349,298,349,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(298,349,298,565,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(179,565,179,321,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(323,324,333,324,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(423,324,423,377,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(423,377,396,377,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(396,377,396,461,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(396,461,473,461,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(473,461,473,497,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(473,497,622,497,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(623,497,622,444,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(622,373,622,354,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(640,353,640,373,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(640,444,640,522,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(640,522,354,522,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(354,522,354,389,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(354,389,370,389,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(370,389,370,349,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(370,349,298,349,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(298,349,298,567,BorderLine::metal_material));
+
+
 
     // Kurve Zeichnen
     BorderLineCurveDrawer::draw(179,565,298,565, 60, 6.0,
                                 BorderLineCurveDrawer::right, false,
                                 BorderLine::metal_material, scene, linepen);
-    BorderLineCurveDrawer::draw(375,539,387,549, 20, 6.0,
-                                BorderLineCurveDrawer::right, false,
-                                BorderLine::metal_material, scene, linepen);
-    BorderLineCurveDrawer::draw(663,549,675,535, 19, 6.0,
-                                BorderLineCurveDrawer::right, false,
-                                BorderLine::metal_material, scene, linepen);
 
-    BorderLineCurveDrawer::draw(664,266,675,277, 17, 6.0,
-                                BorderLineCurveDrawer::left, false,
+    BorderLineCurveDrawer::draw(621,356,643,356, 73, 6.0,
+                                BorderLineCurveDrawer::left, true,
                                 BorderLine::metal_material, scene, linepen);
 
 
@@ -180,7 +227,7 @@ void Level_4::menuLevel()
     {
 
     // Mini menü wird aufgerufen, brushes verändert und pausiert.
-    scene->setForegroundBrush(QImage(QString(":/Images/Images/Level_3_ESC_Menu.png")));
+    scene->setForegroundBrush(QImage(QString(":/Images/Images/Level_4_ESC_Menu.png")));
     continueItem->setVisible(true);
     leaveItem->setVisible(true);
     menuActive = true;
@@ -225,33 +272,37 @@ void Level_4::updateLevel()
     x = vogel2->x();
     y = vogel2->y();
 
-    // Wasserimage wird ständig aktualisiert
-    if (wassercounter < 6)
+    if(graphicsCounterFast == 6)
     {
-        water->setBrush(QImage(":/Images/Images/wasser1.png"));
-
+        water_1->setBrush(QImage(":/Images/Images/wasser1.png"));
+        water_2->setBrush(QImage(":/Images/Images/wasser4.png"));
+        water_2->setBrush(QImage(":/Images/Images/wasser4.png"));
+        water_4->setBrush(QImage(":/Images/Images/wasser1.png"));
     }
 
-    if (wassercounter > 6 && wassercounter <= 12)
+    if (graphicsCounterFast == 12)
     {
-        water->setBrush(QImage(":/Images/Images/wasser2.png"));
-        nonnewton->setBrush(QImage(nonnewtonimage2));
-
+        water_1->setBrush(QImage(":/Images/Images/wasser2.png"));
+        water_2->setBrush(QImage(":/Images/Images/wasser3.png"));
+        water_3->setBrush(QImage(":/Images/Images/wasser3.png"));
+        water_4->setBrush(QImage(":/Images/Images/wasser3.png"));
     }
 
-    if (wassercounter > 12 && wassercounter <= 16)
+    if (graphicsCounterFast == 16)
     {
-        water->setBrush(QImage(":/Images/Images/wasser3.png"));
-
+        water_1->setBrush(QImage(":/Images/Images/wasser3.png"));
+        water_2->setBrush(QImage(":/Images/Images/wasser2.png"));
+        water_3->setBrush(QImage(":/Images/Images/wasser2.png"));
+        water_4->setBrush(QImage(":/Images/Images/wasser3.png"));
     }
 
-    if (wassercounter > 16 && wassercounter <= 20)
+    if (graphicsCounterFast == 20)
     {
-        water->setBrush(QImage(":/Images/Images/wasser4.png"));
-        nonnewton->setBrush(QImage(nonnewtonimage));
-
+        water_1->setBrush(QImage(":/Images/Images/wasser4.png"));
+        water_2->setBrush(QImage(":/Images/Images/wasser1.png"));
+        water_3->setBrush(QImage(":/Images/Images/wasser1.png"));
+        water_4->setBrush(QImage(":/Images/Images/wasser4.png"));
     }
-
     // Vogelaction wird mit gewisser Wahrscheinlichkeit ausgelöst
     if (rand < 0.001)
     {
@@ -271,30 +322,61 @@ void Level_4::updateLevel()
         vogelaction = false;
     }
 
-    if(vogelcounter < 8)
+    if(vogelCounter < 8)
     {
         vogel2->setPixmap(vogelimage);
     }
 
-    if(vogelcounter >= 8)
+    if(vogelCounter >= 8)
     {
         vogel2->setPixmap(vogelimage2);
     }
 
-    //Counter werden erhöht um spezielle Timesteps erreichen zu können
-    vogelcounter++;
-    wassercounter++;
-
-    // Counter wird zurückgesetz
-    if(vogelcounter >10)
+    if(vogelCounter >10)
     {
-        vogelcounter = 0;
+        vogelCounter = 0;
     }
 
      // Counter wird zurückgesetz
-    if(wassercounter  >20)
+
+
+
+    if (graphicsCounterSlow == 20)
     {
-        wassercounter = 0;
+            gate1->setRect(439,492,4,40);
+            gate2->setRect(439,452,4,40);
+            gateline1->setVisible(true);
+            gateline2->setVisible(true);
+    }
+    if (graphicsCounterSlow == 40)
+    {
+            gate1->setRect(439,522,4,40);
+            gate2->setRect(439,422,4,40);
+            gateline1->setVisible(false);
+            gateline2->setVisible(false);
     }
 
+
+
+   if(vogelCounter > 10)
+   {
+        vogelCounter = 0;
+   }
+
+   if(graphicsCounterFast  > 20)
+   {
+       graphicsCounterFast = 0;
+   }
+
+   if(graphicsCounterSlow > 40)
+   {
+       graphicsCounterSlow = 0;
+   }
+
+   vogelCounter++;
+   graphicsCounterFast++;
+   graphicsCounterSlow++;
+
 }
+
+

@@ -40,6 +40,8 @@
         <file>Images/club6.png</file>
         <file>Images/club7.png</file>
         <file>Images/Level_4.png</file>
+        <file>Images/gatter.png</file>
+        <file>Images/Level_4_ESC_Menu.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Sounds/birdHit.wav</file>

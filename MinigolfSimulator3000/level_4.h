@@ -9,7 +9,7 @@
 #include <QGraphicsItem>
 #include <QString>
 #include <QGraphicsPixmapItem>
-
+#include <math.h>
 
 class Level_4 :  public Court
 {
@@ -37,7 +37,10 @@ public slots:
 
 
 private:
-    GroundMaterial *water;
+    GroundMaterial *water_1;
+    GroundMaterial *water_2;
+    GroundMaterial *water_3;
+    GroundMaterial *water_4;
     GroundMaterial *nonnewton;
     QGraphicsRectItem *vogel;
     QGraphicsPixmapItem *vogel2;
@@ -51,9 +54,15 @@ private:
     QString nonnewtonimage2;
     bool changeimage;
     bool vogelaction;
-    int vogelcounter;
-    int wassercounter;
+    int vogelCounter;
+    int graphicsCounterFast;
+    int graphicsCounterSlow;
     bool menuActive;
+
+    QGraphicsRectItem *gate1;
+    QGraphicsRectItem *gate2;
+    BorderLine *gateline1;
+    BorderLine *gateline2;
 
 
 protected:
