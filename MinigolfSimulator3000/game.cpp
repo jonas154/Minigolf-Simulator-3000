@@ -10,7 +10,6 @@ Game::Game(StartWindow* _startW)
     connect(&deleteLevel2Timer, SIGNAL(timeout()), this, SLOT(deleteLevel2()));
     connect(&deleteLevel3Timer, SIGNAL(timeout()), this, SLOT(deleteLevel3()));
     connect(&deleteLevel4Timer, SIGNAL(timeout()), this, SLOT(deleteLevel4()));
-    startW->setActLevel(1);
 }
 
 //------------------------------------------

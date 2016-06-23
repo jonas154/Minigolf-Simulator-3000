@@ -137,7 +137,7 @@ private:
     Ui::StartWindow* ui;
 
     //! \brief Variable with the number of available levels
-    int availableLevel = 3;
+    int availableLevel = 4;
 
     bool firstStart = false;
 
