@@ -7,18 +7,20 @@ Level_4::Level_4(QWidget *parent)
     :
     Court(parent)
 {
+    //Startkoordinaten können zum debuggen versetzt werden "this->setStartCoordinates(374,495);"
+    //um newton Fluid zu testen
+    this->setStartCoordinates(234.0, 576.0);
 
-   // this->setStartCoordinates(234.0, 576.0);
-    this->setStartCoordinates(374,495);
+    // Lochkoordinaten setzen
     this->setHoleCoordinates(517.0,291.0);
-    this->constructLevel();
 
+    this->constructLevel();
     this->createBall();
     this->createArrow(true);
 
 }
 
-//-----------------------------------
+//------------------------------------
 
 void Level_4::constructLevel()
 {
@@ -43,6 +45,16 @@ void Level_4::constructLevel()
     // Hintergrundbild der scene setzen
     scene->setBackgroundBrush(QImage(bgroundimage));
 
+    /* Unsichtbaren QPen für linien erstellen
+     * [zum debuggen QPen(Qt::red) anstatt linepen verwenden]
+     */
+    QPen linepen;
+    linepen.setWidth(2);
+    linepen.setColor(QColor(0,0,0,0));
+    linepen.setJoinStyle(Qt::RoundJoin);
+    linepen.setCapStyle(Qt::RoundCap);
+
+    //WASSERPOLYGON 1-----------------------------------------
     // Wasserbilder 1 Polygon erstellen
     QPolygon water_polygon_1;
     water_polygon_1 << QPoint(180,256) << QPoint(322,256) << QPoint(322,323) << QPoint(180,323);
@@ -53,8 +65,10 @@ void Level_4::constructLevel()
     scene->addItem(water_1);
     water_1->setVisible(true);
     water_1->setPen(Qt::NoPen);
+    //--------------------------------------------------------
 
-
+    //WASSERPOLYGON 2-----------------------------------------
+    // Wasserbilder 2 Polygon erstellen
     QPolygon water_polygon_2;
     water_polygon_2 << QPoint(334,256) << QPoint(422,256) << QPoint(422,323) << QPoint(334,323);
     water_2 = new GroundMaterial(GroundMaterial::water_material,water_polygon_2);
@@ -64,8 +78,10 @@ void Level_4::constructLevel()
     scene->addItem(water_2);
     water_2->setVisible(true);
     water_2->setPen(Qt::NoPen);
+    //--------------------------------------------------------
 
-
+    //WASSERPOLYGON 3-----------------------------------------
+    // Wasserbilder 3 Polygon erstellen
     QPolygon water_polygon_3;
     water_polygon_3 << QPoint(595,374) << QPoint(622,374) << QPoint(622,443) << QPoint(595,443);
     water_3 = new GroundMaterial(GroundMaterial::water_material,water_polygon_3);
@@ -75,8 +91,10 @@ void Level_4::constructLevel()
     scene->addItem(water_3);
     water_3->setVisible(true);
     water_3->setPen(Qt::NoPen);
+    //--------------------------------------------------------
 
-
+    //WASSERPOLYGON 4-----------------------------------------
+    // Wasserbilder 4 Polygon erstellen
     QPolygon water_polygon_4;
     water_polygon_4 << QPoint(640,374) << QPoint(640,443) << QPoint(667,443) << QPoint(667,374);
     water_4 = new GroundMaterial(GroundMaterial::water_material,water_polygon_4);
@@ -86,89 +104,101 @@ void Level_4::constructLevel()
     scene->addItem(water_4);
     water_4->setVisible(true);
     water_4->setPen(Qt::NoPen);
+    //--------------------------------------------------------
 
+    //NONNEWTONFLUID 1-----------------------------------------
     //Nonnewtonsches Fluid erstellen und zur scene hinzufügen
     QPolygon nonnewton_polygon;
     nonnewton_polygon << QPoint(397,462) << QPoint(472,462) << QPoint(472,498) << QPoint(472,521)
                       << QPoint(397,521);
     nonnewton = new GroundMaterial(GroundMaterial::nonNewtonian_material,nonnewton_polygon);
+
     nonnewton->setBrush(QImage(nonnewtonimage));
     scene->addItem(nonnewton);
     nonnewton->setVisible(true);
     nonnewton->setPen(Qt::NoPen);
+    //--------------------------------------------------------
 
-    // Unsichtbaren QPen für linien erstellen
-    QPen linepen;
-    linepen.setWidth(2);
-    linepen.setColor(QColor(0,0,0,0));
-    linepen.setJoinStyle(Qt::RoundJoin);
-    linepen.setCapStyle(Qt::RoundCap);
+    //GATE 1&2------------------------------------------------
+    // Gate 1 und 2 erstellen und zur scene hinzufügen
+    gate1 = new QGraphicsRectItem();
+    gate2 = new QGraphicsRectItem();
+    gate1->setRect(439,522,4,40);
+    gate1->setPen(linepen);
+    gate1->setBrush(QImage(":/Images/Images/gatter.png"));
+    scene->addItem(gate1);
+    gate2->setRect(439,422,4,40);
+    gate2->setPen(linepen);
+    gate2->setBrush(QImage(":/Images/Images/gatter.png"));
+    scene->addItem(gate2);
 
-    //Grass Material erstellen und zur scene hinzufügen
-    //[zum debuggen QPen(Qt::red) anstatt linepen verwenden]
+    //Gate 1 und 2 Collisionslinien erstellen (werden in update Level benötigt)
+    gateline1 = new BorderLine(439,461,439,522,BorderLine::metal_material);
+    gateline2 = new BorderLine(442,461,442,522,BorderLine::metal_material);
+    gateline1->setPen(linepen);
+    gateline2->setPen(linepen);
+
+    //zur scene hinzufügen
+    scene->addItem(gateline1);
+    scene->addItem(gateline2);
+    //--------------------------------------------------------
 
 
+    //GRASS 1-------------------------------------------------
+    //Grass 1 erstellen und zur scene hinzufügen
     QPolygonF grassPolygon1;
     grassPolygon1 << QPoint(161,641) << QPoint(176,334) << QPoint(429,331) << QPoint(432,455)
                      << QPoint(389,459) << QPoint(388,526) << QPoint(280,638);
     GroundMaterial* grass1 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon1);
     grass1->setPen(linepen);
     scene->addItem(grass1);
+    //--------------------------------------------------------
 
-    gate1 = new QGraphicsRectItem();
-
-    gate1->setRect(439,522,4,40);
-    gate1->setPen(linepen);
-    gate1->setBrush(QImage(":/Images/Images/gatter.png"));
-    scene->addItem(gate1);
-
-
-    gate2 = new QGraphicsRectItem();
-
-    gate2->setRect(439,422,4,40);
-    gate2->setPen(linepen);
-    gate2->setBrush(QImage(":/Images/Images/gatter.png"));
-    scene->addItem(gate2);
-
-    gateline1 = new BorderLine(439,461,439,522,BorderLine::metal_material);
-    gateline2 = new BorderLine(442,461,442,522,BorderLine::metal_material);
-    gateline1->setPen(linepen);
-    gateline2->setPen(linepen);
-
-    scene->addItem(gateline1);
-    scene->addItem(gateline2);
-
-
-    //Grass Material erstellen und zur scene hinzufügen
-    //[zum debuggen QPen(Qt::red) anstatt linepen verwenden]
-
+    //GRASS 2-------------------------------------------------
+    //Grass 2 erstellen und zur scene hinzufügen
     QPolygonF grassPolygon2;
-    grassPolygon2 << QPoint(484,528) << QPoint(484,494) << QPoint(627,447) << QPoint(627,370)
-                     << QPoint(529,278) << QPoint(629,184) << QPoint(761,272) << QPoint(634,369)
-                       << QPoint(634,451) << QPoint(673,534);
+    grassPolygon2 << QPoint(484,528) << QPoint(484,494) << QPoint(629,447)
+                       << QPoint(630,451) << QPoint(673,534);
     GroundMaterial* grass2 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon2);
     grass2->setPen(linepen);
     scene->addItem(grass2);
+    //--------------------------------------------------------
 
+    //GRASS 3-------------------------------------------------
+    //Grass 3 erstellen und zur scene hinzufügen
+    QPolygonF grassPolygon3;
+    grassPolygon3 << QPoint(629,370)   << QPoint(529,278) << QPoint(629,184) << QPoint(761,272);
+    GroundMaterial *grass3 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon3);
+    grass3->setPen(linepen);
+    scene->addItem(grass3);
+    //--------------------------------------------------------
+
+    //HOLE 1-------------------------------------------------
     // Loch erstellen und zur scene hinzufügen
     QPolygonF holePoly;
     holePoly << QPoint(628,278) << QPoint(634,278) << QPoint(634,282) << QPoint(629,282);
     GroundMaterial* hole = new GroundMaterial(GroundMaterial::hole_material, holePoly);
     hole->setPen(linepen);
     scene->addItem(hole);
+    //--------------------------------------------------------
 
+    //CONTINUEBLOCK ------------------------------------------
     //Items für das mini menü erstellen und unsichtbar setzen
     continueItem->setRect(368,266,289,80);
     continueItem->setPen(linepen);
     continueItem->setVisible(false);
     scene->addItem(continueItem);
+    //--------------------------------------------------------
 
+    //LEVEBLOCK ----------------------------------------------
     //Items für das mini menü erstellen und unsichtbar setzen
     leaveItem->setRect(368,362,289,80);
     leaveItem->setPen(linepen);
     leaveItem->setVisible(false);
     scene->addItem(leaveItem);
+    //--------------------------------------------------------
 
+    // BORDERLINES -------------------------------------------
     //Begrenzungslinien zur Liste hinzufügen
     lineVec.push_back( new BorderLine(179,565,179,321,BorderLine::metal_material));
     lineVec.push_back( new BorderLine(323,324,333,324,BorderLine::metal_material));
@@ -189,9 +219,15 @@ void Level_4::constructLevel()
     lineVec.push_back( new BorderLine(370,349,298,349,BorderLine::metal_material));
     lineVec.push_back( new BorderLine(298,349,298,567,BorderLine::metal_material));
 
+    //Linien unsichtbar machen + Linien zur Scene hinzufügen
+    for (int i=0;i< static_cast<int>(lineVec.size());i++)
+    {
+        lineVec[i]->setPen(linepen);
+        scene->addItem(lineVec[i]);
+    }
+    //--------------------------------------------------------
 
-
-    // Kurve Zeichnen
+    // BORDERLINE CURVE---------------------------------------
     BorderLineCurveDrawer::draw(179,565,298,565, 60, 6.0,
                                 BorderLineCurveDrawer::right, false,
                                 BorderLine::metal_material, scene, linepen);
@@ -199,29 +235,24 @@ void Level_4::constructLevel()
     BorderLineCurveDrawer::draw(621,356,643,356, 73, 6.0,
                                 BorderLineCurveDrawer::left, true,
                                 BorderLine::metal_material, scene, linepen);
+    //--------------------------------------------------------
 
-
-    //Linien unsichtbar machen + Linien zur Scene hinzufügen
-    for (int i=0;i< static_cast<int>(lineVec.size());i++)
-    {
-        lineVec[i]->setPen(linepen);
-        scene->addItem(lineVec[i]);
-    }
-
-    // Vogelbilder
+    // BIRD---------------------------------------------------
+    // Vogelbilder setzen + scene hinzufügen + position setzen
     vogel2 = new QGraphicsPixmapItem;
     vogel2->setPixmap(vogelimage);
     vogel2->setVisible(true);
     vogel2->setPos(50,100);
     scene->addItem(vogel2);
+    //--------------------------------------------------------
 
     //Connecten der Slots
     connect(graphicsTimer, SIGNAL(timeout()),this, SLOT(updateLevel()));
     connect(continueItem,SIGNAL(mousePressed()),this,SLOT(menuLevel()));
     connect(leaveItem,SIGNAL(mousePressed()),this,SLOT(leaveLevel()));
-
-
 }
+//------------------------------------
+
 void Level_4::menuLevel()
 {   if (menuActive == false)
     {
@@ -247,12 +278,15 @@ else
     }
    // qDebug() << "menuLevel erreicht";
 }
+//------------------------------------
+
 void Level_4::leaveLevel()
 {
     emit destroyLevel4();
     qDebug() << "destroy level emittiert";
 }
 //------------------------------------
+
 void Level_4::keyPressEvent(QKeyEvent *event) {
 
    // ESC taste wird eingefangen und menuLevel aufgerufen
@@ -262,9 +296,10 @@ void Level_4::keyPressEvent(QKeyEvent *event) {
    }
 }
 //------------------------------------
+
 void Level_4::updateLevel()
 {
-
+    //rand wird erzeugt um vogel zufällig erscheinen zu lassen
     float rand = qrand();
     int x,y;
 
@@ -272,6 +307,7 @@ void Level_4::updateLevel()
     x = vogel2->x();
     y = vogel2->y();
 
+    //WASSERANIMATIONEN---------------------------------------
     if(graphicsCounterFast == 6)
     {
         water_1->setBrush(QImage(":/Images/Images/wasser1.png"));
@@ -303,6 +339,9 @@ void Level_4::updateLevel()
         water_3->setBrush(QImage(":/Images/Images/wasser1.png"));
         water_4->setBrush(QImage(":/Images/Images/wasser4.png"));
     }
+    //--------------------------------------------------------
+
+    //VOGELANIMATIONEN----------------------------------------
     // Vogelaction wird mit gewisser Wahrscheinlichkeit ausgelöst
     if (rand < 0.001)
     {
@@ -322,61 +361,57 @@ void Level_4::updateLevel()
         vogelaction = false;
     }
 
+    //Vogel auf erstes Bild setzen
     if(vogelCounter < 8)
     {
         vogel2->setPixmap(vogelimage);
     }
 
+    //Vogel auf zweites Bild seten
     if(vogelCounter >= 8)
     {
         vogel2->setPixmap(vogelimage2);
     }
 
+    //Counter zurücksetzen (max 10)
     if(vogelCounter >10)
     {
         vogelCounter = 0;
     }
+    //--------------------------------------------------------
 
-     // Counter wird zurückgesetz
-
-
-
+    // GATEANIMATIONEN & LINES -------------------------------
     if (graphicsCounterSlow == 20)
     {
-            gate1->setRect(439,492,4,40);
-            gate2->setRect(439,452,4,40);
-            gateline1->setVisible(true);
-            gateline2->setVisible(true);
+        gate1->setRect(439,492,4,40);
+        gate2->setRect(439,452,4,40);
+        gateline1->setVisible(true);
+        gateline2->setVisible(true);
     }
     if (graphicsCounterSlow == 40)
     {
-            gate1->setRect(439,522,4,40);
-            gate2->setRect(439,422,4,40);
-            gateline1->setVisible(false);
-            gateline2->setVisible(false);
+        gate1->setRect(439,522,4,40);
+        gate2->setRect(439,422,4,40);
+        gateline1->setVisible(false);
+        gateline2->setVisible(false);
     }
+    //--------------------------------------------------------
 
-
-
-   if(vogelCounter > 10)
-   {
-        vogelCounter = 0;
-   }
-
+   //counter zurücksetzen
    if(graphicsCounterFast  > 20)
    {
        graphicsCounterFast = 0;
    }
-
+   //counter zurücksetzen
    if(graphicsCounterSlow > 40)
    {
        graphicsCounterSlow = 0;
    }
 
+   //counter erhöhen
    vogelCounter++;
    graphicsCounterFast++;
    graphicsCounterSlow++;
-
 }
 
 

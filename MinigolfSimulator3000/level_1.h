@@ -36,19 +36,42 @@ public slots:
     void leaveLevel() override;
 
 private:
+    //! \brief Pointer for watermaterials to change later in updateLevel()
     GroundMaterial *water;
+
+    //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
     QGraphicsRectItem *vogel;
+
+    //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
     QGraphicsPixmapItem *vogel2;
+
     //! \brief Constructs the level
     void constructLevel();
+
+    //! \brief Strings with path to files
     QString waterimage;
+
+    //! \brief Strings with path to files
     QString waterimage2;
+
+    //! \brief Strings with path to files
     QString vogelimage;
+
+    //! \brief Strings with path to files
     QString vogelimage2;
-    bool changeimage;
+
+    //! \brief This bool is true when a bird should appear
     bool vogelaction;
+
+    //! \brief Counter for BirdGraphics to handle picture changes
+    //! max 10
     int vogelcounter;
-    int wassercounter;
+
+    //! \brief FAST Counter for Graphics to handle picture changes
+    //! max 20
+    int graphicsCounterFast;
+
+    //! \brief This bool is true if the mini menu is open
     bool menuActive;
 
 

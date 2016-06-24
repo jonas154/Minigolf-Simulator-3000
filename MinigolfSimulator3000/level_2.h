@@ -35,19 +35,31 @@ public slots:
 
 
 private:
+    //! \brief Pointer for watermaterials to change later in updateLevel()
     GroundMaterial *water;
+
+    //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
     QGraphicsRectItem *vogel;
+
+    //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
     QGraphicsPixmapItem *vogel2;
+
     //! \brief Constructs the level
     void constructLevel();
-    QString waterimage;
-    QString waterimage2;
+
+    //! \brief Strings with path to files
     QString vogelimage;
+
+    //! \brief Strings with path to files
     QString vogelimage2;
-    bool changeimage;
+
+    //! \brief This bool is true when a bird should appear
     bool vogelaction;
+
+    //! \brief Counter for BirdGraphics to handle picture changes
     int vogelcounter;
-    int wassercounter;
+
+    //! \brief This bool is true if the mini menu is open
     bool menuActive;
 
 protected:

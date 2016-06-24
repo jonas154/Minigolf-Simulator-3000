@@ -37,31 +37,76 @@ public slots:
 
 
 private:
+    //! \brief Pointer for watermaterials to change later in updateLevel()
     GroundMaterial *water_1;
+
+    //! \brief Pointer for watermaterials to change later in updateLevel()
     GroundMaterial *water_2;
+
+    //! \brief Pointer for watermaterials to change later in updateLevel()
     GroundMaterial *water_3;
+
+    //! \brief Pointer for watermaterials to change later in updateLevel()
     GroundMaterial *water_4;
+
+    //! \brief Pointer for nonnewton to change later in updateLevel()
     GroundMaterial *nonnewton;
+
+    //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
     QGraphicsRectItem *vogel;
+
+    //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
     QGraphicsPixmapItem *vogel2;
+
     //! \brief Constructs the level
     void constructLevel();
+
+    //! \brief Strings with path to files
     QString waterimage;
+
+    //! \brief Strings with path to files
     QString waterimage2;
+
+    //! \brief Strings with path to files
     QString vogelimage;
+
+    //! \brief Strings with path to files
     QString vogelimage2;
+
+    //! \brief Strings with path to files
     QString nonnewtonimage;
+
+    //! \brief Strings with path to files
     QString nonnewtonimage2;
-    bool changeimage;
+
+    //! \brief This bool is true when a bird should appear
     bool vogelaction;
+
+    //! \brief Counter for BirdGraphics to handle picture changes
+    //! max 10
     int vogelCounter;
+
+    //! \brief FAST Counter for Graphics to handle picture changes
+    //! max 20
     int graphicsCounterFast;
+
+    //! \brief SLOW Counter for Graphics to handle picture changes
+    //! max 40
     int graphicsCounterSlow;
+
+    //! \brief This bool is true if the mini menu is open
     bool menuActive;
 
+    //! \brief RectItems pointer for Gates to chance in updateLevel()
     QGraphicsRectItem *gate1;
+
+    //! \brief RectItems pointer for Gates to chance in updateLevel()
     QGraphicsRectItem *gate2;
+
+    //! \brief Borderline gate1 pointer to chance in updateLevel()
     BorderLine *gateline1;
+
+    //! \brief Borderline gate2 pointer to chance in updateLevel()
     BorderLine *gateline2;
 
 
