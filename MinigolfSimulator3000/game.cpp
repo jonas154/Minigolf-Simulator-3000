@@ -365,17 +365,18 @@ int Game::calculateScore2()
 
 void Game::BallinHole()
 {
-    // time for joy
-    QTime dieTime= QTime::currentTime().addSecs(2);
-    while (QTime::currentTime() < dieTime) {
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-    }
 
     switch(currentLevel)
     {
         case 1:
-
+        {
             l1->getBall()->setPos(l1->getHoleCoordinates());
+
+            // time for joy
+            QTime dieTime= QTime::currentTime().addSecs(2);
+            while (QTime::currentTime() < dieTime) {
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            }
 
 //Multiplayer Mode L1
             if (startW->getGameMode() == true)
@@ -487,11 +488,18 @@ void Game::BallinHole()
                 startLevel(2);
                 startW->setActLevel(2);
             }
-
+        }
         break;
 
         case 2:
+        {
             l2->getBall()->setPos(l2->getHoleCoordinates());
+
+            // time for joy
+            QTime dieTime= QTime::currentTime().addSecs(2);
+            while (QTime::currentTime() < dieTime) {
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            }
 
 //Multiplayer Mode L2
             if (startW->getGameMode() == true)
@@ -599,10 +607,18 @@ void Game::BallinHole()
                 startLevel(3);
                 startW->setActLevel(3);
             }
+        }
         break;
 
         case 3:
+        {
             l3->getBall()->setPos(l3->getHoleCoordinates());
+
+            // time for joy
+            QTime dieTime= QTime::currentTime().addSecs(2);
+            while (QTime::currentTime() < dieTime) {
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            }
 
 //Multiplayer Mode L3
             if (startW->getGameMode() == true)
@@ -709,18 +725,94 @@ void Game::BallinHole()
                 GameOver();
                 startLevel(4);
                 startW->setActLevel(4);
+            }
         }
         break;
 
-    case 4:
-        l4->getBall()->setPos(l4->getHoleCoordinates());
-
-//Multiplayer Mode L4
-        if (startW->getGameMode() == true)
+        case 4:
         {
+            l4->getBall()->setPos(l4->getHoleCoordinates());
 
-//first player L4
-            if (getTurn() == startW->getActPlayer1Name())
+            // time for joy
+            QTime dieTime= QTime::currentTime().addSecs(2);
+            while (QTime::currentTime() < dieTime) {
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            }
+
+    //Multiplayer Mode L4
+            if (startW->getGameMode() == true)
+            {
+
+    //first player L4
+                if (getTurn() == startW->getActPlayer1Name())
+                {
+                    strike1->decrease(1);
+                    score1->increase(1);
+
+                    if (score1->getScore(1) > 6)
+                    {
+                        if (bonus1->getBonus(1) > 0)
+                        {
+                            qDebug() << "Bonus: " << bonus1->getBonus(1);
+                            endScore1 += 500;
+                            bonus_count1 += 1;
+                        }
+                    }
+                    else
+                    {
+                        if (bonus1->getBonus(1) > 0)
+                        {
+                            bonus_count1 += 1;
+                        }
+                        qDebug() << "P1's L3 Score:" << calculateScore1();
+                    }
+
+                    startW->setActPlayer1Highscore(endScore1);
+                    qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
+
+                    nextPlayersTurn();
+                    l4->getBall()->setPos(l4->getStartCoordinates());
+                    l4->createArrow();
+
+                    connect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
+                }
+
+    //second player L4
+                else
+                {
+                    strike2->decrease(2);
+                    score2->increase(2);
+
+                    if (score2->getScore(2) > 6)
+                    {
+                        if (bonus2->getBonus(2) > 0)
+                        {
+                            qDebug() << "Bonus: " << bonus2->getBonus(2);
+                            endScore2 += 500;
+                            bonus_count2 += 1;
+                        }
+                    }
+                    else
+                    {
+                        if (bonus1->getBonus(1) > 0)
+                        {
+                            bonus_count2 += 1;
+                        }
+                        qDebug() << "P2's L3 Score:" << calculateScore2();
+                    }
+
+                    startW->setActPlayer2Highscore(endScore2);
+                    qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
+
+                    GameOver();
+
+                    disconnect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
+                }
+
+            }
+
+    //Single Player Mode L4
+            else
             {
                 strike1->decrease(1);
                 score1->increase(1);
@@ -740,83 +832,16 @@ void Game::BallinHole()
                     {
                         bonus_count1 += 1;
                     }
-                    qDebug() << "P1's L3 Score:" << calculateScore1();
+                    qDebug() << "P1's L4 Score:" << calculateScore1();
                 }
 
                 startW->setActPlayer1Highscore(endScore1);
                 qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
 
-                nextPlayersTurn();
-                l4->getBall()->setPos(l4->getStartCoordinates());
-                l4->createArrow();
-
-                connect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
-            }
-
-//second player L4
-            else
-            {
-                strike2->decrease(2);
-                score2->increase(2);
-
-                if (score2->getScore(2) > 6)
-                {
-                    if (bonus2->getBonus(2) > 0)
-                    {
-                        qDebug() << "Bonus: " << bonus2->getBonus(2);
-                        endScore2 += 500;
-                        bonus_count2 += 1;
-                    }
-                }
-                else
-                {
-                    if (bonus1->getBonus(1) > 0)
-                    {
-                        bonus_count2 += 1;
-                    }
-                    qDebug() << "P2's L3 Score:" << calculateScore2();
-                }
-
-                startW->setActPlayer2Highscore(endScore2);
-                qDebug() << "P2's HighScore:" << startW->getActHighscorePlayer2();
-
                 GameOver();
-
-                disconnect(l4->getBall(), SIGNAL(birdHit()), bonus2, SLOT(increase2()));
             }
-
         }
-
-//Single Player Mode L4
-        else
-        {
-            strike1->decrease(1);
-            score1->increase(1);
-
-            if (score1->getScore(1) > 6)
-            {
-                if (bonus1->getBonus(1) > 0)
-                {
-                    qDebug() << "Bonus: " << bonus1->getBonus(1);
-                    endScore1 += 500;
-                    bonus_count1 += 1;
-                }
-            }
-            else
-            {
-                if (bonus1->getBonus(1) > 0)
-                {
-                    bonus_count1 += 1;
-                }
-                qDebug() << "P1's L4 Score:" << calculateScore1();
-            }
-
-            startW->setActPlayer1Highscore(endScore1);
-            qDebug() << "P1's HighScore:" << startW->getActHighscorePlayer1();
-
-            GameOver();
-    }
-    break;
+        break;
 
         default: break;
     }
