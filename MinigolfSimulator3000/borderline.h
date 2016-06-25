@@ -33,11 +33,11 @@ public:
         switch(material)
         {
             case metal_material:
-                reflectionCoefficient = 0.9;
+                reflectionCoefficient = 0.95;
             break;
 
             case wood_material:
-                reflectionCoefficient = 0.8;
+                reflectionCoefficient = 0.9;
             break;
 
             case spring_material:

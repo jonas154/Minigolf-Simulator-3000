@@ -129,7 +129,7 @@ void Ball::doCollision()
 
                     speed = speed * borderline->getReflectionCoefficient();
 
-                    canCollide = 2;
+                    canCollide = 3;
                 }
             }
             break;

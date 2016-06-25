@@ -10,7 +10,7 @@ Level_2::Level_2(QWidget *parent)
     this->setStartCoordinates(195.0, 590.0);
 
     // Lochkoordinaten setzen
-    this->setHoleCoordinates(689,318);
+    this->setHoleCoordinates(693,321);
     this->constructLevel();
 
     this->createBall();
@@ -79,7 +79,7 @@ void Level_2::constructLevel()
     //HOLE 1-------------------------------------------------
     // Loch erstellen und zur scene hinzufügen
     QPolygonF holePoly;
-    holePoly << QPoint(689, 318) << QPoint(689, 343) << QPoint(694, 348) << QPoint(689, 343);
+    holePoly << QPoint(690, 319) << QPoint(695, 319) << QPoint(695, 324) << QPoint(690, 324);
     GroundMaterial* hole = new GroundMaterial(GroundMaterial::hole_material, holePoly);
     hole->setPen(linepen);
     scene->addItem(hole);
@@ -104,29 +104,29 @@ void Level_2::constructLevel()
 
     // BORDERLINES -------------------------------------------
     //Begrenzungslinien zur Liste hinzufügen
-    lineVec.push_back( new BorderLine(143,590,143,269,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(246,592,246,286,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(275,288,275,378,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(275,378,321,437,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(321,526,277,564,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(277,564,275,607,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(315,646,666,646,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(665,513,583,513,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(583,513,583,362,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(583,362,734,362,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(734,362,734,279,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(734,279,516,279,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(516,279,516,279,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(516,570,647,570,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(647,592,399,592,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(399,592,399,566,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(399,566,364,529,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(364,529,364,435,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(364,435,399,379,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(399,379,398,268,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(399,379,398,268,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(321,438,321,526,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(516,570,516,279,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(143,590,143,269,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(246,592,246,286,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(275,288,275,378,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(275,378,321,437,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(321,526,277,564,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(277,564,275,607,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(315,646,666,646,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(665,513,583,513,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(583,513,583,362,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(583,362,734,362,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(734,362,734,279,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(734,279,516,279,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(516,279,516,279,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(516,570,647,570,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(647,592,399,592,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(399,592,399,566,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(399,566,364,529,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(364,529,364,435,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(364,435,399,379,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(399,379,398,268,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(399,379,398,268,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(321,438,321,526,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(516,570,516,279,BorderLine::wood_material));
 
     //Linien unsichtbar machen + Linien zur Scene hinzufügen
     for (int i=0;i< static_cast<int>(lineVec.size());i++)
@@ -140,22 +140,22 @@ void Level_2::constructLevel()
     // BORDERLINE CURVE---------------------------------------
     BorderLineCurveDrawer::draw(246,286, 275,288, 15, 6.0,
                                 BorderLineCurveDrawer::left, false,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
     BorderLineCurveDrawer::draw(143,269, 398,270, 130, 6.0,
                                 BorderLineCurveDrawer::left, false,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
     BorderLineCurveDrawer::draw(143,591, 246,590, 52, 6.0,
                                 BorderLineCurveDrawer::right, false,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
     BorderLineCurveDrawer::draw(315,646,275,607, 50, 6.0,
                                 BorderLineCurveDrawer::left, false,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
     BorderLineCurveDrawer::draw(660,645,669,513, 67, 6.0,
                                 BorderLineCurveDrawer::right, false,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
     BorderLineCurveDrawer::draw(648,570,647,592,12,6.0,
                                 BorderLineCurveDrawer::left, false,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
     //--------------------------------------------------------
 
     // BIRD---------------------------------------------------

@@ -9,10 +9,10 @@ Level_4::Level_4(QWidget *parent)
 {
     //Startkoordinaten können zum debuggen versetzt werden "this->setStartCoordinates(374,495);"
     //um newton Fluid zu testen
-    this->setStartCoordinates(234.0, 576.0);
+    this->setStartCoordinates(240.0, 570.0);
 
     // Lochkoordinaten setzen
-    this->setHoleCoordinates(517.0,291.0);
+    this->setHoleCoordinates(631.0,280.0);
 
     this->constructLevel();
     this->createBall();
@@ -116,7 +116,7 @@ void Level_4::constructLevel()
     nonnewton->setBrush(QImage(nonnewtonimage));
     scene->addItem(nonnewton);
     nonnewton->setVisible(true);
-    nonnewton->setPen(Qt::NoPen);
+    nonnewton->setPen(linepen);
     //--------------------------------------------------------
 
     //GATE 1&2------------------------------------------------
@@ -133,8 +133,8 @@ void Level_4::constructLevel()
     scene->addItem(gate2);
 
     //Gate 1 und 2 Collisionslinien erstellen (werden in update Level benötigt)
-    gateline1 = new BorderLine(439,461,439,522,BorderLine::metal_material);
-    gateline2 = new BorderLine(442,461,442,522,BorderLine::metal_material);
+    gateline1 = new BorderLine(439,461,439,522,BorderLine::wood_material);
+    gateline2 = new BorderLine(442,461,442,522,BorderLine::wood_material);
     gateline1->setPen(linepen);
     gateline2->setPen(linepen);
 
@@ -147,8 +147,8 @@ void Level_4::constructLevel()
     //GRASS 1-------------------------------------------------
     //Grass 1 erstellen und zur scene hinzufügen
     QPolygonF grassPolygon1;
-    grassPolygon1 << QPoint(161,641) << QPoint(176,334) << QPoint(429,331) << QPoint(432,455)
-                     << QPoint(389,459) << QPoint(388,526) << QPoint(280,638);
+    grassPolygon1 << QPoint(161,641) << QPoint(176,334) << QPoint(429,334) << QPoint(432,455)
+                     << QPoint(387,459) << QPoint(387,526) << QPoint(280,638);
     GroundMaterial* grass1 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon1);
     grass1->setPen(linepen);
     scene->addItem(grass1);
@@ -157,8 +157,8 @@ void Level_4::constructLevel()
     //GRASS 2-------------------------------------------------
     //Grass 2 erstellen und zur scene hinzufügen
     QPolygonF grassPolygon2;
-    grassPolygon2 << QPoint(484,528) << QPoint(484,494) << QPoint(629,447)
-                       << QPoint(630,451) << QPoint(673,534);
+    grassPolygon2 << QPoint(484,528) << QPoint(484,494) << QPoint(625,452)
+                       << QPoint(640,452) << QPoint(673,534);
     GroundMaterial* grass2 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon2);
     grass2->setPen(linepen);
     scene->addItem(grass2);
@@ -167,7 +167,7 @@ void Level_4::constructLevel()
     //GRASS 3-------------------------------------------------
     //Grass 3 erstellen und zur scene hinzufügen
     QPolygonF grassPolygon3;
-    grassPolygon3 << QPoint(629,370)   << QPoint(529,278) << QPoint(629,184) << QPoint(761,272);
+    grassPolygon3 << QPoint(635,365) << QPoint(625,365) << QPoint(529,278) << QPoint(629,184) << QPoint(761,272);
     GroundMaterial *grass3 = new GroundMaterial(GroundMaterial::grass_material, grassPolygon3);
     grass3->setPen(linepen);
     scene->addItem(grass3);
@@ -176,7 +176,7 @@ void Level_4::constructLevel()
     //HOLE 1-------------------------------------------------
     // Loch erstellen und zur scene hinzufügen
     QPolygonF holePoly;
-    holePoly << QPoint(628,278) << QPoint(634,278) << QPoint(634,282) << QPoint(629,282);
+    holePoly << QPoint(629,278) << QPoint(634,278) << QPoint(634,282) << QPoint(629,282);
     GroundMaterial* hole = new GroundMaterial(GroundMaterial::hole_material, holePoly);
     hole->setPen(linepen);
     scene->addItem(hole);
@@ -200,24 +200,24 @@ void Level_4::constructLevel()
 
     // BORDERLINES -------------------------------------------
     //Begrenzungslinien zur Liste hinzufügen
-    lineVec.push_back( new BorderLine(179,565,179,321,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(323,324,333,324,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(423,324,423,377,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(423,377,396,377,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(396,377,396,461,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(396,461,473,461,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(473,461,473,497,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(473,497,622,497,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(623,497,622,444,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(622,373,622,354,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(640,353,640,373,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(640,444,640,522,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(640,522,354,522,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(354,522,354,389,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(354,389,370,389,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(370,389,370,349,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(370,349,298,349,BorderLine::metal_material));
-    lineVec.push_back( new BorderLine(298,349,298,567,BorderLine::metal_material));
+    lineVec.push_back( new BorderLine(179,565,179,321,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(323,324,333,324,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(423,324,423,377,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(423,377,396,377,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(396,377,396,461,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(396,461,473,461,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(473,461,473,497,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(473,497,622,497,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(623,497,622,444,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(622,373,622,354,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(640,353,640,373,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(640,444,640,522,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(640,522,354,522,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(354,522,354,389,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(354,389,370,389,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(370,389,370,349,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(370,349,298,349,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(298,349,298,567,BorderLine::wood_material));
 
     //Linien unsichtbar machen + Linien zur Scene hinzufügen
     for (int i=0;i< static_cast<int>(lineVec.size());i++)
@@ -230,11 +230,11 @@ void Level_4::constructLevel()
     // BORDERLINE CURVE---------------------------------------
     BorderLineCurveDrawer::draw(179,565,298,565, 60, 6.0,
                                 BorderLineCurveDrawer::right, false,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
 
     BorderLineCurveDrawer::draw(621,356,643,356, 73, 6.0,
                                 BorderLineCurveDrawer::left, true,
-                                BorderLine::metal_material, scene, linepen);
+                                BorderLine::wood_material, scene, linepen);
     //--------------------------------------------------------
 
     // BIRD---------------------------------------------------
