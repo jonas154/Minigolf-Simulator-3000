@@ -10,7 +10,7 @@
 #include "ball.h"
 
 
-//! The ArrowStartItem is moveable and used to adjust the arrow.
+//! The ArrowStartItem is moveable and used to adjust the Arrow.
 /*! It inherits from a QGraphicsItem and also from QObject because a signal is emitted. */
 
 class ArrowStartItem : public QObject, public QGraphicsItem
@@ -18,34 +18,30 @@ class ArrowStartItem : public QObject, public QGraphicsItem
     Q_OBJECT
 public:
 
-    //! Constructor
+    //! Initializes its position 50 pixels beneath the current Ball position
     ArrowStartItem(Ball* _ball, bool _firstCreate = false);
 
-    //! overrides the boundingRect() function of QGraphicsItem
+    //! Overrides the boundingRect() function of QGraphicsItem
     QRectF boundingRect() const override;
 
-    //! paints the item in every time step
+    //! Paints the item in every time step
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
-    //! overrides the mouseReleaseEvent() function of QGraphicsItem such that a signal is emitted
+    //! Overrides the mouseReleaseEvent() function of QGraphicsItem such that a signal is emitted
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-    //! overrides the itemChange() function of QGraphicsItem and limits the distance between the Ball and the ArrowStartItem
+    //! Overrides the itemChange() function of QGraphicsItem and limits the distance between the Ball and the ArrowStartItem
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 signals:
 
-    //! signal that the mouse is released from the ArrowStartItem
+    //! Signal that the mouse is released from the ArrowStartItem
     void arrowStartItemReleased();
 
 private:
 
-    //! Pointer to the ball
     Ball* ball;
-
-    //! needed to implement a limitation of the distance between the ball and the ArrowStartItem
-    bool firstCreate;
-
+    bool firstCreate; // needed to implement a limitation of the distance between the ball and the ArrowStartItem
     bool changeReceived;
 
 };

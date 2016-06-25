@@ -14,7 +14,7 @@
 #include <soundengine.h>
 
 
-//! This class displays and handles the Ball on the QMainWindow
+//! Displays and handles the Ball on the QMainWindow
 
 class Ball : public QObject, public QGraphicsItem
 {
@@ -23,38 +23,47 @@ Q_OBJECT
 
 public:
 
-    //! Constructor
+    //! Initializes the Ball and the SoundEngine
     Ball(QPointF _startCoordinates);
 
-    //! overrides the boundingRect() function of QGraphicsItem
+    //! Overrides the boundingRect() function of QGraphicsItem
     QRectF boundingRect() const override;
 
-    //! paints the Ball on the QMainWindow in every time step
+    //! Paints the Ball on the QMainWindow in every time step
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
-    //! moves the Ball
+    //! Moves the Ball
     void advance(int phase) override;
 
-    //! set the angle of the Ball
+    //! Set the angle of the Ball
     void setAngle(qreal a);
 
-    //! set the speed of the Ball
+    //! Set the speed of the Ball
     void setSpeed(qreal s);
 
+    //! Emits a signal whenever a shot is done
     void playShotSound();
 
+    //! Sets a circular shape for the Ball
     QPainterPath shape() const override;
 
 
 
 signals:
 
-    //! signal that the Ball does not move
+    //! Signal that the Ball does not move
     void ballStopped();
 
+    //! Signal that the Ball is over a water ground material
     void ballInWater();
+
+    //! Signal that the Ball is over a hole ground material
     void ballInHole();
+
+    //! Signal that a certain sound effect occurs
     void soundPlay(int);
+
+    //! Signal that the Bird is hit
     void birdHit();
 
 
@@ -63,8 +72,7 @@ private:
     qreal angle;
     qreal speed;
 
-    //! counter needed to handle a collision
-    int canCollide;
+    int canCollide; // counter needed to handle a collision
 
     void doCollision();
 
@@ -79,7 +87,6 @@ private:
     SoundEngine *soundEnginePointer;
 
     bool isBirdDead;
-
 
 };
 

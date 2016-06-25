@@ -1,5 +1,3 @@
-//BEISPIELCODE, WIRD SPÄTER ERSETZT
-
 #include "ball.h"
 
 Ball::Ball(QPointF _startCoordinates)

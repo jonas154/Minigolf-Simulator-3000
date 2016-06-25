@@ -8,10 +8,6 @@ ArrowStartItem::ArrowStartItem(Ball* _ball, bool _firstCreate)
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 
     this->setPos(ball->pos()-QPointF(0.0,-50.0));
-
-
-
-
 }
 
 QRectF ArrowStartItem::boundingRect() const

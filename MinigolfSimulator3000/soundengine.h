@@ -4,14 +4,19 @@
 #include <QObject>
 #include <QMediaPlayer>
 
+//! Plays sound effects for certain events during the game
+/*! There is one slot with an enumeration parameter such that various sounds can be played */
+
 class SoundEngine : public QObject
 {
     Q_OBJECT
 
 public:
 
+    //! Enumeration lisiting the available sounds
     enum eSound{borderCollisionSound=0, waterSound, birdHitSound, cheeringSound, sandSound, shotSound};
 
+    //! initializes a QMediaPlayer and sets the file paths
     SoundEngine()
         :
         borderCollision(new QMediaPlayer),
@@ -35,6 +40,7 @@ public:
 
 public slots:
 
+    //! Plays the sound that is requested by the enumeration parameter
     void playSound(int soundNumber)
     {
         switch(soundNumber)

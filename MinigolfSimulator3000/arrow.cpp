@@ -11,8 +11,8 @@ Arrow::Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent)
 
 QRectF Arrow::boundingRect() const
 {
-    // The Reimplementation is necessary because the arrow with its head occupies more space in the QMainWindow.
-    // The bounding rectangle must include the whole arrow such that the right space of the QMainWindow can be updated
+    /*! The Reimplementation is necessary because the arrow with its head occupies more space in the QMainWindow.
+        The bounding rectangle must include the whole arrow such that the right space of the QMainWindow can be updated. */
 
     qreal extra = (pen().width() + 20) / 2.0;
 

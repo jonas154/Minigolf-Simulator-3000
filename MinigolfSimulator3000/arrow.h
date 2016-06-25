@@ -9,17 +9,17 @@
 #include <qmath.h>
 
 
-//! This class draws an arrow between an ArrowStartItem and a Ball
+//! Draws an arrow between an ArrowStartItem and a Ball
 /*! The arrow is used to compute the initial speed and initial angle of the ball for a shot. */
 
 class Arrow : public QGraphicsLineItem
 {
 public:
 
-    //! Constructor
+    //! Initializes the start item and the end item and sets a QPen with red color
     Arrow(ArrowStartItem *startItem, Ball *endItem, QGraphicsItem *parent = 0);
 
-    //! Reimplements the boundingRect() function of QGraphicsLineItem
+    //! Reimplements the boundingRect()-function of QGraphicsLineItem
     QRectF boundingRect() const Q_DECL_OVERRIDE;
 
     //! Returns a QPainterPath including the arrow line and the arrow head
@@ -28,21 +28,21 @@ public:
     //! Pointer to the start item of the arrow
     ArrowStartItem *startItem() const { return myStartItem; }
 
-    //! Pointer to the end item of the arrow
+    //! Pointer to the end item of the Arrow which is a Ball
     Ball *endItem() const { return myEndItem; }
 
-    //! returns the angle of the arrow
+    //! Returns the current angle of the Arrow
     qreal getAngle();
 
-    //! returns a speed value that is dependent on the length of the arrow
+    //! Returns a speed value that is dependent on the length of the Arrow
     qreal getSpeed();
 
-    //! updates the position of the arrow
+    //! Updates the position of the Arrow
     void updatePosition();
 
 protected:
 
-    //! paints the arrow line and the arrow head in the QMainWindow
+    //! Paints the arrow line and the arrow head in the QMainWindow
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0) Q_DECL_OVERRIDE;
 
 private:
