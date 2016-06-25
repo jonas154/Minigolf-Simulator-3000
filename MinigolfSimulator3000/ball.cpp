@@ -10,7 +10,7 @@ Ball::Ball(QPointF _startCoordinates)
     setFlag(ItemUsesExtendedStyleOption);
 
     stopped = true;
-    canCollide = 0; //Zähler damit Kollision nicht abspackt, kann besser gelöst werden
+    canCollide = 0;
     speed = 0.0;
     angle = 0.0;
 
@@ -174,11 +174,7 @@ void Ball::doCollision()
 
                     case GroundMaterial::hole_material:
 
-                        if(speed>maxspeed)
-                        {
-                            //speed -= speed*friction;
-                        }
-                        else
+                        if(speed<maxspeed)
                         {
                             emit soundPlay(SoundEngine::cheeringSound);
                             speed = 0.0;
@@ -215,10 +211,12 @@ void Ball::doCollision()
                     }
                     break;
 
-//              unused materials:
-//                    case GroundMaterial::speedUp_material:
-//                    case GroundMaterial::concrete_material:
-//                    case GroundMaterial::wood_material:
+                    //unused materials:
+                    /*
+                    case GroundMaterial::speedUp_material:
+                    case GroundMaterial::concrete_material:
+                    case GroundMaterial::wood_material:
+                    */
 
                     default: break;
                 }

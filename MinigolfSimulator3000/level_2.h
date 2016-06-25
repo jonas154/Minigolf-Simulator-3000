@@ -18,9 +18,6 @@ public:
     //! \brief Constructor
     Level_2(QWidget* parent = 0);
 
-    //! \brief Destructor
-    virtual ~Level_2(){};
-
 public slots:
     //! \brief This slot updates the level graphic pictures with each timestep
     void updateLevel() override;

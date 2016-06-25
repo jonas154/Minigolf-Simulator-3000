@@ -8,7 +8,7 @@
 #include <QDebug>
 
 
-class BorderLine : public CourtElement, public QGraphicsLineItem
+class BorderLine : public QGraphicsLineItem, public CourtElement
 {
 
 public:

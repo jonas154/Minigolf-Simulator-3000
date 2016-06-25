@@ -1,8 +1,5 @@
-//DIES IST EIN TESTPROGRAMM, WIRD SPÄTER ERSETZT
-
 #include <QApplication>
 #include "startwindow.h"
-
 
 
 int main(int argc, char *argv[])

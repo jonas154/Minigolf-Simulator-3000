@@ -147,23 +147,23 @@ void Level_1::constructLevel()
 void Level_1::menuLevel()
 {   if (menuActive == false)
     {
-    // Mini menü wird aufgerufen, brushes verändert und pausiert.
-    scene->setForegroundBrush(QImage(QString(":/Images/Images/Level_1_ESC_Menu.png")));
-    continueItem->setVisible(true);
-    leaveItem->setVisible(true);
-    menuActive = true;
-    timer->stop();
-    graphicsTimer->stop();
+        // Mini menü wird aufgerufen, brushes verändert und pausiert.
+        scene->setForegroundBrush(QImage(QString(":/Images/Images/Level_1_ESC_Menu.png")));
+        continueItem->setVisible(true);
+        leaveItem->setVisible(true);
+        menuActive = true;
+        timer->stop();
+        graphicsTimer->stop();
     }
-else
+    else
     {
-    // Mini menü wird geschlossen, brushes verändert und timer gestartet.
-    scene->setForegroundBrush(Qt::NoBrush);
-    continueItem->setVisible(false);
-    leaveItem->setVisible(false);
-    menuActive = false;
-    timer->start();
-    graphicsTimer->start();
+        // Mini menü wird geschlossen, brushes verändert und timer gestartet.
+        scene->setForegroundBrush(Qt::NoBrush);
+        continueItem->setVisible(false);
+        leaveItem->setVisible(false);
+        menuActive = false;
+        timer->start();
+        graphicsTimer->start();
     }
 
 }
@@ -179,11 +179,11 @@ void Level_1::leaveLevel()
 
 void Level_1::keyPressEvent(QKeyEvent *event) {
 
-   // ESC taste wird eingefangen und menuLevel aufgerufen
-   if (event->key() == Qt::Key_Escape)
-   {
-     menuLevel();
-   }
+    // ESC taste wird eingefangen und menuLevel aufgerufen
+    if (event->key() == Qt::Key_Escape)
+    {
+        menuLevel();
+    }
 }
 //------------------------------------
 void Level_1::updateLevel()

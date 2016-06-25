@@ -14,10 +14,13 @@
 class Game;
 class addPlayerDialog;
 
-namespace Ui {
-//! This class creates the startwindow and manages the player and their parameter.
-class StartWindow;
+namespace Ui
+{
+    class StartWindow;
 }
+
+
+//! This class creates the startwindow and manages the player and their parameter.
 
 class StartWindow : public QMainWindow
 {
@@ -28,7 +31,8 @@ public:
     //! \brief Constructor
     explicit StartWindow(QWidget *parent = 0);
     ~StartWindow();
-    Game* game;
+
+    QScopedPointer<Game> game;
 
     Ui::StartWindow* getUi()
     {

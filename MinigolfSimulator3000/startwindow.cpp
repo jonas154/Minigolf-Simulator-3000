@@ -14,9 +14,9 @@ StartWindow::StartWindow(QWidget *parent) :
     this->setFixedSize(width,height);
     statusBar()->setFixedHeight(0);
     ui->stackedWidget->setCurrentIndex(0);
-    QPalette* palette = new QPalette();
-    palette->setBrush(QPalette::Background,*(new QBrush(*(new QPixmap(":/Images/Images/Hauptmenue.png")))));
-    setPalette(*palette);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, QBrush(QPixmap(":/Images/Images/Hauptmenue.png")));
+    setPalette(palette);
 
     ui->addPlayerButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
     ui->addPlayerMPButton->setStyleSheet("border-image:url(:/Images/Images/button_template.png);");
@@ -32,7 +32,8 @@ StartWindow::StartWindow(QWidget *parent) :
 
     this->checkFile();
     this->createPlayerBox();
-    game = new Game(this);
+
+    game.reset(new Game(this));
 
 
 }
@@ -93,8 +94,8 @@ bool StartWindow::getGameMode()
 int StartWindow::getActLevel()
 {
     QString _actLevel = matrix[ui->playerBox->currentIndex()][2];
-    return 4;
-   // return _actLevel.toInt();
+    //return 4;
+    return _actLevel.toInt();
 
 }
 

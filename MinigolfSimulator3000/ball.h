@@ -11,11 +11,8 @@
 #include <QStyleOptionGraphicsItem>
 #include <QObject>
 #include <QTimer>
-
 #include <soundengine.h>
 
-
-#include <QDebug>
 
 //! This class displays and handles the Ball on the QMainWindow
 
@@ -67,10 +64,9 @@ private:
     qreal speed;
 
     //! counter needed to handle a collision
-    int canCollide; //Zähler damit Kollision nicht abspackt, kann besser gelöst werden
+    int canCollide;
 
-    //inline bedeutet: setze den Funktionscode an die Stelle, an der die Funktion aufgerufen wird (zur Optimierung). Kann man, muss man aber nicht machen
-    inline void doCollision();
+    void doCollision();
 
     QString birdDeadPicture;
     int birdDeadCounter;

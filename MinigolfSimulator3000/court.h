@@ -14,7 +14,6 @@
 #include <vector>
 #include "rectitem.h"
 
-#include <QDebug>
 
 namespace Ui {
 class Court;
@@ -119,6 +118,9 @@ protected:
     //! \brief Create ball and add to scene at start coordinates
     void createBall();
 
+    ArrowStartItem* arrowStart;
+    Arrow* arrow;
+
 
 //---------------------------------
 
@@ -128,13 +130,7 @@ private:
     QPointF startCoordinates;
     QPointF holeCoordinates;
 
-    Ball* ball;
-
-
-
-protected:
-    ArrowStartItem* arrowStart;
-    Arrow* arrow;
+    Ball* ball;    
 
 };
 
