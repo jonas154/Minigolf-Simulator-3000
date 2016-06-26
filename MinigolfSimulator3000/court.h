@@ -66,6 +66,7 @@ public slots:
     //! \brief Slot which leaves the level and bring player back to main menu
     virtual void leaveLevel () = 0;
 
+    //! \brief Set the new speed and angle of the ball and delete the Arrow
     void shot();
 
 signals:
@@ -96,10 +97,10 @@ protected:
     //! \brief Timer for water, lava, bird animations
     QTimer* graphicsTimer;
 
-    //! \brief RectItem Pointer to make RectItems available for functions like levelLevel
+    //! \brief Pointer to RectItem in the Esc Menu
     RectItem* continueItem;
 
-    //! \brief RectItem Pointer to make RectItems available for functions like levelLevel
+    //! \brief Pointer to RectItem in the Esc Menu
     RectItem* leaveItem;
 
     //! \brief Set the start coordinates of the level

@@ -24,9 +24,7 @@ public slots:
     //! \brief This slot updates the level graphic pictures with each timestep
     void updateLevel() override;
 
-    /*! \brief This slot brings the game into a mini menu where the game
-    *   gets paused and the player can continue or go back to the main menu
-    */
+    //! \brief This slot brings the game into a mini menu where the game gets paused and the player can continue or go back to the main menu
     void menuLevel()  override;
 
     //! \brief This slot brings the user back to the main menu
@@ -34,6 +32,7 @@ public slots:
 
 
 private:
+
     //! \brief Pointer for watermaterials to change later in updateLevel()
     GroundMaterial *water;
 
@@ -48,6 +47,7 @@ private:
 
     //! \brief Constructs the level
     void constructLevel();
+
     //! \brief Strings with path to files
     QString waterimage;
 
@@ -79,9 +79,6 @@ private:
 
     //! \brief This bool is true if the mini menu is open
     bool menuActive;
-
-
-protected:
 
     //! Catches ESC key presses in game to get to mini menu
     void keyPressEvent(QKeyEvent * e);

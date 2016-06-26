@@ -35,12 +35,16 @@ void Bonus::increase2()
 
 int Bonus::getBonus(int _bonus)
 {
+    int ret = 0;
+
     if (_bonus == 1)
     {
-        return bonus1;
+        ret = bonus1;
     }
     else if (_bonus == 2)
     {
-        return bonus2;
+        ret = bonus2;
     }
+
+    return ret;
 }

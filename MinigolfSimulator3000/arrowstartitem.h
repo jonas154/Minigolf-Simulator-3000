@@ -16,6 +16,8 @@
 class ArrowStartItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
+
 public:
 
     //! Initializes its position 50 pixels beneath the current Ball position

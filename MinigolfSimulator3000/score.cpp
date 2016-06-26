@@ -55,12 +55,16 @@ void Score::increase(int _score)
 
 int Score::getScore(int _score)
 {
+    int ret = 0;
+
     if (_score == 1)
     {
-        return score1;
+        ret = score1;
     }
     else if (_score == 2)
     {
-        return score2;
+        ret = score2;
     }
+
+    return ret;
 }

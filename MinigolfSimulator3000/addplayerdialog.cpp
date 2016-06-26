@@ -1,10 +1,10 @@
 #include "addplayerdialog.h"
 #include "ui_addplayerdialog.h"
 
-addPlayerDialog::addPlayerDialog(StartWindow* _startwindow, QWidget *parent) :
+AddPlayerDialog::AddPlayerDialog(StartWindow* _startwindow, QWidget *parent) :
     startwindow(_startwindow),
     QDialog(parent),
-    ui(new Ui::addPlayerDialog)
+    ui(new Ui::AddPlayerDialog)
 {
     ui->setupUi(this);
     const int width2 = 600;
@@ -16,12 +16,12 @@ addPlayerDialog::addPlayerDialog(StartWindow* _startwindow, QWidget *parent) :
     this->setPalette(pale);
 
 }
-addPlayerDialog::~addPlayerDialog()
+AddPlayerDialog::~AddPlayerDialog()
 {
     delete ui;
 }
 
-void addPlayerDialog::on_addButton_clicked()
+void AddPlayerDialog::on_addButton_clicked()
 {
     name = ui->inputName->text();
 
@@ -39,6 +39,6 @@ void addPlayerDialog::on_addButton_clicked()
         startwindow->playercounter = number;
     }
 
-    addPlayerDialog::close();
+    AddPlayerDialog::close();
 
 }

@@ -12,7 +12,7 @@
 
 
 class Game;
-class addPlayerDialog;
+class AddPlayerDialog;
 
 namespace Ui
 {

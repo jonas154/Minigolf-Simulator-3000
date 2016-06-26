@@ -50,12 +50,16 @@ void Strike::decrease(int _strike)
 
 int Strike::getStrike(int _strike)
 {
+    int ret = 0;
+
     if (_strike == 1)
     {
-        return strike1;
+        ret = strike1;
     }
     else if (_strike == 2)
     {
-        return strike2;
+        ret = strike2;
     }
+
+    return ret;
 }

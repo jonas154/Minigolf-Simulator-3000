@@ -175,13 +175,13 @@ void StartWindow::on_addPlayerButton_clicked()
     {
         if (multiPlayerMode == true)
         {
-            addPlayerDialog playerDialog(this);
+            AddPlayerDialog playerDialog(this);
             playerDialog.setModal(true);
             playerDialog.exec();
             this->createPlayerBox();
         }
         else{
-            addPlayerDialog playerDialog(this);
+            AddPlayerDialog playerDialog(this);
             playerDialog.setModal(true);
             playerDialog.exec();
 
@@ -302,7 +302,7 @@ void StartWindow::checkFile()
     QString verzeichnis=QCoreApplication::applicationDirPath();
     verzeichnis.append("/config.txt");
     QFile file(verzeichnis);
-    if(file.open(QIODevice::ReadOnly) | QIODevice::Text)
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
 
         QTextStream in(&file);
@@ -330,7 +330,7 @@ void StartWindow::readLines()
     verzeichnis.append("/config.txt");
     QFile file(verzeichnis);
 
-    if(file.open(QIODevice::ReadOnly) | QIODevice::Text)
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
 
         QTextStream in(&file);
