@@ -14,7 +14,7 @@ class SoundEngine : public QObject
 public:
 
     //! Enumeration lisiting the available sounds
-    enum eSound{borderCollisionSound=0, waterSound, birdHitSound, cheeringSound, sandSound, shotSound};
+    enum eSound{borderCollisionSound=0, waterSound, birdHitSound, cheeringSound, sandSound, shotSound, lavaSound};
 
     //! Constructor, initializes a QMediaPlayer and sets the file paths
     SoundEngine()
@@ -24,14 +24,24 @@ public:
         birdHit(new QMediaPlayer),
         cheering(new QMediaPlayer),
         sand(new QMediaPlayer),
-        shot(new QMediaPlayer)
+        shot(new QMediaPlayer),
+        lava(new QMediaPlayer)
+
     {
-        borderCollision->setMedia(QUrl("qrc:/Sounds/Sounds/bounce5.wav"));
+        borderCollision->setMedia(QUrl("qrc:/Sounds/Sounds/woodBounce.wav"));
         water->setMedia(QUrl("qrc:/Sounds/Sounds/water2.wav"));
         birdHit->setMedia(QUrl("qrc:/Sounds/Sounds/birdHit.wav"));
         cheering->setMedia(QUrl("qrc:/Sounds/Sounds/cheering2.wav"));
         sand->setMedia(QUrl("qrc:/Sounds/Sounds/sand2.wav"));
-        shot->setMedia(QUrl("qrc:/Sounds/Sounds/shot2.wav"));
+        shot->setMedia(QUrl("qrc:/Sounds/Sounds/golfHit.wav"));
+        lava->setMedia(QUrl("qrc:/Sounds/Sounds/lavaBurn.wav"));
+
+        borderCollision->setVolume(80);
+        water->setVolume(90);
+        cheering->setVolume(90);
+        birdHit->setVolume(80);
+        cheering->setVolume(90);
+        lava->setVolume(90);
 
     }
 
@@ -70,6 +80,10 @@ public slots:
                 shot->play();
             break;
 
+            case lavaSound:
+                lava->play();
+            break;
+
             default: break;
 
         }
@@ -83,6 +97,7 @@ private:
     QScopedPointer<QMediaPlayer> cheering;
     QScopedPointer<QMediaPlayer> sand;
     QScopedPointer<QMediaPlayer> shot;
+    QScopedPointer<QMediaPlayer> lava;
 
 };
 

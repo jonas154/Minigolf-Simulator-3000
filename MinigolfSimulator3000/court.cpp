@@ -144,6 +144,12 @@ void Court::deleteArrow()
 void Court::shot()
 {
     ball->playShotSound();
+
+    QTime dieTime= QTime::currentTime().addMSecs(100);
+    while (QTime::currentTime() < dieTime) {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
+
     ball->setAngle(arrow->getAngle());
     ball->setSpeed(arrow->getSpeed());
 //    qDebug() << "speed handed to ball: " << arrow->getSpeed();

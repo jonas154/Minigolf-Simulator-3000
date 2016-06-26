@@ -50,6 +50,9 @@
         <file>Sounds/bounce5.wav</file>
         <file>Sounds/sand2.wav</file>
         <file>Sounds/cheering2.wav</file>
+        <file>Sounds/golfHit.wav</file>
+        <file>Sounds/lavaBurn.wav</file>
+        <file>Sounds/woodBounce.wav</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
