@@ -113,7 +113,7 @@ void Level_4::constructLevel()
                       << QPoint(397,521);
     nonnewton = new GroundMaterial(GroundMaterial::nonNewtonian_material,nonnewton_polygon);
 
-    nonnewton->setBrush(QImage(nonnewtonimage));
+    //nonnewton->setBrush(QImage(nonnewtonimage));
     scene->addItem(nonnewton);
     nonnewton->setVisible(true);
     nonnewton->setPen(linepen);
