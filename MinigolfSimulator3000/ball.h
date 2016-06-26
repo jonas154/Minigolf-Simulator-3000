@@ -14,8 +14,7 @@
 #include <soundengine.h>
 
 
-//! Displays and handles the Ball on the QMainWindow
-
+//! This class handles the ball animation and physical interaction with the Court
 class Ball : public QObject, public QGraphicsItem
 {
 
@@ -24,7 +23,8 @@ Q_INTERFACES(QGraphicsItem)
 
 public:
 
-    //! Initializes the Ball and the SoundEngine
+    //! Constructor
+    //! @param _startCoordinates The start coordinates of the active level
     Ball(QPointF _startCoordinates);
 
     //! Overrides the boundingRect() function of QGraphicsItem
@@ -37,9 +37,11 @@ public:
     void advance(int phase) override;
 
     //! Set the angle of the Ball
+    //! @param a The new angle
     void setAngle(qreal a);
 
     //! Set the speed of the Ball
+    //! @param s The new speed
     void setSpeed(qreal s);
 
     //! Emits a signal whenever a shot is done

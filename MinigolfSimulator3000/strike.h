@@ -5,6 +5,8 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 
+
+//! \brief Object for counting and displaying the player's strikes
 class Strike : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT

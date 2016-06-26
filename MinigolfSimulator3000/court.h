@@ -20,6 +20,7 @@ class Court;
 }
 
 
+//! \brief Baseclass for the Levels, provides graphical interface for playing the game
 class Court : public QWidget
 {
     Q_OBJECT

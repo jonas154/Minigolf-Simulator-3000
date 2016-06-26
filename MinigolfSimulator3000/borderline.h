@@ -24,7 +24,7 @@ public:
      *
      * Constructs a BorderLine object.
      * x1, y1, x2, y2 specify the coordinates of the line
-     * @param[in] _material The line's material as defined in enum eMaterial
+     * @param _material The line's material as defined in enum eMaterial
      */
     BorderLine(qreal x1, qreal y1, qreal x2, qreal y2, const int _material, QGraphicsItem* parent = 0)
         :

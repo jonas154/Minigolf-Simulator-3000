@@ -24,8 +24,8 @@ public:
     /*! \brief Constructor
      *
      * Constructs a GroundMaterial object.
-     * @param[in] _material The ground's material as defined in enum eMaterial
-     * @param[in] _polygon The ground's polygon, can be set later via setPolygon()
+     * @param _material The ground's material as defined in enum eMaterial
+     * @param _polygon The ground's polygon, can be set later via setPolygon()
      */
     GroundMaterial(const int _material, const QPolygonF _polygon = QPolygonF(), QGraphicsItem* parent = 0)
         :

@@ -5,6 +5,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 
+//! \brief Object for calculating and displaying the player's bonus points
 class Bonus : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT

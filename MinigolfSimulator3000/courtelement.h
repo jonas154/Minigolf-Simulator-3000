@@ -1,6 +1,8 @@
 #ifndef COURTELEMENT_H
 #define COURTELEMENT_H
 
+
+//! \brief Baseclass for elements in the Court (borderlines and groundmaterials)
 class CourtElement
 {
 

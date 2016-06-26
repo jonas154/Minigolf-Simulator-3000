@@ -5,6 +5,8 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 
+
+//! \brief Object for calculating the player's score
 class Score : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
