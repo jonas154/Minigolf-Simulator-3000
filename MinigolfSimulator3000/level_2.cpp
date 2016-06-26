@@ -39,9 +39,9 @@ void Level_2::constructLevel()
     // Hintergrundbild der scene setzen
     scene->setBackgroundBrush(QImage(bgroundimage));
 
-    /* Unsichtbaren QPen für linien erstellen
-     * [zum debuggen QPen(Qt::red) anstatt linepen verwenden]
-     */
+    // Unsichtbaren QPen für linien erstellen
+    // (zum debuggen QPen(Qt::red) anstatt linepen verwenden)
+
     QPen linepen;
     linepen.setWidth(2);
     linepen.setColor(QColor(0,0,0,0));
@@ -107,25 +107,49 @@ void Level_2::constructLevel()
     lineVec.push_back( new BorderLine(143,590,143,269,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(246,592,246,286,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(275,288,275,378,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(275,378,321,437,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(321,526,277,564,BorderLine::wood_material));
+
+    //line a
+    lineVec.push_back( new BorderLine(275,378,317,432,BorderLine::wood_material));
+
+    //line b
+    lineVec.push_back( new BorderLine(321,443,321,521,BorderLine::wood_material));
+
+    //line c
+    lineVec.push_back( new BorderLine(318,531,277,564,BorderLine::wood_material));
+
+    //line d
+    lineVec.push_back( new BorderLine(399,379,368,430,BorderLine::wood_material));
+
+    //line e
+    lineVec.push_back( new BorderLine(364,440,364,524,BorderLine::wood_material));
+
+    //line f
+    lineVec.push_back( new BorderLine(368,533,399,566,BorderLine::wood_material));
+
+    //line g
+    lineVec.push_back( new BorderLine(399,566,399,584,BorderLine::wood_material));
+
+    //line h
+    lineVec.push_back( new BorderLine(405,593,647,592,BorderLine::wood_material));
+
     lineVec.push_back( new BorderLine(277,564,275,607,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(315,646,666,646,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(665,513,583,513,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(583,513,583,362,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(583,362,734,362,BorderLine::wood_material));
+
+    //line i
+    lineVec.push_back( new BorderLine(665,513,590,513,BorderLine::wood_material));
+
+    //line j
+    lineVec.push_back( new BorderLine(583,506,583,369,BorderLine::wood_material));
+
+    //line k
+    lineVec.push_back( new BorderLine(590,362,734,362,BorderLine::wood_material));
+
     lineVec.push_back( new BorderLine(734,362,734,279,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(734,279,516,279,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(516,279,516,279,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(516,570,647,570,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(647,592,399,592,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(399,592,399,566,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(399,566,364,529,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(364,529,364,435,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(364,435,399,379,BorderLine::wood_material));
+
     lineVec.push_back( new BorderLine(399,379,398,268,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(399,379,398,268,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(321,438,321,526,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(516,570,516,279,BorderLine::wood_material));
 
     //Linien unsichtbar machen + Linien zur Scene hinzufügen
@@ -154,6 +178,41 @@ void Level_2::constructLevel()
                                 BorderLineCurveDrawer::right, false,
                                 BorderLine::wood_material, scene, linepen);
     BorderLineCurveDrawer::draw(648,570,647,592,12,6.0,
+                                BorderLineCurveDrawer::left, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    //curve between line a and line b
+    BorderLineCurveDrawer::draw(317,432,321,443, 15, 2.0,
+                                BorderLineCurveDrawer::left, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    //curve between line b and line c
+    BorderLineCurveDrawer::draw(321,521,318,531, 15, 2.0,
+                                BorderLineCurveDrawer::left, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    //curve between line d and line e
+    BorderLineCurveDrawer::draw(368,430,364,440, 15, 2.0,
+                                BorderLineCurveDrawer::right, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    //curve between line e and line f
+    BorderLineCurveDrawer::draw(364,524,368,533, 15, 2.0,
+                                BorderLineCurveDrawer::right, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    //curve between line g and line h
+    BorderLineCurveDrawer::draw(399,584,405,593, 8, 2.0,
+                                BorderLineCurveDrawer::right, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    //curve between line i and line j
+    BorderLineCurveDrawer::draw(590,513,583,506, 7, 2.0,
+                                BorderLineCurveDrawer::left, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    //curve between line j and line k
+    BorderLineCurveDrawer::draw(583,369,590,362, 7, 2.0,
                                 BorderLineCurveDrawer::left, false,
                                 BorderLine::wood_material, scene, linepen);
     //--------------------------------------------------------
