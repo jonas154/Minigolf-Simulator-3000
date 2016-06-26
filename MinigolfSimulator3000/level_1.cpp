@@ -105,9 +105,9 @@ void Level_1::constructLevel()
 
     // BORDERLINES -------------------------------------------
     //Begrenzungslinien zur Liste hinzufügen
-    lineVec.push_back( new BorderLine(294.0,594.0,294.0,375.0,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(294.0,375.0,335.0,337.0,BorderLine::wood_material));
-    lineVec.push_back( new BorderLine(335.0,337.0,730.0,337.0,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(294.0,594.0,294.0,380.0,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(298.0,371.0,331.0,341.0,BorderLine::wood_material));
+    lineVec.push_back( new BorderLine(340.0,337.0,730.0,337.0,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(730.0,337.0,730.0,253.0,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(294.0,253.0,294.0,151.0,BorderLine::wood_material));
     lineVec.push_back( new BorderLine(730.0,253.0,294.0,253.0,BorderLine::wood_material));
@@ -125,6 +125,14 @@ void Level_1::constructLevel()
     // BORDERLINE CURVE---------------------------------------
     BorderLineCurveDrawer::draw(140.0, 594.0, 294.0, 594.0, 77.5, 6.0,
                                 BorderLineCurveDrawer::right, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    BorderLineCurveDrawer::draw(294.0, 380.0, 298.0, 371.0, 15.0, 2.0,
+                                BorderLineCurveDrawer::left, false,
+                                BorderLine::wood_material, scene, linepen);
+
+    BorderLineCurveDrawer::draw(331.0, 341.0, 340.0, 337.0, 15.0, 2.0,
+                                BorderLineCurveDrawer::left, false,
                                 BorderLine::wood_material, scene, linepen);
     //--------------------------------------------------------
 
