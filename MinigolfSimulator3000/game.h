@@ -16,6 +16,7 @@
 
 class StartWindow;
 
+//! \brief This class handles the game logic
 class Game : public QObject
 {
     Q_OBJECT
@@ -23,30 +24,8 @@ class Game : public QObject
 public:
 
     //! \brief Constructor
-    Game(StartWindow* _startW);
-
-    //! \brief Set turn to current player name
-    void setTurn(QString player);
-
-    //! \brief Return current turn
-    QString getTurn();
-
-    //! \brief Proceed to second player's turn
-    void nextPlayersTurn();
-
-    //! \brief Return the first player's score
-    int calculateScore1();
-
-    //! \brief Return the second player's score
-    int calculateScore2();
-
-    Bonus *bonus1, *bonus2;
-    Score *score1, *score2;
-    Strike *strike1, *strike2;
-    QScopedPointer<Level_1> l1;
-    QScopedPointer<Level_2> l2;
-    QScopedPointer<Level_3> l3;
-    QScopedPointer<Level_4> l4;
+    //! @param _startW Pointer to the StartWindow
+    Game(StartWindow* _startW);    
 
 public slots:
 
@@ -67,15 +46,51 @@ public slots:
 
 private:
 
+    //! \brief Set turn to current player name
+    void setTurn(QString player);
+
+    //! \brief Return current turn
+    QString getTurn();
+
+    //! \brief Proceed to second player's turn
+    void nextPlayersTurn();
+
+    //! \brief Return the first player's score
+    int calculateScore1();
+
+    //! \brief Return the second player's score
+    int calculateScore2();
+
+    //! \brief Pointers to bonus objects
+    Bonus *bonus1, *bonus2;
+
+    //! \brief Pointers to score objects
+    Score *score1, *score2;
+
+    //! \brief Pointers to strike objects
+    Strike *strike1, *strike2;
+
+    //! \brief Pointer to level 1
+    QScopedPointer<Level_1> l1;
+
+    //! \brief Pointer to level 1
+    QScopedPointer<Level_2> l2;
+
+    //! \brief Pointer to level 1
+    QScopedPointer<Level_3> l3;
+
+    //! \brief Pointer to level 1
+    QScopedPointer<Level_4> l4;
+
+    //! \brief Display player's name, score, strike, turn
+    void construct(QGraphicsScene* _scene);
+
     QString Turn;
     QGraphicsTextItem *TurnText;
     StartWindow* startW;
     int currentLevel;
     int endScore1 = 0, endScore2 = 0;
     int bonus_count1 = 0, bonus_count2 = 0;
-
-    //! \brief Display player's name, score, strike, turn
-    void construct(QGraphicsScene* _scene);
 
     QTimer deleteLevel1Timer;
     QTimer deleteLevel2Timer;
