@@ -220,7 +220,7 @@ void Level_1::updateLevel()
 
     //VOGELANIMATIONEN----------------------------------------
     // Vogelaction wird mit gewisser Wahrscheinlichkeit ausgelöst
-    if (rand < 0.005)
+    if (rand < 0.003)
     {
         vogelaction = true;
     }
