@@ -22,6 +22,7 @@ public:
 
 protected:
 
+    //! \brief The type of the CourtElement, borderline or groundmaterial
     const int elementType;
 
 };

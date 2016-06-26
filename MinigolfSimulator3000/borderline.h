@@ -7,7 +7,7 @@
 #include <QLineF>
 #include <QDebug>
 
-
+//! \brief This class provides the functionality for setting up borderlines with different materials in the Court
 class BorderLine : public QGraphicsLineItem, public CourtElement
 {
 

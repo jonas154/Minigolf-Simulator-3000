@@ -47,6 +47,7 @@ public:
     //! \brief Create Arrow including the ArrowStartItem
     void createArrow(bool firstCreate = false);
 
+    //! \brief Stops timers and calls this->hide()
     void stopAndHide();
     
     //! \brief Create Arrow including the ArrowStartItem
@@ -56,52 +57,50 @@ public:
 
 public slots:
 
-    //! \brief Slot which updates the level graphics
-    //! with each timestep
+    //! \brief Slot which updates the level graphics with each timestep
     virtual void updateLevel() = 0;
 
     //! \brief Slot which brings game into a minimenu
     virtual void menuLevel() = 0;
 
-    //! \brief Slot which leaves the level and bring
-    //! player back to main menu
+    //! \brief Slot which leaves the level and bring player back to main menu
     virtual void leaveLevel () = 0;
 
     void shot();
 
 signals:
-    //! \brief Signal which tells the game to destroy
-    //! Level 1
+    //! \brief Signal which tells the game to destroy Level 1
     void destroyLevel();
 
-    //! \brief Signal which tells the game to destroy
-    //! Level 2
+    //! \brief Signal which tells the game to destroy Level 2
     void destroyLevel2();
 
-    //! \brief Signal which tells the game to destroy
-    //! Level 3
+    //! \brief Signal which tells the game to destroy Level 3
     void destroyLevel3();
 
-    //! \brief Signal which tells the game to destroy
-    //! Level 4
+    //! \brief Signal which tells the game to destroy Level 4
     void destroyLevel4();
 
 
 protected:
 
+    //! \brief Pointer to the UI
     Ui::Court* ui;
+
+    //! \brief Pointer to the GraphicsScene
     QGraphicsScene* scene;
+
+    //! \brief Timer for ball animation
     QTimer* timer;
+
+    //! \brief Timer for water, lava, bird animations
     QTimer* graphicsTimer;
 
-    //! \brief RectItem Pointer to make RectItems available for
-    //! funktions like levelLevel
-    RectItem * continueItem;
+    //! \brief RectItem Pointer to make RectItems available for functions like levelLevel
+    RectItem* continueItem;
 
-    //! \brief RectItem Pointer to make RectItems available for
-    //! funktions like levelLevel
-    RectItem * leaveItem;
-
+    //! \brief RectItem Pointer to make RectItems available for functions like levelLevel
+    RectItem* leaveItem;
 
     //! \brief Set the start coordinates of the level
     void setStartCoordinates(const QPointF startPoint);
@@ -118,7 +117,10 @@ protected:
     //! \brief Create ball and add to scene at start coordinates
     void createBall();
 
+    //! \brief Pointer to the Arrow start item
     ArrowStartItem* arrowStart;
+
+    //! \brief Pointer to the Arrow
     Arrow* arrow;
 
 

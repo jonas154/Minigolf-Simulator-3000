@@ -20,8 +20,7 @@ namespace Ui
 }
 
 
-//! This class creates the startwindow and manages the player and their parameter.
-
+//! This class creates the startwindow and manages the players and their parameters.
 class StartWindow : public QMainWindow
 {
     Q_OBJECT
@@ -30,14 +29,18 @@ public:
 
     //! \brief Constructor
     explicit StartWindow(QWidget *parent = 0);
+
+    //! \brief Destructor
     ~StartWindow();
 
-    QScopedPointer<Game> game;
-
+    //! \brief Returns pointer to the UI
     Ui::StartWindow* getUi()
     {
         return this->ui;
     };
+
+    //! \brief Pointer to the game logic
+    QScopedPointer<Game> game;
 
     //! \brief In this matrix all player data is stored
     QString matrix[100][4];
@@ -112,8 +115,6 @@ private slots:
     //! \brief Checks if a new Player is in the PlayerBox choosen and updates the LevelBox
     void on_playerBox_currentIndexChanged(int index);
 
-
-
     //! \brief Starts a MP-game with the in the level-box selected level
     void on_startMPButton_clicked();
 
@@ -139,6 +140,7 @@ private slots:
 
 private:
     Ui::StartWindow* ui;
+
 
     //! \brief Variable with the number of available levels
     int availableLevel = 4;

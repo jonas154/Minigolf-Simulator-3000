@@ -11,6 +11,7 @@
 #include <QGraphicsPixmapItem>
 #include <math.h>
 
+//! \brief Fourth level in the game
 class Level_4 :  public Court
 {
 

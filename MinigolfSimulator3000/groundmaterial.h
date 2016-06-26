@@ -7,6 +7,7 @@
 #include <QPolygonF>
 
 
+//! \brief This class provides the functionality for using different ground materials in the Court
 class GroundMaterial : public CourtElement, public QGraphicsPolygonItem
 {
 

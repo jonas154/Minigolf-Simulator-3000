@@ -10,7 +10,7 @@
 #include <QString>
 #include <QGraphicsPixmapItem>
 
-
+//! \brief First level in the game
 class Level_1 :  public Court
 {
 

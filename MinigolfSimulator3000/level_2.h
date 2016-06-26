@@ -9,7 +9,7 @@
 #include <QString>
 #include <QGraphicsPixmapItem>
 
-
+//! \brief Second level in the game
 class Level_2 : public Court
 {
 

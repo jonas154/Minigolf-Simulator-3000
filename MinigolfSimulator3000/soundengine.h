@@ -16,7 +16,7 @@ public:
     //! Enumeration lisiting the available sounds
     enum eSound{borderCollisionSound=0, waterSound, birdHitSound, cheeringSound, sandSound, shotSound};
 
-    //! initializes a QMediaPlayer and sets the file paths
+    //! Constructor, initializes a QMediaPlayer and sets the file paths
     SoundEngine()
         :
         borderCollision(new QMediaPlayer),
@@ -35,6 +35,7 @@ public:
 
     }
 
+    //! Destructor
     virtual ~SoundEngine(){};
 
 
@@ -72,9 +73,6 @@ public slots:
             default: break;
 
         }
-
-
-
     }
 
 private:

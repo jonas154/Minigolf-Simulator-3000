@@ -15,14 +15,14 @@ public:
 
     /*! \brief Draws a piecewise linear curve between start and stop
      *
-     * @param radius The radius of the circular segment
-     * @param lineLenght The length of the individual lines
-     * @param orientation The orientation of the curve, BorderLineCurveDrawer::left or right
-     * @param segmentIsComplementary If this is false, the shorter one of the two possible cirular segments is drawn.
+     * @param[in] radius The radius of the circular segment
+     * @param[in] lineLenght The length of the individual lines
+     * @param[in] orientation The orientation of the curve, BorderLineCurveDrawer::left or right
+     * @param[in] segmentIsComplementary If this is false, the shorter one of the two possible cirular segments is drawn.
      * If this is true, the longer one of the two possible segments is drawn
-     * @param material The BorderLine's material as defined in the BorderLine class header
-     * @param scene The GraphicsScene to which the curve will be added
-     * @param pen The pen that is used to draw the curve. An invisible pen can be made by pen.setColor(QColor(0,0,0,0))
+     * @param[in] material The BorderLine's material as defined in the BorderLine class header
+     * @param[in] scene The GraphicsScene to which the curve will be added
+     * @param[in] pen The pen that is used to draw the curve. An invisible pen can be made by pen.setColor(QColor(0,0,0,0))
      */
 
     static std::vector<BorderLine*> draw(double startX, double startY,
