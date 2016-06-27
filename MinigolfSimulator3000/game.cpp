@@ -1018,7 +1018,7 @@ void Game::BallStopped()
 void Game::deleteLevel1()
 {
     deleteLevel1Timer.stop();
-    l1.reset(nullptr);
+    l1.reset(0);
 }
 
 //------------------------------------------
@@ -1026,7 +1026,7 @@ void Game::deleteLevel1()
 void Game::deleteLevel2()
 {
     deleteLevel2Timer.stop();
-    l2.reset(nullptr);
+    l2.reset(0);
 }
 
 //------------------------------------------
@@ -1034,11 +1034,11 @@ void Game::deleteLevel2()
 void Game::deleteLevel3()
 {
     deleteLevel3Timer.stop();
-    l3.reset(nullptr);
+    l3.reset(0);
 }
 
 void Game::deleteLevel4()
 {
     deleteLevel4Timer.stop();
-    l4.reset(nullptr);
+    l4.reset(0);
 }

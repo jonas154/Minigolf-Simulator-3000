@@ -5,6 +5,7 @@
 #include <vector>
 #include <QGraphicsScene>
 #include <cassert>
+#include <cmath>
 
 
 //! \brief This class provides a static function for drawing piecewise linear borderline curves

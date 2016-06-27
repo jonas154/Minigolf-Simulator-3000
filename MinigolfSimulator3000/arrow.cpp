@@ -55,7 +55,7 @@ qreal Arrow::getSpeed()
     qreal scalingFactor = 0.04;
 
     // the length of the arrow line is computed via the hypotenuse of a right-angled triangle
-    length = std::sqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
+    length = qSqrt((startItem()->pos().x()-endItem()->pos().x())*(startItem()->pos().x()-endItem()->pos().x())+(startItem()->pos().y()-endItem()->pos().y())*(startItem()->pos().y()-endItem()->pos().y()));
 
     // the speed for the ball is set to a multiplication of the arrow length with a scaling factor
     return scalingFactor * length;
