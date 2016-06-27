@@ -176,6 +176,7 @@ void Game::GameOver()
             disconnect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
+            disconnect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(resetScore()));
             disconnect(l1->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
             l1->stopAndHide();
@@ -189,6 +190,7 @@ void Game::GameOver()
             disconnect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
+            disconnect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(resetScore()));
             disconnect(l2->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
             l2->stopAndHide();
@@ -203,6 +205,7 @@ void Game::GameOver()
             disconnect(l3->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l3->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(GameOver()));
+            disconnect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(resetScore()));
             disconnect(l3->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
             l3->stopAndHide();
@@ -217,6 +220,7 @@ void Game::GameOver()
             disconnect(l4->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             disconnect(l4->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
             disconnect(l4.data(), SIGNAL(destroyLevel4()), this, SLOT(GameOver()));
+            disconnect(l4.data(), SIGNAL(destroyLevel4()), this, SLOT(resetScore()));
             disconnect(l4->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
             l4->stopAndHide();
@@ -229,21 +233,6 @@ void Game::GameOver()
             bonus_count1 = 0;
             bonus_count2 = 0;
 
-
-        /*
-            if (endScore1 > endScore2)
-            {
-                TurnText->setPlainText(QString(startW->getActPlayer1Name() + " wins!"));
-            }
-            else if (endScore1 == endScore2)
-            {
-                TurnText->setPlainText(QString("Tie Game!"));
-            }
-            else
-            {
-                TurnText->setPlainText(QString("Player 2 wins!"));
-            }
-        */
         break;
 
         default: break;
@@ -267,6 +256,7 @@ void Game::startLevel(int levelnumber)
             connect(l1->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l1->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l1->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(resetScore()));
             connect(l1.data(), SIGNAL(destroyLevel()), this, SLOT(GameOver()));
             connect(l1->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
@@ -280,6 +270,7 @@ void Game::startLevel(int levelnumber)
             connect(l2->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l2->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l2->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(resetScore()));
             connect(l2.data(), SIGNAL(destroyLevel2()), this, SLOT(GameOver()));
             connect(l2->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
@@ -292,6 +283,7 @@ void Game::startLevel(int levelnumber)
             connect(l3->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l3->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l3->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(resetScore()));
             connect(l3.data(), SIGNAL(destroyLevel3()), this, SLOT(GameOver()));
             connect(l3->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
@@ -305,6 +297,7 @@ void Game::startLevel(int levelnumber)
             connect(l4->getBall(), SIGNAL(ballStopped()), this, SLOT(BallStopped()));
             connect(l4->getBall(), SIGNAL(ballInWater()), this, SLOT(BallinWater()));
             connect(l4->getBall(), SIGNAL(ballInHole()), this, SLOT(BallinHole()));
+            connect(l4.data(), SIGNAL(destroyLevel4()), this, SLOT(resetScore()));
             connect(l4.data(), SIGNAL(destroyLevel4()), this, SLOT(GameOver()));
             connect(l4->getBall(), SIGNAL(birdHit()), bonus1, SLOT(increase1()));
 
@@ -894,8 +887,6 @@ void Game::BallStopped()
     {
         case 1:
         {
-            QPointF coordinates = l1->getBall()->pos();
-            //do something with the coordinates, maybe save for multiplayer?
             l1->createArrow();
 
             if (startW->getGameMode() == true)
@@ -923,8 +914,6 @@ void Game::BallStopped()
 
         case 2:
         {
-            QPointF coordinates = l2->getBall()->pos();
-            //do something with the coordinates, maybe save for multiplayer?
             l2->createArrow();
 
             if (startW->getGameMode() == true)
@@ -953,8 +942,6 @@ void Game::BallStopped()
 
         case 3:
         {
-            QPointF coordinates = l3->getBall()->pos();
-            //do something with the coordinates, maybe save for multiplayer?
             l3->createArrow();
 
             if (startW->getGameMode() == true)
@@ -982,8 +969,6 @@ void Game::BallStopped()
 
     case 4:
     {
-        QPointF coordinates = l4->getBall()->pos();
-        //do something with the coordinates, maybe save for multiplayer?
         l4->createArrow();
 
         if (startW->getGameMode() == true)
@@ -1037,8 +1022,21 @@ void Game::deleteLevel3()
     l3.reset(0);
 }
 
+//------------------------------------------
+
 void Game::deleteLevel4()
 {
     deleteLevel4Timer.stop();
     l4.reset(0);
+}
+
+//------------------------------------------
+
+void Game::resetScore()
+{
+    endScore1 = 0;
+    endScore2 = 0;
+
+    bonus_count1 = 0;
+    bonus_count2 = 0;
 }

@@ -111,6 +111,8 @@ private slots:
     //! \brief Delete level 4
     void deleteLevel4();
 
+    //! \brief Reset score and bonus to 0
+    void resetScore();
 
 };
 
