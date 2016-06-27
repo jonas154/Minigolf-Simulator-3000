@@ -50,10 +50,7 @@ private:
     GroundMaterial *nonnewton;
 
     //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
-    QGraphicsRectItem *vogel;
-
-    //! \brief GraphicsRect Item Pointer to chance later in updateLevel()
-    QGraphicsPixmapItem *vogel2;
+    QGraphicsPixmapItem *vogel;
 
     //! \brief Constructs the level
     void constructLevel();
@@ -107,7 +104,7 @@ private:
     BorderLine *gateline2;
 
     //! Catches ESC key presses in game to get to mini menu
-    void keyPressEvent(QKeyEvent * e);
+    void keyPressEvent(QKeyEvent * e) override;
 
 };
 

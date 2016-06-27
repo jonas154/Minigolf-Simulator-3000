@@ -30,7 +30,7 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
     //! Overrides the mouseReleaseEvent() function of QGraphicsItem such that a signal is emitted
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
     //! Overrides the itemChange() function of QGraphicsItem and limits the distance between the Ball and the ArrowStartItem
     QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;

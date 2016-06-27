@@ -1,6 +1,5 @@
 #include "level_4.h"
-#include "rectitem.h"
-#include "startwindow.h"
+
 
 
 Level_4::Level_4(QWidget *parent)
@@ -239,11 +238,11 @@ void Level_4::constructLevel()
 
     // BIRD---------------------------------------------------
     // Vogelbilder setzen + scene hinzufügen + position setzen
-    vogel2 = new QGraphicsPixmapItem;
-    vogel2->setPixmap(vogelimage);
-    vogel2->setVisible(true);
-    vogel2->setPos(50,100);
-    scene->addItem(vogel2);
+    vogel = new QGraphicsPixmapItem;
+    vogel->setPixmap(vogelimage);
+    vogel->setVisible(false);
+    vogel->setPos(50,100);
+    scene->addItem(vogel);
     //--------------------------------------------------------
 
     //Connecten der Slots
@@ -302,8 +301,8 @@ void Level_4::updateLevel()
     int x,y;
 
     rand /= RAND_MAX;
-    x = vogel2->x();
-    y = vogel2->y();
+    x = vogel->x();
+    y = vogel->y();
 
     //WASSERANIMATIONEN---------------------------------------
     if(graphicsCounterFast == 6)
@@ -344,31 +343,32 @@ void Level_4::updateLevel()
     if (rand < 0.003)
     {
         vogelaction = true;
+        vogel->setVisible(true);
     }
 
     // Vogel wird versetzt und Bilder aktualisiert
     if(x < 1024  && vogelaction == true)
     {
-        vogel2->setVisible(true);
-        vogel2->setPos(x+10,y);
+        vogel->setVisible(true);
+        vogel->setPos(x+10,y);
     }
     else
     {
-        vogel2->setPos(0,1000*rand);
-        vogel2->setVisible(false);
+        vogel->setPos(0,1000*rand);
+        vogel->setVisible(false);
         vogelaction = false;
     }
 
     //Vogel auf erstes Bild setzen
     if(vogelCounter < 8)
     {
-        vogel2->setPixmap(vogelimage);
+        vogel->setPixmap(vogelimage);
     }
 
     //Vogel auf zweites Bild seten
     if(vogelCounter >= 8)
     {
-        vogel2->setPixmap(vogelimage2);
+        vogel->setPixmap(vogelimage2);
     }
 
     //Counter zurücksetzen (max 10)

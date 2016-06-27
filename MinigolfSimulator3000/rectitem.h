@@ -1,7 +1,7 @@
 #ifndef RECTITEM_H
 #define RECTITEM_H
 #include <QGraphicsRectItem>
-
+#include <QDebug>
 
 //! This class inherits from QGraphicsRectItem and makes QGraphicsRectItems clickable with mouse
 
