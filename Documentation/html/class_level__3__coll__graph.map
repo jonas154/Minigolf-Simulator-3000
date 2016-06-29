@@ -1,0 +1,6 @@
+<map id="Level_3" name="Level_3">
+<area shape="rect" id="node2" href="$class_court.html" title="Baseclass for the Levels, provides graphical interface for playing the game. " alt="" coords="193,404,350,775"/>
+<area shape="rect" id="node4" href="$class_rect_item.html" title="This class inherits from QGraphicsRectItem and makes QGraphicsRectItems clickable with mouse..." alt="" coords="287,183,434,275"/>
+<area shape="rect" id="node9" href="$class_arrow_start_item.html" title="The ArrowStartItem is moveable and used to adjust the Arrow. " alt="" coords="103,161,263,297"/>
+<area shape="rect" id="node7" href="$class_arrow.html" title="Draws an arrow between an ArrowStartItem and a Ball. " alt="" coords="458,132,586,327"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="CourtElement" name="CourtElement">
+<area shape="rect" id="node2" href="$class_border_line.html" title="This class provides the functionality for setting up borderlines with different materials in the Cour..." alt="" coords="5,153,183,303"/>
+<area shape="rect" id="node3" href="$class_ground_material.html" title="This class provides the functionality for using different ground materials in the Court..." alt="" coords="207,145,370,311"/>
+</map>

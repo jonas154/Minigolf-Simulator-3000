@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['type',['type',['../class_border_line.html#aaa92ea80bf771f70b8d908e0b30abef1',1,'BorderLine::type()'],['../class_ground_material.html#a1eea68108e20155a045622f3a2c0e9c4',1,'GroundMaterial::type()']]]
+];

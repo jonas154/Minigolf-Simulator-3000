@@ -1,0 +1,10 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$class_arrow_start_item.html" title="The ArrowStartItem is moveable and used to adjust the Arrow. " alt="" coords="207,5,315,32"/>
+<area shape="rect" id="node3" href="$class_ball.html" title="This class handles the ball animation and physical interaction with the Court. " alt="" coords="239,56,283,83"/>
+<area shape="rect" id="node5" href="$class_bonus.html" title="Object for calculating and displaying the player&#39;s bonus points. " alt="" coords="231,107,290,133"/>
+<area shape="rect" id="node6" href="$class_score.html" title="Object for calculating the player&#39;s score. " alt="" coords="233,157,289,184"/>
+<area shape="rect" id="node7" href="$class_strike.html" title="Object for counting and displaying the player&#39;s strikes. " alt="" coords="233,208,289,235"/>
+<area shape="rect" id="node9" href="$class_rect_item.html" title="This class inherits from QGraphicsRectItem and makes QGraphicsRectItems clickable with mouse..." alt="" coords="223,360,298,387"/>
+<area shape="rect" id="node11" href="$class_game.html" title="This class handles the game logic. " alt="" coords="232,259,289,285"/>
+<area shape="rect" id="node12" href="$class_sound_engine.html" title="Plays sound effects for certain events during the game. " alt="" coords="211,309,310,336"/>
+</map>
